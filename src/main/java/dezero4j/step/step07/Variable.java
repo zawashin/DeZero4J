@@ -1,0 +1,42 @@
+package dezero4j.step.step07;
+
+/**
+ * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
+ */
+public class Variable {
+    private double data;
+    private double grad;
+    private AbstractFunction creator;
+
+    public Variable(double data) {
+        this.data = data;
+        this.grad = 0.0;
+        this.creator = null;
+    }
+
+    public void setCreator(AbstractFunction func) {
+        this.creator = func;
+    }
+
+    public void backward() {
+        AbstractFunction f = this.creator;
+        System.out.println(f);
+        if (f != null) {
+            Variable x = f.getInput();
+            x.setGrad(f.backward(this.grad));
+            x.backward();
+        }
+    }
+
+    public double getData() {
+        return this.data;
+    }
+
+    public double getGrad() {
+        return this.grad;
+    }
+
+    public void setGrad(double grad) {
+        this.grad = grad;
+    }
+}
