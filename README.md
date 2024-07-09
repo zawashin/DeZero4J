@@ -1,7 +1,7 @@
 
 # DeZero4j
 [PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)を自作してみたいから、「[ゼロから作るDeep Learning ❸](https://github.com/oreilly-japan/deep-learning-from-scratch-3)」のフレームワークDezeroをJavaで(出来るところまで）実装してみた。
-
+＊＊＊
 ## 現状
 - ステップ46の途中まで
   - 全結合の多層パーセプトロン
@@ -10,7 +10,6 @@
 - メモリ管理
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
 
-***
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
 - [ゼロから作るDeep Learning ❸](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
