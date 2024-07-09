@@ -9,6 +9,7 @@
   - OptimizerはSGDのみ
 - メモリ管理
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
+    - 結果、OutOfMemoryで落ちる
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
