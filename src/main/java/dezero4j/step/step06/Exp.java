@@ -3,7 +3,7 @@ package dezero4j.step.step06;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-class Exp extends AbstractFunction {
+class Exp extends Function {
     @Override
     public Variable forward(Variable input) {
         double x = input.data;

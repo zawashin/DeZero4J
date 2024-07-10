@@ -6,7 +6,7 @@ import java.util.List;
 public class Variable {
     private double data;
     private double grad;
-    private AbstractFunction creator;
+    private Function creator;
 
     public Variable(double data) {
         this.data = data;
@@ -14,16 +14,16 @@ public class Variable {
         this.creator = null;
     }
 
-    public void setCreator(AbstractFunction func) {
+    public void setCreator(Function func) {
         this.creator = func;
     }
 
     public void backward() {
-        List<AbstractFunction> funcs = new ArrayList<>();
+        List<Function> funcs = new ArrayList<>();
         funcs.add(this.creator);
 
         while (!funcs.isEmpty()) {
-            AbstractFunction f = funcs.remove(funcs.size() - 1);
+            Function f = funcs.remove(funcs.size() - 1);
             Variable x = f.getInput();
             Variable y = f.getOutput();
             x.setGrad(f.backward(y.getGrad()));
@@ -50,7 +50,7 @@ public class Variable {
         this.grad = grad;
     }
 
-    public AbstractFunction getCreator() {
+    public Function getCreator() {
         return this.creator;
     }
 }
