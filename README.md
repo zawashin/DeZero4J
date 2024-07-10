@@ -164,7 +164,6 @@ public Variable[] backward(Variable... gys) {
 - Modelクラス
   - Layerの派生クラス
 - TwoLayerNetクラス
-  - 
 - MultiLayerPerceptronクラス
 
 ### Step46
