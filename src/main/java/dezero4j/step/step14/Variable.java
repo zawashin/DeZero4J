@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Variable {
     private double[] data;
     private double[] grad;
-    private AbstractFunction creator;
+    private Function creator;
 
     public Variable(double[] data) {
         this.data = data;
@@ -23,7 +23,7 @@ public class Variable {
         this.creator = null;
     }
 
-    public void setCreator(AbstractFunction func) {
+    public void setCreator(Function func) {
         this.creator = func;
     }
 
@@ -36,10 +36,10 @@ public class Variable {
             grad = new double[data.length];
             Arrays.fill(grad, 1.0);
         }
-        ArrayList<AbstractFunction> funcList = new ArrayList<>();
+        ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);
         while (!funcList.isEmpty()) {
-            AbstractFunction f = funcList.remove(funcList.size() - 1);
+            Function f = funcList.remove(funcList.size() - 1);
             double[][] gys = new double[f.outputs.length][];
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
@@ -68,29 +68,6 @@ public class Variable {
                 }
             }
         }
-        /*
-        zawashin.dezero4j.step162.AbstractFunction[] funcs = {creator};
-        while (funcs.length > 0) {
-            zawashin.dezero4j.step162.AbstractFunction f = funcs[funcs.length - 1];
-            funcs = Arrays.copyOfRange(funcs, 0, funcs.length - 1);
-            double[][] gys = new double[f.outputs.length][];
-            for (int i = 0; i < f.outputs.length; i++) {
-                gys[i] = f.outputs[i].getGrad();
-            }
-            double[][] gxs = f.backward(gys);
-            if (gxs.length != f.inputs.length) {
-                throw new IllegalStateException("Number of gradients does not match number of inputs");
-            }
-            for (int i = 0; i < gxs.length; i++) {
-                f.inputs[i].setGrad(gxs[i]);
-                if (f.inputs[i].creator != null) {
-                    funcs = Arrays.copyOf(funcs, funcs.length + 1);
-                    funcs[funcs.length - 1] = f.inputs[i].creator;
-                }
-            }
-        }
-
-         */
     }
 
     public double[] getData() {
@@ -105,16 +82,16 @@ public class Variable {
         this.grad = grad;
     }
 
-    public AbstractFunction getCreator() {
+    public Function getCreator() {
         return creator;
     }
 
     Variable[] plus(Variable other) {
-        AbstractFunction plus = new Plus();
+        Function plus = new Plus();
         return plus.forward(this, other);
     }
     Variable[] square() {
-        AbstractFunction square = new Square();
+        Function square = new Square();
         return square.forward(this);
     }
 }

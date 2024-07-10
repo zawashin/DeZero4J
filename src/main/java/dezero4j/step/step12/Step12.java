@@ -6,7 +6,7 @@ public class Step12 {
         Variable x1 = new Variable(new double[]{3});
         Variable[] xs = new Variable[]{x0, x1};
 
-        AbstractFunction f = new Plus();
+        Function f = new Plus();
         Variable[] ys = f.forward(xs[0], xs[1]);
         Variable y = ys[0];
 

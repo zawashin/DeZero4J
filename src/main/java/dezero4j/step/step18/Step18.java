@@ -7,9 +7,9 @@ public class Step18 {
 
     public static void main(String[] args) {
         Variable x = new Variable(new double[]{2.0});
-        AbstractFunction square = new Square();
+        Function square = new Square();
         Variable a = square.forward(x)[0];
-        AbstractFunction plus = new Plus();
+        Function plus = new Plus();
         Variable y = plus.forward(a.square()[0], a.square()[0])[0];
         Config.enableBackprop = false;
         y.backward();

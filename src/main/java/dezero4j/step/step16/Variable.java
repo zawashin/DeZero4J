@@ -8,7 +8,7 @@ import java.util.*;
 public class Variable {
     private double[] data;
     private double[] grad;
-    private AbstractFunction creator;
+    private Function creator;
     private int generation;
 
     public Variable(double[] data) {
@@ -29,7 +29,7 @@ public class Variable {
         return generation;
     }
 
-    public void setCreator(AbstractFunction func) {
+    public void setCreator(Function func) {
         this.creator = func;
         this.generation = func.getGeneration() + 1;
     }
@@ -43,13 +43,13 @@ public class Variable {
             grad = new double[data.length];
             Arrays.fill(grad, 1.0);
         }
-        ArrayList<AbstractFunction> funcs = new ArrayList<>();
+        ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
-        Set<AbstractFunction> seenSet = new HashSet<>();
+        Set<Function> seenSet = new HashSet<>();
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
-            AbstractFunction f = funcs.remove(funcs.size() - 1);
+            Function f = funcs.remove(funcs.size() - 1);
             double[][] gys = new double[f.outputs.length][];
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
@@ -74,7 +74,7 @@ public class Variable {
                     if (!seenSet.contains(x.creator)) {
                         funcs.add(x.creator);
                         seenSet.add(x.creator);
-                        funcs.sort(Comparator.comparingInt(AbstractFunction::getGeneration));
+                        funcs.sort(Comparator.comparingInt(Function::getGeneration));
                     }
                 }
             }
@@ -93,17 +93,17 @@ public class Variable {
         this.grad = grad;
     }
 
-    public AbstractFunction getCreator() {
+    public Function getCreator() {
         return creator;
     }
 
     Variable[] plus(Variable other) {
-        AbstractFunction plus = new Plus();
+        Function plus = new Plus();
         return plus.forward(this, other);
     }
 
     Variable[] square() {
-        AbstractFunction square = new Square();
+        Function square = new Square();
         return square.forward(this);
     }
 }

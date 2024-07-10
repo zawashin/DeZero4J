@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Variable {
     private double[] data;
     private double[] grad;
-    private AbstractFunction creator;
+    private Function creator;
 
     public Variable(double[] data) {
         if (data != null) {
@@ -22,7 +22,7 @@ public class Variable {
         this.creator = null;
     }
 
-    public void setCreator(AbstractFunction func) {
+    public void setCreator(Function func) {
         this.creator = func;
     }
 
@@ -33,10 +33,10 @@ public class Variable {
             Arrays.fill(grad, 1.0);
         }
 
-        AbstractFunction[] funcs = {creator};
+        Function[] funcs = {creator};
         int index = 0;
         while (index < funcs.length) {
-            AbstractFunction f = funcs[index];
+            Function f = funcs[index];
             Variable x = f.getInput();
             Variable y = f.getOutput();
             x.setGrad(f.backward(y.getGrad()));
@@ -62,7 +62,7 @@ public class Variable {
         this.grad = grad;
     }
 
-    public AbstractFunction getCreator() {
+    public Function getCreator() {
         return creator;
     }
 }

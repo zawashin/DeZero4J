@@ -7,8 +7,8 @@ public class Step14 {
 
     public static void main(String[] args) {
         Variable x = new Variable(new double[]{3.0});
-        AbstractFunction plus = new Plus();
-        AbstractFunction plus2 = new Plus();
+        Function plus = new Plus();
+        Function plus2 = new Plus();
         Variable y = plus.forward(x, x)[0];
         y.backward();
         System.out.println(x.getGrad()[0]);
