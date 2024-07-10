@@ -4,11 +4,10 @@ import java.util.Arrays;
 
 public class  Step02 {
     public static void main(String[] args) {
-        double[] data = {10};
+        double data = 10;
         Variable x = new Variable(data);
         Square f = new Square();
         Variable y = f.forward(x);
-        System.out.println(y.getClass());
-        System.out.println(Arrays.toString(y.getData()));
+        System.out.println(y.getData());
     }
 }

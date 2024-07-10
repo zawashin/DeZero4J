@@ -1,13 +1,13 @@
 package dezero4j.step.step02;
 
-class Variable {
-    private double[] data;
+public class Variable {
+    private double data;
 
-    public Variable(double[] data) {
+    public Variable(double data) {
         this.data = data;
     }
 
-    public double[] getData() {
+    public double getData() {
         return data;
     }
 
