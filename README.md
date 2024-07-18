@@ -140,6 +140,15 @@ public Variable[] backward(Variable... gys) {
 ### Step37
 - Tensorクラス
   - VariableのdataをdoubleからTensorクラスに変更
+```java
+public class Tensor implements Cloneable, Serializable {
+    protected int rank;
+    protected int length;
+    protected double[] values;
+    protected int[] shape;
+
+}
+```    
   - 取り敢えず2階まで
 
 ### Step38
