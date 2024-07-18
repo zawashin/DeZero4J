@@ -3,7 +3,7 @@ package dezero4j.step.step16;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Plus extends AbstractFunction {
+public class Plus extends Function {
 	@Override
     public double[][] forward(double[][] xs) {
         double[] x0 = xs[0];

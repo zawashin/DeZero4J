@@ -1,16 +1,11 @@
 package dezero4j.step.step03;
 
-public class Square extends AbstractFunction {
+public class Square extends Function {
     @Override
     public Variable forward(Variable input) {
         double x = input.getData();
-        double y = forward(x);
+        double y = x * x;
         return new Variable(y);
-    }
-
-    @Override
-    protected double forward(double x) {
-        return x * x;
     }
 }
 

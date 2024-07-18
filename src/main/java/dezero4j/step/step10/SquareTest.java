@@ -35,7 +35,7 @@ public class SquareTest {
         assertTrue(flg);
     }
 
-    public double numericalDiff(AbstractFunction f, Variable x, double eps) {
+    public double numericalDiff(Function f, Variable x, double eps) {
         Variable x0 = new Variable(new double[]{x.getData()[0] - eps});
         Variable x1 = new Variable(new double[]{x.getData()[0] + eps});
         Variable y0 = f.forward(x0);

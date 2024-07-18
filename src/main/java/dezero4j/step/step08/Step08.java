@@ -8,9 +8,9 @@ public class Step08 {
     public static void main(String[] args) {
 
         Variable x;
-        AbstractFunction A = new Square();
-        AbstractFunction B = new Exp();
-        AbstractFunction C = new Square();
+        Function A = new Square();
+        Function B = new Exp();
+        Function C = new Square();
 
         x = new Variable(0.5);
         Variable a = A.forward(x);

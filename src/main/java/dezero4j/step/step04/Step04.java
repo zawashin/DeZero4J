@@ -1,7 +1,7 @@
 package dezero4j.step.step04;
 
 public class Step04 {
-    public static double numerical_diff(AbstractFunction f, Variable x, double eps) {
+    public static double numericalDiff(Function f, Variable x, double eps) {
         Variable x0 = new Variable(x.getData() - eps);
         Variable x1 = new Variable(x.getData() + eps);
         Variable y0 = f.forward(x0);
@@ -12,20 +12,20 @@ public class Step04 {
     public static void main(String[] args) {
         Square f = new Square();
         Variable x = new Variable(2.0);
-        double dy = numerical_diff(f, x, 1e-4);
+        double dy = numericalDiff(f, x, 1e-4);
         System.out.println(dy);
 
-        AbstractFunction f2 = new AbstractFunction() {
+        Function f2 = new Function() {
             public double forward(double x) {
-                AbstractFunction A = new Square();
-                AbstractFunction B = new Exp();
-                AbstractFunction C = new Square();
+                Function A = new Square();
+                Function B = new Exp();
+                Function C = new Square();
                 return C.forward(B.forward(A.forward(new Variable(x)))).getData();
             }
         };
 
         Variable x2 = new Variable(0.5);
-        double dy2 = numerical_diff(f2, x2, 1e-4);
+        double dy2 = numericalDiff(f2, x2, 1e-4);
         System.out.println(dy2);
     }
 }

@@ -6,7 +6,7 @@ package dezero4j.step.step07;
 public class Variable {
     private double data;
     private double grad;
-    private AbstractFunction creator;
+    private Function creator;
 
     public Variable(double data) {
         this.data = data;
@@ -14,12 +14,12 @@ public class Variable {
         this.creator = null;
     }
 
-    public void setCreator(AbstractFunction func) {
+    public void setCreator(Function func) {
         this.creator = func;
     }
 
     public void backward() {
-        AbstractFunction f = this.creator;
+        Function f = this.creator;
         System.out.println(f);
         if (f != null) {
             Variable x = f.getInput();

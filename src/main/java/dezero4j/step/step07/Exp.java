@@ -3,7 +3,7 @@ package dezero4j.step.step07;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Exp extends AbstractFunction {
+public class Exp extends Function {
     @Override
     protected double forward(double x) {
         double y = Math.exp(x);

@@ -3,7 +3,7 @@ package dezero4j.step.step08;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Square extends AbstractFunction {
+public class Square extends Function {
     @Override
     public double forward(double x) {
         double y = Math.pow(x, 2);
