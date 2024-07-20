@@ -73,8 +73,12 @@ public class Variable {
 ### Step11
 - Functionクラス
   - 多入力多出力に対応
-  - 自力でどうにもならずChatGPT導入
+```java
+public abstract class Function {
+    Variable[] inputs;
+    Variable[] outputs;
 
+```
 ### Step12
 
 ### Step13
