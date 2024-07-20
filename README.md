@@ -73,18 +73,15 @@ public class Variable {
 ### Step11
 - Functionクラス
   - 多入力多出力に対応
-
 ```java
 public abstract class Function {
     Variable[] inputs;
     Variable[] outputs;
 
-}
 ```
 ### Step12
 
 ### Step13
-
 ### Step14
 
 ### Step15
@@ -157,16 +154,16 @@ public Variable[] backward(Variable... gys) {
 ### Step37
 - Tensorクラス
   - VariableのdataをdoubleからTensorクラスに変更
-  - 取り敢えず2階まで
 ```java
 public class Tensor implements Cloneable, Serializable {
     int rank;
     int length;
-    double[] values;
+    protected double[] values;
     int[] shape;
 
 }
 ```
+  - 取り敢えず2階まで
 
 ### Step38
 
@@ -191,6 +188,7 @@ public class Tensor implements Cloneable, Serializable {
   - Layerの派生クラス
 - TwoLayerNetクラス
 - MultiLayerPerceptronクラス
+
 ### Step46
 - Optimizerクラス
   - SGD
