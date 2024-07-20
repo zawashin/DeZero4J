@@ -1,7 +1,5 @@
 package dezero4j.step.step24;
 
-import Variable;
-
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */

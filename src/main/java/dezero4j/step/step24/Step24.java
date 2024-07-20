@@ -3,7 +3,7 @@ package dezero4j.step.step24;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Step21 {
+public class Step24 {
 
     public static void main(String[] args) {
         Variable a = new Variable(new double[]{3.0});

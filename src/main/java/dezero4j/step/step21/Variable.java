@@ -1,10 +1,5 @@
 package dezero4j.step.step21;
 
-import dlfs3.step.step21.Function;
-import dlfs3.step.step21.Multiply;
-import dlfs3.step.step21.Plus;
-import dlfs3.step.step21.Square;
-
 import java.util.*;
 
 /**
@@ -13,7 +8,7 @@ import java.util.*;
 public class Variable {
     private double[] data;
     private double[] grad;
-    private dlfs3.step.step21.Function creator;
+    private Function creator;
     private int generation;
     private final int rank;
     private final int[] shape;
@@ -66,7 +61,7 @@ public class Variable {
         return generation;
     }
 
-    public void setCreator(dlfs3.step.step21.Function func) {
+    public void setCreator(Function func) {
         this.creator = func;
         this.generation = func.getGeneration() + 1;
     }
@@ -88,13 +83,13 @@ public class Variable {
             grad = new double[data.length];
             Arrays.fill(grad, 1.0);
         }
-        ArrayList<dlfs3.step.step21.Function> funcs = new ArrayList<>();
+        ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
-        Set<dlfs3.step.step21.Function> seenSet = new HashSet<>();
+        Set<Function> seenSet = new HashSet<>();
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
-            dlfs3.step.step21.Function f = funcs.remove(funcs.size() - 1);
+            Function f = funcs.remove(funcs.size() - 1);
             double[][] gys = new double[f.outputs.length][];
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
@@ -119,7 +114,7 @@ public class Variable {
                     if (!seenSet.contains(x.creator)) {
                         funcs.add(x.creator);
                         seenSet.add(x.creator);
-                        funcs.sort(Comparator.comparingInt(dlfs3.step.step21.Function::getGeneration));
+                        funcs.sort(Comparator.comparingInt(Function::getGeneration));
                     }
                 }
             }
@@ -138,17 +133,17 @@ public class Variable {
         this.grad = grad;
     }
 
-    public dlfs3.step.step21.Function getCreator() {
+    public Function getCreator() {
         return creator;
     }
 
     Variable[] plus(Variable other) {
-        dlfs3.step.step21.Function function = new Plus();
+        Function function = new Plus();
         return function.forward(this, other);
     }
 
     Variable[] multiply(Variable other) {
-        dlfs3.step.step21.Function function = new Multiply();
+        Function function = new Multiply();
         return function.forward(this, other);
     }
 
