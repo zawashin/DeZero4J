@@ -1,0 +1,33 @@
+package dezero4j.step.step24;
+
+import dlfs3.step.step24.Variable;
+
+/**
+ * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
+ */
+public class Goldstein extends MultivariateFunction {
+    public dlfs3.step.step24.Variable forward(dlfs3.step.step24.Variable... xs) {
+        /*
+        val z = (1 + (xs[0] + xs[1] + 1).pow(2) * (19 - 14*xs[0] + 3*xs[0].pow(2) - 14*xs[1] + 6*xs[0]*xs[1] + 3*xs[1].pow(2))) *
+                (30 + (2*xs[0] - 3*xs[1]).pow(2) * (18 - 32*xs[0] + 12*xs[0].pow(2) + 48*xs[1] - 36*xs[0]*xs[1] + 27*xs[1].pow(2)))
+                
+         */
+        dlfs3.step.step24.Variable z;
+        int length = xs[0].getData().length;
+        //z = new Variable(length, 1).plus(xs[0].plus(xs[1]).plus(new Variable(length, 1)).pow(2).multiply(new Variable(length, 19).minus(new Variable(length, 14).multiply(xs[0])).plus(new Variable(length, 3).multiply(xs[0].pow(2))).minus(new Variable(length, 14).multiply(xs[1])).plus(new Variable(length, 6).multiply(xs[0]).multiply(xs[1])).plus(new Variable(length, 3).multiply(xs[1].pow(2))))).multiply(new Variable(length, 30).plus(new Variable(length, 2).multiply(xs[0]).minus(new Variable(length, 3).multiply(xs[1])).pow(2).multiply(new Variable(length, 18).minus(new Variable(length, 32).multiply(xs[0])).plus(new Variable(length, 12).multiply(xs[0].pow(2))).plus(new Variable(length, 48).multiply(xs[1])).minus(new Variable(length, 36).multiply(xs[0]).multiply(xs[1])).plus(new Variable(length, 27).multiply(xs[1].pow(2))))));
+        z = constant(length, 1).plus(xs[0].plus(xs[1]).plus(constant(length, 1)).pow(2).multiply(constant(length, 19).minus(constant(length, 14).multiply(xs[0])).plus(constant(length, 3).multiply(xs[0].pow(2))).minus(constant(length, 14).multiply(xs[1])).plus(constant(length, 6).multiply(xs[0]).multiply(xs[1])).plus(constant(length, 3).multiply(xs[1].pow(2))))).multiply(constant(length, 30).plus(constant(length, 2).multiply(xs[0]).minus(constant(length, 3).multiply(xs[1])).pow(2).multiply(constant(length, 18).minus(constant(length, 32).multiply(xs[0])).plus(constant(length, 12).multiply(xs[0].pow(2))).plus(constant(length, 48).multiply(xs[1])).minus(constant(length, 36).multiply(xs[0]).multiply(xs[1])).plus(constant(length, 27).multiply(xs[1].pow(2))))));
+        return z;
+    }
+
+    public static void main(String[] args) {
+        dlfs3.step.step24.Variable x = new dlfs3.step.step24.Variable(new double[]{1,1});
+        dlfs3.step.step24.Variable y = new dlfs3.step.step24.Variable(new double[]{2,1});
+        Goldstein goldstein = new Goldstein();
+        Variable z = goldstein.forward(x, y);
+        z.backward();
+        System.out.println(x.getGrad()[0]);
+        System.out.println(y.getGrad()[0]);
+        System.out.println(x.getGrad()[1]);
+        System.out.println(y.getGrad()[1]);
+    }
+}
