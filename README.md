@@ -21,7 +21,10 @@
 - Variableクラス
   - NumPyは使えないので取り敢えずプリミティブ型
 ```java:
-double data;
+public class Variable {
+    double data;
+    
+}
 ```
 
 ### Step02
@@ -42,7 +45,11 @@ public abstract class Function {
 - Variableクラス
   - 勾配を追加
 ```java:
-double grad;
+public class Variable {
+    double data;
+    double grad;
+    
+}
 ```
 
 ### Step07
@@ -53,9 +60,12 @@ double grad;
 - Variableクラス
   - dataとgradを配列に変更
 ```java:
-private double[] data;
-private double[] grad;
-private Function creator;
+public class Variable {
+    double[] data;
+    double[] grad;
+    Function creator;
+    
+}
 ```
 
 ### Step10
@@ -68,6 +78,7 @@ private Function creator;
 ### Step12
 
 ### Step13
+
 ### Step14
 
 ### Step15
@@ -142,13 +153,13 @@ public Variable[] backward(Variable... gys) {
   - VariableのdataをdoubleからTensorクラスに変更
 ```java
 public class Tensor implements Cloneable, Serializable {
-    protected int rank;
-    protected int length;
+    int rank;
+    int length;
     protected double[] values;
-    protected int[] shape;
+    int[] shape;
 
 }
-```    
+```
   - 取り敢えず2階まで
 
 ### Step38
@@ -174,7 +185,6 @@ public class Tensor implements Cloneable, Serializable {
   - Layerの派生クラス
 - TwoLayerNetクラス
 - MultiLayerPerceptronクラス
-
 ### Step46
 - Optimizerクラス
   - SGD
