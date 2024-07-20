@@ -1,6 +1,6 @@
 package dezero4j.step.step24;
 
-import dlfs3.step.step24.Variable;
+import Variable;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>

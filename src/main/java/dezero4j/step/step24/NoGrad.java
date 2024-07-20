@@ -1,6 +1,6 @@
 package dezero4j.step.step24;
 
-import dlfs3.step.step24.Config;
+import Config;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>

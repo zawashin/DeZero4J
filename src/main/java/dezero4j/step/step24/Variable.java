@@ -1,14 +1,5 @@
 package dezero4j.step.step24;
 
-import dlfs3.step.step24.Divide;
-import dlfs3.step.step24.Function;
-import dlfs3.step.step24.Minus;
-import dlfs3.step.step24.Multiply;
-import dlfs3.step.step24.Negative;
-import dlfs3.step.step24.Plus;
-import dlfs3.step.step24.Power;
-import dlfs3.step.step24.Square;
-
 import java.util.*;
 
 /**
@@ -17,7 +8,7 @@ import java.util.*;
 public class Variable implements Cloneable {
     private double[] data;
     private double[] grad;
-    private dlfs3.step.step24.Function creator;
+    private Function creator;
     private int generation;
     private final int rank;
     private final int[] shape;
@@ -92,7 +83,7 @@ public class Variable implements Cloneable {
         return generation;
     }
 
-    public void setCreator(dlfs3.step.step24.Function func) {
+    public void setCreator(Function func) {
         this.creator = func;
         this.generation = func.getGeneration() + 1;
     }
@@ -118,13 +109,13 @@ public class Variable implements Cloneable {
             grad = new double[data.length];
             Arrays.fill(grad, 1.0);
         }
-        ArrayList<dlfs3.step.step24.Function> funcs = new ArrayList<>();
+        ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
-        Set<dlfs3.step.step24.Function> seenSet = new HashSet<>();
+        Set<Function> seenSet = new HashSet<>();
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
-            dlfs3.step.step24.Function f = funcs.remove(funcs.size() - 1);
+            Function f = funcs.remove(funcs.size() - 1);
             double[][] gys = new double[f.outputs.length][];
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
@@ -149,7 +140,7 @@ public class Variable implements Cloneable {
                     if (!seenSet.contains(x.creator)) {
                         funcs.add(x.creator);
                         seenSet.add(x.creator);
-                        funcs.sort(Comparator.comparingInt(dlfs3.step.step24.Function::getGeneration));
+                        funcs.sort(Comparator.comparingInt(Function::getGeneration));
                     }
                 }
             }
@@ -168,17 +159,17 @@ public class Variable implements Cloneable {
         this.grad = grad;
     }
 
-    public dlfs3.step.step24.Function getCreator() {
+    public Function getCreator() {
         return creator;
     }
 
     public Variable plus(Variable other) {
-        dlfs3.step.step24.Function function = new dlfs3.step.step24.Plus();
+        Function function = new Plus();
         return function.forward(this, other)[0];
     }
 
     public Variable plus(double other) {
-        dlfs3.step.step24.Function function = new Plus();
+        Function function = new Plus();
         double[] array = new double[data.length];
         for(int i = 0; i < data.length; i++) {
             array[i] = other;
@@ -188,22 +179,22 @@ public class Variable implements Cloneable {
     }
 
     public Variable minus(Variable other) {
-        dlfs3.step.step24.Function function = new dlfs3.step.step24.Minus();
+        Function function = new Minus();
         return function.forward(this, other)[0];
     }
 
     public Variable rminus(Variable other) {
-        dlfs3.step.step24.Function function = new Minus();
+        Function function = new Minus();
         return function.forward(other, this)[0];
     }
 
     public Variable multiply(Variable other) {
-        dlfs3.step.step24.Function function = new dlfs3.step.step24.Multiply();
+        Function function = new Multiply();
         return function.forward(this, other)[0];
     }
 
     public Variable multiply(double other) {
-        dlfs3.step.step24.Function function = new Multiply();
+        Function function = new Multiply();
         double[] array = new double[data.length];
         for(int i = 0; i < data.length; i++) {
             array[i] = other;
@@ -212,22 +203,22 @@ public class Variable implements Cloneable {
         return function.forward(this, otherVariable)[0];
     }
     public Variable divide(Variable other) {
-        dlfs3.step.step24.Function function = new dlfs3.step.step24.Divide();
+        Function function = new Divide();
         return function.forward(this, other)[0];
     }
 
     public Variable rdivide(Variable other) {
-        dlfs3.step.step24.Function function = new Divide();
+        Function function = new Divide();
         return function.forward(other, this)[0];
     }
 
     public Variable negative() {
-        dlfs3.step.step24.Function function = new Negative();
+        Function function = new Negative();
         return function.forward(this)[0];
     }
 
     public Variable pow(double index) {
-        dlfs3.step.step24.Function function = new dlfs3.step.step24.Power();
+        Function function = new Power();
         ((Power)function).setIndex(index);
         return function.forward(this)[0];
     }
