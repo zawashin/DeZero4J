@@ -1,7 +1,5 @@
 package dezero4j.step.step01;
 
-import java.util.Arrays;
-
 public class Step01 {
 
     public static void main(String[] args) {

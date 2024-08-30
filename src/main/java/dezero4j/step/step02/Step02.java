@@ -1,7 +1,5 @@
 package dezero4j.step.step02;
 
-import java.util.Arrays;
-
 public class  Step02 {
     public static void main(String[] args) {
         double data = 10;

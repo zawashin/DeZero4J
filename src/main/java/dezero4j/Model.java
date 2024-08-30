@@ -41,14 +41,19 @@ public class Model extends Layer {
         activates.add(new Sigmoid());
     }
 
-    public void addLayer(int numOutputs) {
-        layers.add(new Affine(numOutputs));
+    public void addLayer(int numOutput) {
+        layers.add(new Affine(numOutput));
         activates.add(new Sigmoid());
     }
 
-    public void addLayer(int n, Layer layer) {
-        layers.add(n, layer);
+    public void addLayer(int numOutput, Layer layer) {
+        layers.add(numOutput, layer);
         activates.add(new Sigmoid());
+    }
+
+    public void addLayer(int numOutput, ActivationFunction function) {
+        layers.add(new Affine(numOutput));
+        activates.add(function);
     }
 
     public void clearGrads() {

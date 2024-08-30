@@ -3,7 +3,7 @@ package dezero4j;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Tanh extends Function {
+public class Tanh extends ActivationFunction {
 
     public Tanh() {
         numInputs = 1;
