@@ -1,4 +1,4 @@
-### Step37
+### Step37：テンソルを使う
 - Tensorクラス
   - VariableのdataをdoubleからTensorクラスに変更
 ```java

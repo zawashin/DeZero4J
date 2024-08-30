@@ -1,4 +1,4 @@
-### Step09
+### Step09：関数をより便利に
 - Variableクラス
   - dataとgradを配列に変更
 ```java

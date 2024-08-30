@@ -1,4 +1,4 @@
-### Step06
+### Step06：手作業によるバックプロパゲーション
 - Variableクラス
   - 勾配を追加
     - double grad

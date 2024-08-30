@@ -37,20 +37,22 @@ public class Variable {
 ### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
-```java:Function.java
+
+```java
 public abstract class Function {
     public abstract Variable forward(Variable input);
 }
 ```
 ### Step03：関数の連結
 
+- 特になし
 
 ### Step04：数値微分
 - NumricalDiff関数
 
 ### Step05：計算グラフで表す
 
-### Step06
+### Step06：手作業によるバックプロパゲーション
 - Variableクラス
   - 勾配を追加
     - double grad
@@ -62,72 +64,78 @@ public class Variable {
 }
 ```
 
-### Step07
+### Step07：バックプロパゲーションの自動化
 
-### Step08
+### Step08：再帰からループへ
 
-### Step09
+### Step09：関数をより便利に
 - Variableクラス
   - dataとgradを配列に変更
-```java:
+
+```java
 public class Variable {
     double[] data;
     double[] grad;
     Function creator;
-    
+    // 略
 }
 ```
 
-### Step10
+### Step10：テストを行う
 
-### Step11
+- このステップは省略する。
+
+### Step11：可変長の引数（順伝播編）
 - Functionクラス
   - 多入力多出力に対応
   - 自力でどうにもならずChatGPT導入
 
-### Step12
+### Step12：可変長の引数（改善偏）
 
-### Step13
+### Step13：可変長の引数（逆伝播偏）
 
-### Step14
+### Step14：同じ変数を繰り返し使う
 
-### Step15
+### Step15：複雑な計算グラフ（理論編）
 
-### Step16
+### Step16：複雑な計算グラフ（実装編）
 
-### Step17
+### Step17：メモリ管理と循環参照
 
-### Step18
+### Step18：メモリ使用量を減らすモード
 
-### Step19
+### Step19：変数を使いやすく
 
-### Step20
+### Step20：演算子のオーバーロード (1)
 
-### Step21
+### Step21：演算子のオーバーロード (2)
 
-### Step22
+### Step22：演算子のオーバーロード (3)
 
-### Step23
+### Step23：パッケージとしてまとめる
 
-### Step24
+### Step24：複雑な関数の微分
 
-### Step25
+### Step25：計算グラフの可視化 (1)
 
-### Step26
+### Step26：計算グラフの可視化 (2)
 
-### Step27
+### Step27：テイラー展開の微分
 
-### Step28
+### Step28：関数の最適化
 
-### Step29
+### Step299：ニュートン法を用いた最適化（手計算）
 
-### Step30
+### Step30：高階微分（準備編）
 
-### Step31
+### Step31：高階微分（理論編）
 
-### Step32
+- このステップでの実装は無し。
 
-### Step33
+### Step32：高階微分（実装偏）
+
+### Step33### Step33：ニュートン法を使った最適化（自動計算）
+
 - Variableクラス
   - backwardメソッド実装時の注意点
     -   逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
@@ -152,13 +160,13 @@ public Variable[] backward(Variable... gys) {
 }
 ```
 
-### Step34
+### Step34：sin 関数の高階微分
 
-### Step35
+### Step35：高階微分の計算グラフ
 
-### Step36
+### Step36：高階微分以外の用途
 
-### Step37
+### Step37：テンソルを使う
 - Tensorクラス
   - VariableのdataをdoubleからTensorクラスに変更
 ```java
@@ -172,30 +180,32 @@ public class Tensor implements Cloneable, Serializable {
 ```
   - 取り敢えず2階まで
 
-### Step38
+### Step38：形状を変える関数
 
-### Step39
-### Step40
+### Step39：和を求める関数
 
-### Step41
+### Step40：ブロードキャストを行う関数
 
-### Step42
+### Step41：行列の積
 
-### Step43
+### Step422：線形回帰
 
-### Step44
+### Step43：ニューラルネットワーク
+
+### Step44：パラメータをまとめるレイヤ
 - Layerクラス
   - 抽象クラス
 - Affineクラス
   - Layerの派生クラス
   - ゼロつく③の線形層Linearクラス
 
-### Step45
+### Step45：レイヤをまとめるレイヤ
 - Modelクラス
   - Layerの派生クラス
 - TwoLayerNetクラス
 - MultiLayerPerceptronクラス
-### Step46
+
+### Step46：Optimizer によるパラメータ更新
 - Optimizerクラス
   - SGD
 
