@@ -10,6 +10,8 @@
 - メモリ管理
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
     - 結果、OutOfMemoryで落ちる
+- 例題でしか動作しない
+  - 実用上問題なのは明らか
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
@@ -20,35 +22,43 @@
 ### Step01：箱としての変数
 - Variableクラス
   - NumPyは使えないので取り敢えずプリミティブ型
+  - 
 ```java
 public class Variable {
     double data;
     
+    public Variable(double data) {
+        this.data = data;
+    }
+    // 略
 }
 ```
 
 ### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
-```java
+```java:Function.java
 public abstract class Function {
     public abstract Variable forward(Variable input);
 }
 ```
 ### Step03：関数の連結
 
-### Step04
 
-### Step05
+### Step04：数値微分
+- NumricalDiff関数
+
+### Step05：計算グラフで表す
 
 ### Step06
 - Variableクラス
   - 勾配を追加
-```java:
+    - double grad
+```java
 public class Variable {
     double data;
     double grad;
-    
+    // 略
 }
 ```
 
