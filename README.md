@@ -17,25 +17,25 @@
 - ↑のC++版[DeZeroCpp](https://github.com/bugph0bia/DeZeroCpp)
 
 ## 各ステップの実装についてのメモ
-### Step01
+### Step01：箱としての変数
 - Variableクラス
   - NumPyは使えないので取り敢えずプリミティブ型
-```java:
+```java
 public class Variable {
     double data;
     
 }
 ```
 
-### Step02
+### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
-```java:
+```java
 public abstract class Function {
     public abstract Variable forward(Variable input);
 }
 ```
-### Step03
+### Step03：関数の連結
 
 ### Step04
 
@@ -73,15 +73,12 @@ public class Variable {
 ### Step11
 - Functionクラス
   - 多入力多出力に対応
-```java
-public abstract class Function {
-    Variable[] inputs;
-    Variable[] outputs;
+  - 自力でどうにもならずChatGPT導入
 
-```
 ### Step12
 
 ### Step13
+
 ### Step14
 
 ### Step15
@@ -188,7 +185,6 @@ public class Tensor implements Cloneable, Serializable {
   - Layerの派生クラス
 - TwoLayerNetクラス
 - MultiLayerPerceptronクラス
-
 ### Step46
 - Optimizerクラス
   - SGD

@@ -1,7 +1,7 @@
 package dezero4j.step.step01;
 
 public class Variable {
-    private double data;
+    double data;
 
     public Variable(double data) {
         this.data = data;
