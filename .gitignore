@@ -1,7 +1,6 @@
-/src/main/java/dezero4j/step/DeZeroCpp.md
-/src/main/java/dezero4j/step/make_readme.sh
-/src/main/java/dezero4j/step/readme.sh
-/src/main/java/dezero4j/step00
+/src/main/java/dezero4j/step/*.md
+/src/main/java/dezero4j/step/*/*.md
+/src/main/java/dezero4j/step/step00
 /src/main/java/dezero4j/step/*.sh
 /src/main/java/*/*/*/*.md
 
