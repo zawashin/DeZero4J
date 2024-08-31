@@ -1,17 +1,15 @@
-
-# DeZero4J
+# DeZero4J(**De**ep Learning **for** **J**ava)
 
 [PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
 を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
 」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
 
 ### 方針
-
 - 最低限ステップごとにコミットする。ビルドは通る状態とする。
 - numpy代わりのTensorクラスの実装を目指す
-    - nd4jの開発が実質凍結っぽい
-    - 車輪の再発明？それがどうした！
-        - 悲劇の元
+  - nd4jの開発が実質凍結っぽい
+  - 車輪の再発明？それがどうした！
+    - 悲劇の元
 
 ## 現状
 - ステップ46の途中まで
@@ -22,7 +20,7 @@
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
     - 結果、OutOfMemoryで落ちる
 - 例題でしか動作しない
-    - **実用上問題**なのは明らか
+  - **実用上問題**なのは明らか
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
