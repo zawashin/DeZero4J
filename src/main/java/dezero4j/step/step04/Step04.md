@@ -1,3 +1,4 @@
 ### Step04：数値微分
-- NumricalDiff関数
+
+- 検証のためのStep04クラスにnumricalDiffメソッドを実装
 

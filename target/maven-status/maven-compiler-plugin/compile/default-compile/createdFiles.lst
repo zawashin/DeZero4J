@@ -331,7 +331,6 @@ dezero4j/step/step43/BroadcastTo.class
 dezero4j/step/step38/Reshape.class
 dezero4j/step/step43/MeanSquaredError.class
 dezero4j/step/step40/Exp.class
-tensor4j/TensorUtils.class
 dezero4j/step/step38/TensorOperator.class
 dezero4j/step/step43/UsingConfig.class
 dezero4j/step/step44/Neg.class

@@ -4,8 +4,7 @@ public class Exp extends Function {
     @Override
     public Variable forward(Variable input) {
         double x = input.getData();
-        double y = Math.exp(x);
-        return new Variable(y);
+        return new Variable(Math.exp(x));
     }
 }
 

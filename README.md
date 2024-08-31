@@ -1,6 +1,17 @@
 
 # DeZero4J
-[PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)」のフレームワークDezeroをJavaで(出来るところまで）実装してみた。
+
+[PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
+を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
+」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
+
+### 方針
+
+- 最低限ステップごとにコミットする。ビルドは通る状態とする。
+- numpy代わりのTensorクラスの実装を目指す
+    - nd4jの開発が実質凍結っぽい
+    - 車輪の再発明？それがどうした！
+        - 悲劇の元
 
 ## 現状
 - ステップ46の途中まで
@@ -11,7 +22,7 @@
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
     - 結果、OutOfMemoryで落ちる
 - 例題でしか動作しない
-  - 実用上問題なのは明らか
+    - **実用上問題**なのは明らか
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
@@ -22,7 +33,6 @@
 ### Step01：箱としての変数
 - Variableクラス
   - NumPyは使えないので取り敢えずプリミティブ型
-  - 
 ```java
 public class Variable {
     double data;
@@ -37,6 +47,10 @@ public class Variable {
 ### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
+  - 順計算を抽象メソッドとして定義
+      - forwardメソッド
+- Squareクラス
+    - Functionクラスの具象化
 
 ```java
 public abstract class Function {
@@ -45,10 +59,11 @@ public abstract class Function {
 ```
 ### Step03：関数の連結
 
-- 特になし
+- 複数関数が必要なので、Fuctionクラスの具象化としてExpクラスを実装
 
 ### Step04：数値微分
-- NumricalDiff関数
+
+- 検証のためのStep04クラスにnumricalDiffメソッドを実装
 
 ### Step05：計算グラフで表す
 
@@ -71,7 +86,6 @@ public class Variable {
 ### Step09：関数をより便利に
 - Variableクラス
   - dataとgradを配列に変更
-
 ```java
 public class Variable {
     double[] data;
@@ -183,7 +197,6 @@ public class Tensor implements Cloneable, Serializable {
 ### Step38：形状を変える関数
 
 ### Step39：和を求める関数
-
 ### Step40：ブロードキャストを行う関数
 
 ### Step41：行列の積
@@ -204,7 +217,6 @@ public class Tensor implements Cloneable, Serializable {
   - Layerの派生クラス
 - TwoLayerNetクラス
 - MultiLayerPerceptronクラス
-
 ### Step46：Optimizer によるパラメータ更新
 - Optimizerクラス
   - SGD

@@ -1,7 +1,9 @@
 /src/main/java/dezero4j/step/DeZeroCpp.md
 /src/main/java/dezero4j/step/make_readme.sh
 /src/main/java/dezero4j/step/readme.sh
+/src/main/java/dezero4j/step/*.sh
 /src/main/java/dezero4j/step/step00
+/src/main/java/*/*/*/*.md
 /src/main/java/dezero4j/step/step01/Step01.md
 /src/main/java/dezero4j/step/step02/Step02.md
 /src/main/java/dezero4j/step/step03/Step03.md
@@ -41,3 +43,13 @@
 /src/main/java/dezero4j/step/step37/Step37.md
 /src/main/java/dezero4j/step/step38/Step38.md
 /src/main/java/dezero4j/step/step39/Step39.md
+/src/main/java/dezero4j/step/step40/Step40.md
+/src/main/java/dezero4j/step/step41/Step41.md
+/src/main/java/dezero4j/step/step42/Step42.md
+/src/main/java/dezero4j/step/step43/Step43.md
+/src/main/java/dezero4j/step/step44/Step44.md
+/src/main/java/dezero4j/step/step45/Step45.md
+/src/main/java/dezero4j/step/step46/Step46.md
+/src/main/java/dezero4j/step/step47/Step47.md
+/src/main/java/dezero4j/step/step48/Step48.md
+/src/main/java/dezero4j/step/step49/Step49.md
