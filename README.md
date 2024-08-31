@@ -1,12 +1,14 @@
-# DeZero4J(**De**ep Learning **for** **J**ava)
+# DeZero4J
 
-[PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
-を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
-」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
+- **De**ep Learning from **Ze**ro **for** **J**ava
+- [PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
+  を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
+  」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
 
 ### 方針
 - 最低限ステップごとにコミットする。ビルドは通る状態とする。
-- numpy代わりのTensorクラスの実装を目指す
+    - つもりだったけど、Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
+- numpy代わりのTensorクラス**も**実装を目指す
   - nd4jの開発が実質凍結っぽい
   - 車輪の再発明？それがどうした！
     - 悲劇の元

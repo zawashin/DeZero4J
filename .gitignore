@@ -1,8 +1,4 @@
+/src/main/java/dezero4j/step/step00
 /src/main/java/dezero4j/step/*.md
 /src/main/java/dezero4j/step/*/*.md
-/src/main/java/dezero4j/step/step00
 /src/main/java/dezero4j/step/*.sh
-/src/main/java/*/*/*/*.md
-
-./gitignore_backup
-
