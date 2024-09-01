@@ -1,5 +1,5 @@
-# DeZero4J
 
+# DeZero4J
 - **De**ep Learning from **Ze**ro **for** **J**ava
 - [PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
   を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
@@ -7,7 +7,7 @@
 
 ### 方針
 - 最低限ステップごとにコミットする。ビルドは通る状態とする。
-    - つもりだったけど、Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
+  - つもりだったけど、Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
 - numpy代わりのTensorクラス**も**実装を目指す
   - nd4jの開発が実質凍結っぽい
   - 車輪の再発明？それがどうした！
@@ -81,6 +81,7 @@ public class Variable {
 
 ### Step07：バックプロパゲーションの自動化
 
+
 ### Step08：再帰からループへ
 
 ### Step09：関数をより便利に
@@ -138,7 +139,7 @@ public class Variable {
 
 ### Step28：関数の最適化
 
-### Step299：ニュートン法を用いた最適化（手計算）
+### Step29：ニュートン法を用いた最適化（手計算）
 
 ### Step30：高階微分（準備編）
 
@@ -148,7 +149,7 @@ public class Variable {
 
 ### Step32：高階微分（実装偏）
 
-### Step33### Step33：ニュートン法を使った最適化（自動計算）
+### Step33：ニュートン法を使った最適化（自動計算）
 
 - Variableクラス
   - backwardメソッド実装時の注意点
@@ -201,7 +202,7 @@ public class Tensor implements Cloneable, Serializable {
 
 ### Step41：行列の積
 
-### Step422：線形回帰
+### Step42：線形回帰
 
 ### Step43：ニューラルネットワーク
 
@@ -210,7 +211,7 @@ public class Tensor implements Cloneable, Serializable {
   - 抽象クラス
 - Affineクラス
   - Layerの派生クラス
-  - ゼロつく③の線形層Linearクラス
+  - ゼロつく❸の線形層Linearクラス
 
 ### Step45：レイヤをまとめるレイヤ
 - Modelクラス
