@@ -4,6 +4,7 @@ package dezero4j.step.step06;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 class Square extends Function {
+
     @Override
     public Variable forward(Variable input) {
         double x = input.data;
@@ -14,15 +15,13 @@ class Square extends Function {
     }
 
     @Override
-    public double forward(double x) {
-        double y = x * x;
-        return y;
+    protected double forward(double x) {
+        return x * x;
     }
 
     @Override
-    public double backward(double gy) {
+    protected double backward(double gy) {
         double x = this.input.data;
-        double gx = 2 * x * gy;
-        return gx;
+        return 2 * x * gy;
     }
 }

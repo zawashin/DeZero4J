@@ -6,7 +6,6 @@
   」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
 
 ### 方針
-
 - ステップごとにパッケージを作る
     - 各ステップごとにStepNクラスを作って検証する
         - Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
@@ -23,6 +22,7 @@
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
     - 結果、OutOfMemoryで落ちる
 - 例題で**しか**動作しない
+
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
@@ -47,7 +47,7 @@ public class Variable {
 ### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
-  - 順計算を抽象メソッドとして定義
+  - 順伝播を抽象メソッドとして定義
       - forwardメソッド
 - Squareクラス
     - Functionクラスの具象化
@@ -63,6 +63,21 @@ public abstract class Function {
 
 ### Step04：数値微分
 
+- Functionクラス
+    - 順伝播を実際に計算するための抽象メソッドを定義
+
+```java
+public abstract class Function {
+
+    public Variable forward(Variable input) {
+        double x = input.getData();
+        double y = forward(x);
+        return new Variable(y);
+    }
+
+    protected abstract double forward(double x);
+}
+```
 - 検証のためのStep04クラスにnumricalDiffメソッドを実装
 
 ### Step05：計算グラフで表す
@@ -79,6 +94,20 @@ public class Variable {
 }
 ```
 
+- Functionクラス
+    - 勾配を計算のためにフィールドにinputを追加
+        - Variable input
+    - 逆伝播を計算するためのbaackwardメソッドを定義
+
+```java
+public abstract class Function {
+    Variable input;
+
+    public abstract Variable forward(Variable input);
+    protected abstract double forward(double x);
+    protected abstract double backward(double gy);
+}
+```
 ### Step07：バックプロパゲーションの自動化
 
 

@@ -20,7 +20,6 @@ public class Variable {
 
     public void backward() {
         Function f = this.creator;
-        System.out.println(f);
         if (f != null) {
             Variable x = f.getInput();
             x.setGrad(f.backward(this.grad));

@@ -4,25 +4,23 @@ package dezero4j.step.step06;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 class Exp extends Function {
+
     @Override
     public Variable forward(Variable input) {
+        this.input = input;
         double x = input.data;
         double y = forward(x);
-        Variable output = new Variable(y);
-        this.input = input;
-        return output;
+        return new Variable(y);
     }
 
     @Override
-    public double forward(double x) {
-        double y = Math.exp(x);
-        return y;
+    protected double forward(double x) {
+        return Math.exp(x);
     }
 
     @Override
-    public double backward(double gy) {
+    protected double backward(double gy) {
         double x = this.input.data;
-        double gx = Math.exp(x) * gy;
-        return gx;
+        return Math.exp(x) * gy;
     }
 }

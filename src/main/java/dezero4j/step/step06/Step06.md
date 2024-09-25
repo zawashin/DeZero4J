@@ -10,3 +10,19 @@ public class Variable {
 }
 ```
 
+- Functionクラス
+  - 勾配を計算のためにフィールドにinputを追加
+    - Variable input
+  - 逆伝播を計算するためのbackwardメソッドを定義
+
+```java
+public abstract class Function {
+  protected Variable input;
+
+  public abstract Variable forward(Variable input);
+
+  protected abstract double forward(double x);
+
+  protected abstract double backward(double gy);
+}
+```
