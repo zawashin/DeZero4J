@@ -7,11 +7,11 @@
 
 ### 方針
 - ステップごとにパッケージを作る
-    - 各ステップごとにStepNクラスを作って検証する
-        - Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
+  - 各ステップごとにStepNクラスを作って検証する
+    - Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある
 - 外部ライブラリをできる限り使わない
-    - numpy代わりのTensorクラスの実装**も**目指す
-        - 車輪の再発明
+  - numpy代わりのTensorクラスの実装**も**目指す
+    - 車輪の再発明
 
 ## 現状
 - ステップ46の途中まで
@@ -64,7 +64,7 @@ public abstract class Function {
 ### Step04：数値微分
 
 - Functionクラス
-    - 順伝播を実際に計算するための抽象メソッドを定義
+  - 順伝播を実際に計算するための抽象メソッドを定義
 
 ```java
 public abstract class Function {
@@ -95,22 +95,70 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 勾配を計算のためにフィールドにinputを追加
-        - Variable input
-    - 逆伝播を計算するためのbaackwardメソッドを定義
+  - 勾配を計算のためにフィールドにinputを追加
+    - Variable input
+  - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
 public abstract class Function {
-    Variable input;
+  protected Variable input;
 
-    public abstract Variable forward(Variable input);
-    protected abstract double forward(double x);
-    protected abstract double backward(double gy);
+  public abstract Variable forward(Variable input);
+
+  protected abstract double forward(double x);
+
+  protected abstract double backward(double gy);
 }
 ```
 ### Step07：バックプロパゲーションの自動化
 
+- Variableクラス
+  - 逆伝播の計算
+    - フィールドにFunction creatorを追加
+    - 勾配の計算
+      - backwardメソッドを定義
+  - フィールドをprivateに変更
 
+```java
+public class Variable {
+    private double data;
+    private double grad;
+    private Function creator;
+
+    // 略
+    public void backward() {
+        // 略
+    }
+    // 略
+}
+
+
+```
+
+- Functionクラス
+  - 逆伝播を計算のためにフィールドにinputを追加
+    - Variable input
+  - 逆伝播を計算するためのbackwardメソッドを定義
+
+```java
+public abstract class Function {
+    protected Variable input;
+
+    public Variable forward(Variable input) {
+        double x = input.getData();
+        double y = forward(x);
+        Variable output = new Variable(y);
+        output.setCreator(this);
+        this.input = input;
+        this.output = output;
+        return output;
+    }
+
+    protected abstract double forward(double x);
+
+    protected abstract double backward(double gy);
+}
+```
 ### Step08：再帰からループへ
 
 ### Step09：関数をより便利に
