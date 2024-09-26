@@ -11,7 +11,7 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 勾配を計算のためにフィールドにinputを追加
+  - 逆伝播を計算のためにフィールドinputを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 

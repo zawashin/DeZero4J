@@ -2,9 +2,9 @@
 
 - Variableクラス
   - 逆伝播の計算
-    - フィールドにFunction creatorを追加
-    - 勾配の計算
-      - backwardメソッドを定義
+    - フィールドcreatorを追加
+      - Function creator
+    - backwardメソッドを定義
   - フィールドをprivateに変更
 
 ```java
@@ -24,7 +24,7 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにフィールドにinputを追加
+  - 逆伝播を計算のためにフィールドinputを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 
@@ -33,17 +33,10 @@ public abstract class Function {
     protected Variable input;
 
     public Variable forward(Variable input) {
-        double x = input.getData();
-        double y = forward(x);
-        Variable output = new Variable(y);
-        output.setCreator(this);
-        this.input = input;
-        this.output = output;
-        return output;
+      // 略
     }
 
     protected abstract double forward(double x);
-
     protected abstract double backward(double gy);
 }
 ```
