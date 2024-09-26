@@ -6,7 +6,6 @@ package dezero4j.step.step09;
 public class Square extends Function {
     @Override
     public double[] forward(double[] x) {
-        //double[] y = x.mapMultiply(x);
         double[] y = new double[x.length];
         for(int i = 0; i < x.length; i++) {
             y[i] = x[i] * x[i];

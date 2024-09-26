@@ -2,7 +2,7 @@
 
 - Variableクラス
   - 逆伝播の計算
-    - フィールドcreatorを追加
+    - creatorフィールドを追加
       - Function creator
     - backwardメソッドを定義
   - フィールドをprivateに変更
@@ -24,7 +24,7 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにフィールドinputを追加
+  - 逆伝播を計算のためにinputフィールドを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 

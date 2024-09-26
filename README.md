@@ -32,7 +32,8 @@
 ## 各ステップの実装についてのメモ
 ### Step01：箱としての変数
 - Variableクラス
-  - NumPyは使えないので取り敢えずプリミティブ型
+    - NumPyは使えないので取り敢えずdataフィールドはプリミティブ型
+        - double data
 ```java
 public class Variable {
     double data;
@@ -84,7 +85,7 @@ public abstract class Function {
 
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-  - 勾配を追加
+    - 勾配gradフィールドを追加
     - double grad
 ```java
 public class Variable {
@@ -95,7 +96,7 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 逆伝播を計算のためにフィールドinputを追加
+    - 逆伝播を計算のためにinputフィールドを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 
@@ -114,7 +115,7 @@ public abstract class Function {
 
 - Variableクラス
   - 逆伝播の計算
-      - フィールドcreatorを追加
+      - creatorフィールドを追加
           - Function creator
       - backwardメソッドを定義
   - フィールドをprivateに変更
@@ -136,7 +137,7 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 逆伝播を計算のためにフィールドinputを追加
+    - 逆伝播を計算のためにinputフィールドを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 
@@ -145,7 +146,7 @@ public abstract class Function {
     protected Variable input;
 
     public Variable forward(Variable input) {
-        // 略
+      // 略
     }
 
     protected abstract double forward(double x);
@@ -156,7 +157,7 @@ public abstract class Function {
 
 ### Step09：関数をより便利に
 - Variableクラス
-  - dataとgradを配列に変更
+    - dataフィールドとgradフィールドを配列に変更
 ```java
 public class Variable {
     double[] data;
@@ -171,7 +172,15 @@ public class Variable {
 ### Step11：可変長の引数（順伝播編）
 - Functionクラス
   - 多入力多出力に対応
-  - 自力でどうにもならずChatGPT導入
+      - Variable[] inputs
+
+```java
+public abstract class Function {
+    private Variable[] inputs;
+    private Variable[] outputs;
+    // 略
+}
+```
 
 ### Step12：可変長の引数（改善偏）
 

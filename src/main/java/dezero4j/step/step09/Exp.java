@@ -6,7 +6,6 @@ package dezero4j.step.step09;
 public class Exp extends Function {
     @Override
     public double[] forward(double[] x) {
-        //double[] y = x.map(Math::exp);
         double[] y = new double[x.length];
         for(int i = 0; i < y.length; i++) {
             y[i] = Math.exp(x[i]);
@@ -17,7 +16,6 @@ public class Exp extends Function {
     @Override
     public double[] backward(double[] gy) {
         double[] x = getInput().getData();
-        //double[] gx = x.map(Math::exp).ebeMultiply(gy);
         double[] gx = new double[x.length];
         for(int i = 0; i < gx.length; i++) {
             gx[i] = Math.exp(x[i]) * gy[i];

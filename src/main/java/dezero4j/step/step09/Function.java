@@ -4,8 +4,8 @@ package dezero4j.step.step09;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public abstract class Function {
-    private Variable input;
-    private Variable output;
+    protected Variable input;
+    protected Variable output;
 
     public Variable forward(Variable input) {
         double[] x = input.getData();
@@ -17,9 +17,9 @@ public abstract class Function {
         return output;
     }
 
-    public abstract double[] forward(double[] x);
+    protected abstract double[] forward(double[] x);
 
-    public abstract double[] backward(double[] gy);
+    protected abstract double[] backward(double[] gy);
 
     public Variable getInput() {
         return input;

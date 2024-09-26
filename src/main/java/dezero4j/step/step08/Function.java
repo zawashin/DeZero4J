@@ -19,7 +19,7 @@ public abstract class Function {
 
     public abstract double forward(double x);
 
-   public abstract double backward(double gy);
+    public abstract double backward(double gy);
 
     public Variable getInput() {
         return this.input;

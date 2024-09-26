@@ -1,6 +1,6 @@
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-  - 勾配を追加
+    - 勾配gradフィールドを追加
     - double grad
 ```java
 public class Variable {
@@ -11,7 +11,7 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにフィールドinputを追加
+    - 逆伝播を計算のためにinputフィールドを追加
     - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
 
