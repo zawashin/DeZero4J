@@ -5,11 +5,12 @@ package dezero4j.step.step07;
  */
 public abstract class Function {
     protected Variable input;
+    protected Variable output;
 
     public Variable forward(Variable input) {
         double x = input.getData();
         double y = forward(x);
-        Variable output = new Variable(y);
+        output = new Variable(y);
         output.setCreator(this);
         this.input = input;
         return output;

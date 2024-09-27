@@ -18,7 +18,7 @@ public class Plus extends Function {
     @Override
     public double[][] backward(double[][] gys) {
         if (gys.length != 1) {
-            throw new IllegalArgumentException("zawashin.dezero4j.step162.Add function requires exactly 1 gradient");
+            throw new IllegalArgumentException("Plus class requires exactly 1 gradient");
         }
         double[][] gxs = new double[inputs.length][];
         for (int i = 0; i < inputs.length; i++) {
@@ -28,6 +28,5 @@ public class Plus extends Function {
             }
         }
         return gxs;
-        //return new double[0][];
     }
 }

@@ -36,8 +36,6 @@ public class Variable {
         while (index < funcs.length) {
             Function f = funcs[index];
             Variable x = f.getInputs()[0];
-            Variable y = f.getOutputs()[0];
-            //x.setGrad(f.backward(y.getGrad()));
 
             if (x.getCreator() != null) {
                 funcs = Arrays.copyOf(funcs, funcs.length + 1);

@@ -24,8 +24,9 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにinputフィールドを追加
+  - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
     - Variable input
+    - Variable output
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java

@@ -17,7 +17,7 @@
 - ステップ46の途中まで
   - 全結合の多層パーセプトロン
   - 活性化関数はシグモイド関数のみ
-  - OptimizerはSGDのみ
+  - OptimizerクラスはSGDクラスのみ
 - メモリ管理
   - ステップ18でWeakreferenceを使うべきかもしれないけど使い方が判らないので保留
     - 結果、OutOfMemoryで落ちる
@@ -115,9 +115,9 @@ public abstract class Function {
 
 - Variableクラス
   - 逆伝播の計算
-      - creatorフィールドを追加
-          - Function creator
-      - backwardメソッドを定義
+    - creatorフィールドを追加
+      - Function creator
+    - backwardメソッドを定義
   - フィールドをprivateに変更
 
 ```java
@@ -137,8 +137,9 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 逆伝播を計算のためにinputフィールドを追加
+  - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
     - Variable input
+    - Variable output
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
@@ -172,16 +173,25 @@ public class Variable {
 ### Step11：可変長の引数（順伝播編）
 - Functionクラス
   - 多入力多出力に対応
-      - Variable[] inputs
+    - Variable[] inputs
+    - Variable[] outputs
+  - 順伝播forwardメソッドと逆伝播backwardメソッドを修正
 
 ```java
 public abstract class Function {
-    private Variable[] inputs;
-    private Variable[] outputs;
-    // 略
+  protected Variable[] inputs;
+  protected Variable[] outputs;
+
+  public Variable[] forward(Variable[] inputs) {
+  }
+
+  public abstract double[][] forward(double[][] xs);
+  public abstract double[][] backward(double[][] gys);
 }
 ```
 
+- 加算演算クラス
+  - クラス名をAddからPlusに変更
 ### Step12：可変長の引数（改善偏）
 
 ### Step13：可変長の引数（逆伝播偏）
