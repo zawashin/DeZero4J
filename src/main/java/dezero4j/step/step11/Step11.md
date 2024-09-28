@@ -3,7 +3,7 @@
   - 多入力多出力に対応
     - Variable[] inputs
     - Variable[] outputs
-  - 順伝播forwardメソッドと逆伝播backwardメソッドを修正
+  - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
 
 ```java
 public abstract class Function {
