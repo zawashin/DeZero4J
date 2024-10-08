@@ -204,24 +204,13 @@ public abstract class Function {
 
 ```java
 public class Variable {
-
+  // 略
     public void backward() {
-        if (grad == null) {
-            grad = new double[data.length];
-            Arrays.fill(grad, 1.0);
-        }
+      // 略
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);
         while (!funcList.isEmpty()) {
-            Function f = funcList.remove(funcList.size() - 1);
-            double[][] gys = new double[f.outputs.length][];
-            for (int i = 0; i < f.outputs.length; i++) {
-                gys[i] = f.outputs[i].grad;
-            }
-            double[][] gxs = f.backward(gys);
-            if (gxs.length != f.inputs.length) {
-                throw new IllegalStateException("Length of gradients and inputs do not match");
-            }
+          // 略
             for (int i = 0; i < gxs.length; i++) {
                 // 修正箇所
                 if (f.inputs[i].grad == null) {
@@ -231,10 +220,8 @@ public class Variable {
                         f.inputs[i].grad[j] += gxs[i][j];
                     }
                 }
-
-                if (f.inputs[i].creator != null) {
-                    funcList.add(f.inputs[i].creator);
-                }
+              // ここまで
+              // 略
             }
         }
     }
@@ -250,8 +237,12 @@ public class Variable {
 
 ### Step17：メモリ管理と循環参照
 
+- WeakReferenceの導入
+  - 理解出来なかったので保留
+
 ### Step18：メモリ使用量を減らすモード
 
+- Configクラス
 ### Step19：変数を使いやすく
 
 ### Step20：演算子のオーバーロード (1)
