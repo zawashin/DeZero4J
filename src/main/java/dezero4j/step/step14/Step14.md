@@ -5,13 +5,13 @@
 
 ```java
 public class Variable {
-  // 略
+  // ... 略
     public void backward() {
-        // 略
+      // ... 略
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);
         while (!funcList.isEmpty()) {
-        // 略
+          // ... 略
             for (int i = 0; i < gxs.length; i++) {
                 // 修正箇所
                 if (f.inputs[i].grad == null) {
@@ -22,7 +22,7 @@ public class Variable {
                     }
                 }
                 // ここまで
-                // 略
+              // ... 略
             }
         }
     }

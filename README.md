@@ -41,7 +41,7 @@ public class Variable {
     public Variable(double data) {
         this.data = data;
     }
-    // 略
+    // ... 略
 }
 ```
 
@@ -91,7 +91,7 @@ public abstract class Function {
 public class Variable {
     double data;
     double grad;
-    // 略
+    // ... 略
 }
 ```
 
@@ -126,11 +126,11 @@ public class Variable {
     private double grad;
     private Function creator;
 
-    // 略
+    // ... 略
     public void backward() {
-        // 略
+        // ... 略
     }
-    // 略
+    // ... 略
 }
 
 
@@ -147,7 +147,7 @@ public abstract class Function {
     protected Variable input;
 
     public Variable forward(Variable input) {
-      // 略
+      // ... 略
     }
 
     protected abstract double forward(double x);
@@ -164,7 +164,7 @@ public class Variable {
     double[] data;
     double[] grad;
     Function creator;
-    // 略
+    // ... 略
 }
 ```
 
@@ -204,13 +204,13 @@ public abstract class Function {
 
 ```java
 public class Variable {
-  // 略
+  // ... 略
     public void backward() {
-      // 略
+        // ... 略
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);
         while (!funcList.isEmpty()) {
-          // 略
+        // ... 略
             for (int i = 0; i < gxs.length; i++) {
                 // 修正箇所
                 if (f.inputs[i].grad == null) {
@@ -220,8 +220,8 @@ public class Variable {
                         f.inputs[i].grad[j] += gxs[i][j];
                     }
                 }
-              // ここまで
-              // 略
+                // ここまで
+                // ... 略
             }
         }
     }

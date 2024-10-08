@@ -6,7 +6,7 @@
 public class Variable {
     double data;
     double grad;
-    // 略
+    // ... 略
 }
 ```
 

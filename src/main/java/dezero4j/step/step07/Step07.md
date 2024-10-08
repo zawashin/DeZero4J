@@ -13,11 +13,11 @@ public class Variable {
     private double grad;
     private Function creator;
 
-    // 略
+    // ... 略
     public void backward() {
-        // 略
+        // ... 略
     }
-    // 略
+    // ... 略
 }
 
 
@@ -34,7 +34,7 @@ public abstract class Function {
     protected Variable input;
 
     public Variable forward(Variable input) {
-      // 略
+      // ... 略
     }
 
     protected abstract double forward(double x);

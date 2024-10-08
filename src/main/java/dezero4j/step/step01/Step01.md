@@ -9,7 +9,7 @@ public class Variable {
     public Variable(double data) {
         this.data = data;
     }
-    // 略
+    // ... 略
 }
 ```
 
