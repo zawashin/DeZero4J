@@ -175,7 +175,7 @@ public class Variable {
   - 多入力多出力に対応
     - Variable[] inputs
     - Variable[] outputs
-  - 順伝播forwardメソッドと逆伝播backwardメソッドを修正
+  - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
 
 ```java
 public abstract class Function {
@@ -186,6 +186,7 @@ public abstract class Function {
   }
 
   public abstract double[][] forward(double[][] xs);
+
   public abstract double[][] backward(double[][] gys);
 }
 ```
@@ -198,9 +199,54 @@ public abstract class Function {
 
 ### Step14：同じ変数を繰り返し使う
 
+- Variableクラスの修正
+    - backwardメソッド
+
+```java
+public class Variable {
+
+    public void backward() {
+        if (grad == null) {
+            grad = new double[data.length];
+            Arrays.fill(grad, 1.0);
+        }
+        ArrayList<Function> funcList = new ArrayList<>();
+        funcList.add(creator);
+        while (!funcList.isEmpty()) {
+            Function f = funcList.remove(funcList.size() - 1);
+            double[][] gys = new double[f.outputs.length][];
+            for (int i = 0; i < f.outputs.length; i++) {
+                gys[i] = f.outputs[i].grad;
+            }
+            double[][] gxs = f.backward(gys);
+            if (gxs.length != f.inputs.length) {
+                throw new IllegalStateException("Length of gradients and inputs do not match");
+            }
+            for (int i = 0; i < gxs.length; i++) {
+                // 修正箇所
+                if (f.inputs[i].grad == null) {
+                    f.inputs[i].grad = gxs[i];
+                } else {
+                    for (int j = 0; j < gxs[i].length; j++) {
+                        f.inputs[i].grad[j] += gxs[i][j];
+                    }
+                }
+
+                if (f.inputs[i].creator != null) {
+                    funcList.add(f.inputs[i].creator);
+                }
+            }
+        }
+    }
+}
+```
+
 ### Step15：複雑な計算グラフ（理論編）
 
 ### Step16：複雑な計算グラフ（実装編）
+
+- Variableクラス
+    - 順伝搬時の世代を表すgenerationフィールドを追加
 
 ### Step17：メモリ管理と循環参照
 
@@ -240,7 +286,7 @@ public abstract class Function {
 
 - Variableクラス
   - backwardメソッド実装時の注意点
-    -   逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
+      - **順伝播の演算を行う**forwardメソッドを用いないと高階微分が計算されない
 ```java
 // Example 
 public double[][] forward(double[]... xs) {

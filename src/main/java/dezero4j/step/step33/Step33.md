@@ -2,7 +2,7 @@
 
 - Variableクラス
   - backwardメソッド実装時の注意点
-    - 逆伝播は逐一書かず、順伝播の演算を行う**forwardメソッド**を用いないと高階微分が計算されない
+      - **順伝播の演算を行う**forwardメソッドを用いないと高階微分が計算されない
 ```java
 // Example 
 public double[][] forward(double[]... xs) {

@@ -49,19 +49,13 @@ public class Variable {
                 throw new IllegalStateException("Length of gradients and inputs do not match");
             }
             for (int i = 0; i < gxs.length; i++) {
-                //f.inputs[i].grad += gxs[i];
                 if (f.inputs[i].grad == null) {
-                    //f.inputs[i].grad = new double[data.length];
                     f.inputs[i].grad = gxs[i];
-                    //Arrays.fill(f.inputs[i].grad, 1.0);
                 } else {
                     for (int j = 0; j < gxs[i].length; j++) {
                         f.inputs[i].grad[j] += gxs[i][j];
                     }
                 }
-                /*
-                f.inputs[i].setGrad(gxs[i]);
-                 */
 
                 if (f.inputs[i].creator != null) {
                     funcList.add(f.inputs[i].creator);
