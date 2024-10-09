@@ -13,7 +13,7 @@ public class Tensor implements Cloneable, Serializable {
     protected int num4 = 1;
     protected int num2x3x4 = num2 * num3 * num4;
     protected int num3x4 = num3 * num4;
-    protected int rank;
+    public int rank;
     protected int length;
     protected double[] values;
     protected int[] shape;

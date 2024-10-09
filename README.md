@@ -79,8 +79,8 @@ public abstract class Function {
   - 勾配gradフィールドを追加
 ```java
 public class Variable {
-    protected double data;
-    protected double grad;
+  protected double data;
+  protected double grad;
     // ... 略
 }
 ```
@@ -141,9 +141,9 @@ public abstract class Function {
     - dataフィールドとgradフィールドを配列に変更
 ```java
 public class Variable {
-    protected double[] data;
-    protected double[] grad;
-    protected Function creator;
+  protected double[] data;
+  protected double[] grad;
+  protected Function creator;
     // ... 略
 }
 ```
@@ -298,16 +298,16 @@ public Variable[] backward(Variable... gys) {
 ### Step37：テンソルを使う
 - Tensorクラス
   - VariableのdataをdoubleからTensorクラスに変更
+  - 取り敢えず2階まで
 ```java
 public class Tensor implements Cloneable, Serializable {
-    int rank;
-    int length;
+    public int rank;
+    protected int length;
     protected double[] values;
-    int[] shape;
+    protected int[] shape;
 
 }
 ```
-  - 取り敢えず2階まで
 
 ### Step38：形状を変える関数
 
