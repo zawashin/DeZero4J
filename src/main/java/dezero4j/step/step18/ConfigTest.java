@@ -3,17 +3,17 @@ package dezero4j.step.step18;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Test {
+public class ConfigTest {
     public void print() {
         System.out.println(Config.enableBackprop);
     }
 
     public static void main(String[] args) {
         Config.enableBackprop = true;
-        Test test1 = new Test();
-        test1.print();
+        ConfigTest config1 = new ConfigTest();
+        config1.print();
         Config.enableBackprop = false;
-        Test test2 = new Test();
-        test2.print();
+        ConfigTest config2 = new ConfigTest();
+        config2.print();
     }
 }

@@ -6,12 +6,12 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable {
-    private double[] data;
-    private double[] grad;
-    private Function creator;
-    private int generation;
-    private final int rank;
-    private final int[] shape;
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
+    protected int generation;
+    protected final int rank;
+    protected final int[] shape;
 
     public Variable(double data) {
         this.data = new double[]{data};
@@ -137,17 +137,17 @@ public class Variable {
         return creator;
     }
 
-    Variable[] plus(Variable other) {
+    public Variable[] plus(Variable other) {
         Function function = new Plus();
         return function.forward(this, other);
     }
 
-    Variable[] multiply(Variable other) {
+    public Variable[] multiply(Variable other) {
         Function function = new Multiply();
         return function.forward(this, other);
     }
 
-    Variable[] square() {
+    public Variable[] square() {
         Function function = new Square();
         return function.forward(this);
     }

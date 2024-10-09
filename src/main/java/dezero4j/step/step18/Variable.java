@@ -6,10 +6,10 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable {
-    private double[] data;
-    private double[] grad;
-    private Function creator;
-    private int generation;
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
+    protected int generation;
 
     public Variable(double[] data) {
         this.data = data;

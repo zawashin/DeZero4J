@@ -206,11 +206,11 @@ public abstract class Function {
 public class Variable {
   // ... 略
     public void backward() {
-        // ... 略
+      // ... 略
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);
         while (!funcList.isEmpty()) {
-        // ... 略
+          // ... 略
             for (int i = 0; i < gxs.length; i++) {
                 // 修正箇所
                 if (f.inputs[i].grad == null) {
@@ -221,7 +221,7 @@ public class Variable {
                     }
                 }
                 // ここまで
-                // ... 略
+              // ... 略
             }
         }
     }
@@ -235,18 +235,30 @@ public class Variable {
 - Variableクラス
     - 順伝搬時の世代を表すgenerationフィールドを追加
 
+```java
+public class Variable {
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
+    protected int generation;
+    // ... 略
+}
+```
+
 ### Step17：メモリ管理と循環参照
 
 - WeakReferenceの導入
-  - 理解出来なかったので保留
+    - 理解出来なかったので保留
 
 ### Step18：メモリ使用量を減らすモード
 
-- Configクラス
+- Configクラスを定義
 ### Step19：変数を使いやすく
 
 ### Step20：演算子のオーバーロード (1)
 
+- Javaなので無理
+    - ScalaやKotlinは演算子のオーバーロードが出来るけど
 ### Step21：演算子のオーバーロード (2)
 
 ### Step22：演算子のオーバーロード (3)
