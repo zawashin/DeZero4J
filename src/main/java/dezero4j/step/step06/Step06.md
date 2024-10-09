@@ -1,7 +1,6 @@
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-    - 勾配gradフィールドを追加
-    - double grad
+  - 勾配gradフィールドを追加
 ```java
 public class Variable {
     double data;
@@ -11,18 +10,14 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 逆伝播を計算のためにinputフィールドを追加
-    - Variable input
+  - 逆伝播を計算のためにinputフィールドを追加
   - 逆伝播を計算するためのbackwardメソッドを定義
-
 ```java
 public abstract class Function {
   protected Variable input;
 
   public abstract Variable forward(Variable input);
-
   protected abstract double forward(double x);
-
   protected abstract double backward(double gy);
 }
 ```

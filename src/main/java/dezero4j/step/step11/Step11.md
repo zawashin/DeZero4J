@@ -1,8 +1,6 @@
 ### Step11：可変長の引数（順伝播編）
 - Functionクラス
   - 多入力多出力に対応
-    - Variable[] inputs
-    - Variable[] outputs
   - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
 
 ```java
@@ -14,7 +12,6 @@ public abstract class Function {
   }
 
   public abstract double[][] forward(double[][] xs);
-
   public abstract double[][] backward(double[][] gys);
 }
 ```

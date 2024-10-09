@@ -33,7 +33,6 @@
 ### Step01：箱としての変数
 - Variableクラス
     - NumPyは使えないので取り敢えずdataフィールドはプリミティブ型
-        - double data
 ```java
 public class Variable {
     double data;
@@ -48,34 +47,26 @@ public class Variable {
 ### Step02:変数を生み出す関数
 - Functionクラス
   - インターフェースの使い方が良く判らないから抽象クラス
-  - 順伝播を抽象メソッドとして定義
-      - forwardメソッド
-- Squareクラス
-    - Functionクラスの具象化
-
+  - 順伝播を計算するforwardメソッド
 ```java
 public abstract class Function {
     public abstract Variable forward(Variable input);
 }
 ```
 ### Step03：関数の連結
-
 - 複数関数が必要なので、Fuctionクラスの具象化としてExpクラスを実装
 
 ### Step04：数値微分
 
 - Functionクラス
   - 順伝播を実際に計算するための抽象メソッドを定義
-
 ```java
 public abstract class Function {
-
     public Variable forward(Variable input) {
         double x = input.getData();
         double y = forward(x);
         return new Variable(y);
     }
-
     protected abstract double forward(double x);
 }
 ```
@@ -86,7 +77,6 @@ public abstract class Function {
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
     - 勾配gradフィールドを追加
-    - double grad
 ```java
 public class Variable {
     double data;
@@ -97,28 +87,23 @@ public class Variable {
 
 - Functionクラス
     - 逆伝播を計算のためにinputフィールドを追加
-    - Variable input
   - 逆伝播を計算するためのbackwardメソッドを定義
-
 ```java
 public abstract class Function {
   protected Variable input;
 
   public abstract Variable forward(Variable input);
-
   protected abstract double forward(double x);
-
   protected abstract double backward(double gy);
 }
 ```
 ### Step07：バックプロパゲーションの自動化
 
 - Variableクラス
+    - フィールドをprivateに変更
   - 逆伝播の計算
     - creatorフィールドを追加
-      - Function creator
     - backwardメソッドを定義
-  - フィールドをprivateに変更
 
 ```java
 public class Variable {
@@ -132,14 +117,10 @@ public class Variable {
     }
     // ... 略
 }
-
-
 ```
 
 - Functionクラス
   - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
-    - Variable input
-    - Variable output
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
@@ -173,8 +154,6 @@ public class Variable {
 ### Step11：可変長の引数（順伝播編）
 - Functionクラス
   - 多入力多出力に対応
-    - Variable[] inputs
-    - Variable[] outputs
   - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
 
 ```java
@@ -186,7 +165,6 @@ public abstract class Function {
   }
 
   public abstract double[][] forward(double[][] xs);
-
   public abstract double[][] backward(double[][] gys);
 }
 ```
@@ -199,8 +177,8 @@ public abstract class Function {
 
 ### Step14：同じ変数を繰り返し使う
 
-- Variableクラスの修正
-    - backwardメソッド
+- Variableクラス
+    - backwardメソッドの修正
 
 ```java
 public class Variable {
@@ -261,20 +239,16 @@ public class Variable {
   - Variableクラスに各種演算メソッドを定義
   - **Scala**や**Kotlin**は演算子のオーバーロードが出来るけど
 ### Step21：演算子のオーバーロード (2)
-
 - Javaなので演算子の多重定義が(以下略)
 ### Step22：演算子のオーバーロード (3)
 
 - Javaなので(以下略)
-
 ### Step23：パッケージとしてまとめる
-
 ### Step24：複雑な関数の微分
 - 微分する関数
     - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
 
 ### Step25：計算グラフの可視化 (1)
-
 - 省略
 ### Step26：計算グラフの可視化 (2)
 

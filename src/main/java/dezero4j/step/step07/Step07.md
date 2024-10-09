@@ -1,11 +1,10 @@
 ### Step07：バックプロパゲーションの自動化
 
 - Variableクラス
+  - フィールドをprivateに変更
   - 逆伝播の計算
     - creatorフィールドを追加
-      - Function creator
     - backwardメソッドを定義
-  - フィールドをprivateに変更
 
 ```java
 public class Variable {
@@ -19,14 +18,10 @@ public class Variable {
     }
     // ... 略
 }
-
-
 ```
 
 - Functionクラス
   - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
-    - Variable input
-    - Variable output
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java

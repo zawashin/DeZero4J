@@ -1,7 +1,7 @@
 ### Step14：同じ変数を繰り返し使う
 
-- Variableクラスの修正
-    - backwardメソッド
+- Variableクラス
+  - backwardメソッドの修正
 
 ```java
 public class Variable {
