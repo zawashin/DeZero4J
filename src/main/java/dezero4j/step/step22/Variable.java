@@ -6,12 +6,12 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable {
-    private double[] data;
-    private double[] grad;
-    private Function creator;
-    private int generation;
-    private final int rank;
-    private final int[] shape;
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
+    protected int generation;
+    protected final int rank;
+    protected final int[] shape;
 
     public Variable(double data) {
         this.data = new double[]{data};
@@ -137,48 +137,48 @@ public class Variable {
         return creator;
     }
 
-    Variable plus(Variable other) {
+    public Variable plus(Variable other) {
         Function function = new Plus();
         return function.forward(this, other)[0];
     }
 
-    Variable minus(Variable other) {
+    public Variable minus(Variable other) {
         Function function = new Minus();
         return function.forward(this, other)[0];
     }
 
-    Variable rminus(Variable other) {
+    public Variable rminus(Variable other) {
         Function function = new Minus();
         return function.forward(other, this)[0];
     }
 
-    Variable multiply(Variable other) {
+    public Variable multiply(Variable other) {
         Function function = new Multiply();
         return function.forward(this, other)[0];
     }
 
-    Variable divide(Variable other) {
+    public Variable divide(Variable other) {
         Function function = new Divide();
         return function.forward(this, other)[0];
     }
 
-    Variable rdivide(Variable other) {
+    public Variable rdivide(Variable other) {
         Function function = new Divide();
         return function.forward(other, this)[0];
     }
 
-    Variable negative() {
+    public Variable negative() {
         Function function = new Negative();
         return function.forward(this)[0];
     }
 
-    Variable pow(double index) {
+    public Variable pow(double index) {
         Function function = new Power();
         ((Power)function).setIndex(index);
         return function.forward(this)[0];
     }
 
-    Variable square() {
+    public Variable square() {
         Function function = new Square();
         return function.forward(this)[0];
     }

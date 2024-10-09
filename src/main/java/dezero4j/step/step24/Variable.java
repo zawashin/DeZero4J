@@ -6,13 +6,13 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable implements Cloneable {
-    private double[] data;
-    private double[] grad;
-    private Function creator;
-    private int generation;
-    private final int rank;
-    private final int[] shape;
-    private int length;
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
+    protected int generation;
+    protected final int rank;
+    protected final int[] shape;
+    protected int length;
 
     public Variable(double data) {
         this.data = new double[]{data};
@@ -127,7 +127,6 @@ public class Variable implements Cloneable {
 
             for (int i = 0; i < gxs.length; i++) {
                 Variable x = f.inputs[i];
-                //f.inputs[i].grad += gxs[i];
                 if (f.inputs[i].grad == null) {
                     f.inputs[i].grad = gxs[i];
                 } else {
