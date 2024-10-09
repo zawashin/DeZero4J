@@ -1,16 +1,15 @@
 ### Step07：バックプロパゲーションの自動化
 
 - Variableクラス
-  - フィールドをprivateに変更
   - 逆伝播の計算
     - creatorフィールドを追加
     - backwardメソッドを定義
 
 ```java
 public class Variable {
-    private double data;
-    private double grad;
-    private Function creator;
+    protected double data;
+    protected double grad;
+    protected Function creator;
 
     // ... 略
     public void backward() {

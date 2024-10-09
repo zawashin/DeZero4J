@@ -3,8 +3,8 @@
   - 勾配gradフィールドを追加
 ```java
 public class Variable {
-    double data;
-    double grad;
+  protected double data;
+  protected double grad;
     // ... 略
 }
 ```

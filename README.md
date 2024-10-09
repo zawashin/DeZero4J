@@ -35,7 +35,7 @@
     - NumPyは使えないので取り敢えずdataフィールドはプリミティブ型
 ```java
 public class Variable {
-    double data;
+    protected double data;
     
     public Variable(double data) {
         this.data = data;
@@ -76,17 +76,17 @@ public abstract class Function {
 
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-    - 勾配gradフィールドを追加
+  - 勾配gradフィールドを追加
 ```java
 public class Variable {
-    double data;
-    double grad;
+    protected double data;
+    protected double grad;
     // ... 略
 }
 ```
 
 - Functionクラス
-    - 逆伝播を計算のためにinputフィールドを追加
+  - 逆伝播を計算のためにinputフィールドを追加
   - 逆伝播を計算するためのbackwardメソッドを定義
 ```java
 public abstract class Function {
@@ -100,16 +100,15 @@ public abstract class Function {
 ### Step07：バックプロパゲーションの自動化
 
 - Variableクラス
-    - フィールドをprivateに変更
   - 逆伝播の計算
     - creatorフィールドを追加
     - backwardメソッドを定義
 
 ```java
 public class Variable {
-    private double data;
-    private double grad;
-    private Function creator;
+    protected double data;
+    protected double grad;
+    protected Function creator;
 
     // ... 略
     public void backward() {
@@ -142,9 +141,9 @@ public abstract class Function {
     - dataフィールドとgradフィールドを配列に変更
 ```java
 public class Variable {
-    double[] data;
-    double[] grad;
-    Function creator;
+    protected double[] data;
+    protected double[] grad;
+    protected Function creator;
     // ... 略
 }
 ```
@@ -178,7 +177,7 @@ public abstract class Function {
 ### Step14：同じ変数を繰り返し使う
 
 - Variableクラス
-    - backwardメソッドの修正
+  - backwardメソッドの修正
 
 ```java
 public class Variable {
@@ -245,13 +244,14 @@ public class Variable {
 - Javaなので(以下略)
 ### Step23：パッケージとしてまとめる
 ### Step24：複雑な関数の微分
-- 微分する関数
-    - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
+
+- 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
 
 ### Step25：計算グラフの可視化 (1)
 - 省略
 ### Step26：計算グラフの可視化 (2)
 
+- 省略
 ### Step27：テイラー展開の微分
 
 ### Step28：関数の最適化
@@ -261,9 +261,6 @@ public class Variable {
 ### Step30：高階微分（準備編）
 
 ### Step31：高階微分（理論編）
-
-- このステップでの実装は無し。
-
 ### Step32：高階微分（実装偏）
 
 ### Step33：ニュートン法を使った最適化（自動計算）

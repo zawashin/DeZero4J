@@ -4,9 +4,9 @@ package dezero4j.step.step07;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable {
-    private double data;
-    private double grad;
-    private Function creator;
+    protected double data;
+    protected double grad;
+    protected Function creator;
 
     public Variable(double data) {
         this.data = data;

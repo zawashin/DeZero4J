@@ -3,9 +3,9 @@
     - dataフィールドとgradフィールドを配列に変更
 ```java
 public class Variable {
-    double[] data;
-    double[] grad;
-    Function creator;
+  protected double[] data;
+  protected double[] grad;
+  protected Function creator;
     // ... 略
 }
 ```
