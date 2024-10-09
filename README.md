@@ -2,7 +2,7 @@
 # DeZero4J
 - **De**ep Learning from **Ze**ro **for** **J**ava
 - [PINNs(Physics-Informed Neural Networks)](https://en.wikipedia.org/wiki/Physics-informed_neural_networks)
-  を自作してみたいから、「[ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
+  を自作してみたいから、「[ゼロから作るDeep Learning ③ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
   」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
 
 ### 方針
@@ -26,7 +26,7 @@
 
 ## 参考資料
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch) 
-- [ゼロから作るDeep Learning ❸ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
+- [ゼロから作るDeep Learning ③ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
 - ↑のC++版[DeZeroCpp](https://github.com/bugph0bia/DeZeroCpp)
 
 ## 各ステップの実装についてのメモ
@@ -301,10 +301,10 @@ public Variable[] backward(Variable... gys) {
   - 取り敢えず2階まで
 ```java
 public class Tensor implements Cloneable, Serializable {
-    public int rank;
-    protected int length;
+  public int rank;
+  protected int length;
     protected double[] values;
-    protected int[] shape;
+  protected int[] shape;
 
 }
 ```
@@ -325,7 +325,7 @@ public class Tensor implements Cloneable, Serializable {
   - 抽象クラス
 - Affineクラス
   - Layerの派生クラス
-  - ゼロつく❸の線形層Linearクラス
+  - ゼロつく③の線形層Linearクラス
 
 ### Step45：レイヤをまとめるレイヤ
 - Modelクラス
