@@ -1,6 +1,6 @@
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-  - 勾配gradフィールドを追加
+  - 勾配を表すgradフィールドを追加
 ```java
 public class Variable {
   protected double data;

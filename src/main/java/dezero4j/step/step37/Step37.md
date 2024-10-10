@@ -6,7 +6,7 @@
 public class Tensor implements Cloneable, Serializable {
   public int rank;
   protected int length;
-    protected double[] values;
+  protected double[] values;
   protected int[] shape;
 
 }

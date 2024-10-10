@@ -76,7 +76,7 @@ public abstract class Function {
 
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-  - 勾配gradフィールドを追加
+    - 勾配を表すgradフィールドを追加
 ```java
 public class Variable {
   protected double data;
@@ -119,16 +119,17 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
+    - 逆伝播計算自動化するのためにoutputフィールドを追加
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
 public abstract class Function {
     protected Variable input;
+    protected Variable output;
 
     public Variable forward(Variable input) {
-      // ... 略
-    }
+       // ... 略
+     }
 
     protected abstract double forward(double x);
     protected abstract double backward(double gy);
@@ -303,7 +304,7 @@ public Variable[] backward(Variable... gys) {
 public class Tensor implements Cloneable, Serializable {
   public int rank;
   protected int length;
-    protected double[] values;
+  protected double[] values;
   protected int[] shape;
 
 }

@@ -20,12 +20,13 @@ public class Variable {
 ```
 
 - Functionクラス
-  - 逆伝播を計算のためにinputフィールドとoutputフィールドを追加
+  - 逆伝播計算自動化するのためにoutputフィールドを追加
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
 public abstract class Function {
     protected Variable input;
+  protected Variable output;
 
     public Variable forward(Variable input) {
       // ... 略

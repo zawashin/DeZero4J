@@ -7,11 +7,11 @@ import java.util.Arrays;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Tensor implements Cloneable, Serializable {
-    protected int num1 = 1;
-    protected int num2 = 1;
+    protected int iMax = 1;
+    protected int jMax = 1;
     protected int num3 = 1;
     protected int num4 = 1;
-    protected int num2x3x4 = num2 * num3 * num4;
+    protected int num2x3x4 = jMax * num3 * num4;
     protected int num3x4 = num3 * num4;
     public int rank;
     protected int length;
@@ -35,7 +35,7 @@ public class Tensor implements Cloneable, Serializable {
         rank = 0;
         shape = new int[1];
         shape[0] = 1;
-        length = num1 * num2 * num3 * num4;
+        length = iMax * jMax * num3 * num4;
         values = new double[length];
         values[0] = scalar;
     }
@@ -49,23 +49,23 @@ public class Tensor implements Cloneable, Serializable {
             rank = 1;
             shape = new int[1];
             shape[0] = array1d.length;
-            num1 = array1d.length;
+            iMax = array1d.length;
         }
-        length = num1 * num2 * num3 * num4;
+        length = iMax * jMax * num3 * num4;
         values = new double[length];
         values = array1d.clone();
     }
 
     public Tensor(double[][] array2d) {
         rank = 2;
-        num1 = array2d.length;
-        num2 = array2d[0].length;
-        shape = new int[]{num1, num2};
-        length = num1 * num2 * num3 * num4;
+        iMax = array2d.length;
+        jMax = array2d[0].length;
+        shape = new int[]{iMax, jMax};
+        length = iMax * jMax * num3 * num4;
         values = new double[length];
         int n = 0;
-        for (int i = 0; i < num1; i++) {
-            for (int j = 0; j < num2; j++) {
+        for (int i = 0; i < iMax; i++) {
+            for (int j = 0; j < jMax; j++) {
                 values[n++] = array2d[i][j];
             }
         }
@@ -74,39 +74,39 @@ public class Tensor implements Cloneable, Serializable {
 
     public Tensor(double[][][] array3d) {
         rank = 3;
-        num1 = array3d.length;
-        num2 = array3d[0].length;
+        iMax = array3d.length;
+        jMax = array3d[0].length;
         num3 = array3d[0][0].length;
-        shape = new int[]{num1, num2, num3};
-        num2x3x4 = num2 * num3 * num4;
+        shape = new int[]{iMax, jMax, num3};
+        num2x3x4 = jMax * num3 * num4;
         num3x4 = num3 * num4;
-        length = num1 * num2 * num3 * num4;
+        length = iMax * jMax * num3 * num4;
         values = new double[length];
         int n = 0;
-        for (int i = 0; i < num1; i++) {
-            for (int j = 0; j < num2; j++) {
+        for (int i = 0; i < iMax; i++) {
+            for (int j = 0; j < jMax; j++) {
                 for (int k = 0; k < num3; k++) {
                     values[n++] = array3d[i][j][k];
                 }
             }
         }
-        assert length == num1 * num2 * num3 * num4 : "Length Error";
+        assert length == iMax * jMax * num3 * num4 : "Length Error";
     }
 
     public Tensor(double[][][][] array4d) {
         rank = 4;
-        num1 = array4d.length;
-        num2 = array4d[0].length;
+        iMax = array4d.length;
+        jMax = array4d[0].length;
         num3 = array4d[0][0].length;
         num4 = array4d[0][0][0].length;
-        shape = new int[]{num1, num2, num3, num4};
-        num2x3x4 = num2 * num3 * num4;
+        shape = new int[]{iMax, jMax, num3, num4};
+        num2x3x4 = jMax * num3 * num4;
         num3x4 = num3 * num4;
-        length = num1 * num2 * num3 * num4;
+        length = iMax * jMax * num3 * num4;
         values = new double[length];
         int n = 0;
-        for (int i = 0; i < num1; i++) {
-            for (int j = 0; j < num2; j++) {
+        for (int i = 0; i < iMax; i++) {
+            for (int j = 0; j < jMax; j++) {
                 for (int k = 0; k < num3; k++) {
                     for (int l = 0; l < num4; l++) {
                         values[n++] = array4d[i][j][k][l];
@@ -114,21 +114,21 @@ public class Tensor implements Cloneable, Serializable {
                 }
             }
         }
-        assert length == num1 * num2 * num3 * num4 : "Length Error";
+        assert length == iMax * jMax * num3 * num4 : "Length Error";
     }
 
     public Tensor(Tensor tensor) {
         values = tensor.values.clone();
         shape = tensor.shape.clone();
         rank = tensor.rank;
-        num1 = tensor.num1;
-        num2 = tensor.num2;
+        iMax = tensor.iMax;
+        jMax = tensor.jMax;
         num3 = tensor.num3;
         num4 = tensor.num4;
-        num2x3x4 = num2 * num3 * num4;
+        num2x3x4 = jMax * num3 * num4;
         num3x4 = num3 * num4;
         length = tensor.length;
-        assert length == num1 * num2 * num3 * num4 : "Length Error";
+        assert length == iMax * jMax * num3 * num4 : "Length Error";
     }
 
     public Tensor(double[] values, int[] shape) {
@@ -142,20 +142,20 @@ public class Tensor implements Cloneable, Serializable {
             case 0:
                 break;
             case 1:
-                num1 = shape[0];
+                iMax = shape[0];
                 break;
             case 2:
-                num1 = shape[0];
-                num2 = shape[1];
+                iMax = shape[0];
+                jMax = shape[1];
                 break;
             case 3:
-                num1 = shape[0];
-                num2 = shape[1];
+                iMax = shape[0];
+                jMax = shape[1];
                 num3 = shape[2];
                 break;
             case 4:
-                num1 = shape[0];
-                num2 = shape[1];
+                iMax = shape[0];
+                jMax = shape[1];
                 num3 = shape[2];
                 num4 = shape[3];
                 break;
@@ -163,10 +163,10 @@ public class Tensor implements Cloneable, Serializable {
                 throw new RuntimeException("Over 5 rank tensor is not implemented");
 
         }
-        num2x3x4 = num2 * num3 * num4;
+        num2x3x4 = jMax * num3 * num4;
         num3x4 = num3 * num4;
         length = values.length;
-        assert values.length == num1 * num2 * num3 * num4 : "Length Error";
+        assert values.length == iMax * jMax * num3 * num4 : "Length Error";
     }
 
     public int getRank() {
@@ -203,32 +203,32 @@ public class Tensor implements Cloneable, Serializable {
             case 0:
                 break;
             case 1:
-                num1 = shape[0];
-                num2x3x4 = num2 * num3 * num4;
+                iMax = shape[0];
+                num2x3x4 = jMax * num3 * num4;
                 num3x4 = num3 * num4;
-                for (int i = 0; i < num1; i++) {
+                for (int i = 0; i < iMax; i++) {
                     values[n++] = data[index(i)];
                 }
                 break;
             case 2:
-                num1 = shape[0];
-                num2 = shape[1];
-                num2x3x4 = num2 * num3 * num4;
+                iMax = shape[0];
+                jMax = shape[1];
+                num2x3x4 = jMax * num3 * num4;
                 num3x4 = num3 * num4;
-                for (int i = 0; i < num1; i++) {
-                    for (int j = 0; j < num2; j++) {
+                for (int i = 0; i < iMax; i++) {
+                    for (int j = 0; j < jMax; j++) {
                         values[n++] = data[index(i, j)];
                     }
                 }
                 break;
             case 3:
-                num1 = shape[0];
-                num2 = shape[1];
+                iMax = shape[0];
+                jMax = shape[1];
                 num3 = shape[2];
-                num2x3x4 = num2 * num3 * num4;
+                num2x3x4 = jMax * num3 * num4;
                 num3x4 = num3 * num4;
-                for (int i = 0; i < num1; i++) {
-                    for (int j = 0; j < num2; j++) {
+                for (int i = 0; i < iMax; i++) {
+                    for (int j = 0; j < jMax; j++) {
                         for (int k = 0; k < num3; k++) {
                             values[n++] = data[index(i, j, k)];
                         }
@@ -236,14 +236,14 @@ public class Tensor implements Cloneable, Serializable {
                 }
                 break;
             case 4:
-                num1 = shape[0];
-                num2 = shape[1];
+                iMax = shape[0];
+                jMax = shape[1];
                 num3 = shape[2];
                 num4 = shape[3];
-                num2x3x4 = num2 * num3 * num4;
+                num2x3x4 = jMax * num3 * num4;
                 num3x4 = num3 * num4;
-                for (int i = 0; i < num1; i++) {
-                    for (int j = 0; j < num2; j++) {
+                for (int i = 0; i < iMax; i++) {
+                    for (int j = 0; j < jMax; j++) {
                         for (int k = 0; k < num3; k++) {
                             for (int l = 0; l < num4; l++) {
                                 values[n++] = data[index(i, j, k, l)];
@@ -284,9 +284,9 @@ public class Tensor implements Cloneable, Serializable {
                 break;
             case 1:
                 buffer.append("[");
-                for (int i = 0; i < num1; i++) {
+                for (int i = 0; i < iMax; i++) {
                     buffer.append(values[n++]);
-                    if (i == num1 - 1) {
+                    if (i == iMax - 1) {
                         buffer.append("]");
                     } else {
                         buffer.append(",");
@@ -295,21 +295,21 @@ public class Tensor implements Cloneable, Serializable {
                 break;
             case 2:
                 buffer.append("[");
-                for (int i = 0; i < num1; i++) {
+                for (int i = 0; i < iMax; i++) {
                     if (i == 0) {
                         buffer.append("[");
                     } else {
                         buffer.append(" [");
                     }
-                    for (int j = 0; j < num2; j++) {
+                    for (int j = 0; j < jMax; j++) {
                         buffer.append(values[n++]);
-                        if (j == num2 - 1) {
+                        if (j == jMax - 1) {
                             buffer.append("]");
                         } else {
                             buffer.append(",");
                         }
                     }
-                    if (i == num1 - 1) {
+                    if (i == iMax - 1) {
                         buffer.append("]");
                     } else {
                         buffer.append(",\n");
@@ -318,18 +318,18 @@ public class Tensor implements Cloneable, Serializable {
                 //buffer.append("]");
                 break;
             case 3:
-                for (int i = 0; i < num1; i++) {
+                for (int i = 0; i < iMax; i++) {
                     if (i == 0) {
                         buffer.append("[");
                     } else {
                         buffer.append(" [");
                     }
-                    for (int j = 0; j < num2; j++) {
+                    for (int j = 0; j < jMax; j++) {
                         for (int k = 0; k < num3; k++) {
                             buffer.append(values[n++]).append("\n");
                         }
                     }
-                    if (i == num1 - 1) {
+                    if (i == iMax - 1) {
                         buffer.append("]");
                     } else {
                         buffer.append(",\n");
@@ -337,20 +337,20 @@ public class Tensor implements Cloneable, Serializable {
                 }
                 break;
             case 4:
-                for (int i = 0; i < num1; i++) {
+                for (int i = 0; i < iMax; i++) {
                     if (i == 0) {
                         buffer.append("[");
                     } else {
                         buffer.append(" [");
                     }
-                    for (int j = 0; j < num2; j++) {
+                    for (int j = 0; j < jMax; j++) {
                         for (int k = 0; k < num3; k++) {
                             for (int l = 0; l < num4; l++) {
                                 buffer.append(values[n++]).append("\n");
                             }
                         }
                     }
-                    if (i == num1 - 1) {
+                    if (i == iMax - 1) {
                         buffer.append("]");
                     } else {
                         buffer.append(",\n");
@@ -376,7 +376,7 @@ public class Tensor implements Cloneable, Serializable {
                 if (rank != 2) {
                     throw new RuntimeException(ERROR_MESSAGE[2]);
                 }
-                index = indexes[0] * num2 + indexes[1];
+                index = indexes[0] * jMax + indexes[1];
                 break;
             case 3:
                 if (rank != 3) {
@@ -398,7 +398,7 @@ public class Tensor implements Cloneable, Serializable {
         if (rank != 2) {
             throw new RuntimeException(ERROR_MESSAGE[2]);
         }
-        return i * num2 + j;
+        return i * jMax + j;
     }
 
     public int index(int i, int j, int k) {
@@ -421,7 +421,7 @@ public class Tensor implements Cloneable, Serializable {
                 break;
             case 2:
                 assert rank == 2 : "Tensor is not Matrix";
-                index = indices[0] * num2 + indices[1];
+                index = indices[0] * jMax + indices[1];
                 break;
             case 3:
                 assert rank == 3 : "Tensor is not 3rd order";
@@ -439,7 +439,7 @@ public class Tensor implements Cloneable, Serializable {
         if (rank != 2) {
             throw new RuntimeException("Tensor is not Matrix");
         }
-        return values[i * num2 + j];
+        return values[i * jMax + j];
     }
 
     public double getValue(int i, int j, int k) {
@@ -462,7 +462,7 @@ public class Tensor implements Cloneable, Serializable {
                 break;
             case 2:
                 assert rank == 2 : "Tensor is not Matrix";
-                index = indices[0] * num2 + indices[1];
+                index = indices[0] * jMax + indices[1];
                 break;
             case 3:
                 assert rank == 3 : "Tensor is not 3rd order";
@@ -493,7 +493,7 @@ public class Tensor implements Cloneable, Serializable {
         if (rank != 2) {
             throw new RuntimeException(ERROR_MESSAGE[2]);
         }
-        values[i * num2 + j] = value;
+        values[i * jMax + j] = value;
     }
 
     public void setValue(double value, int i, int j, int k) {
@@ -547,8 +547,8 @@ public class Tensor implements Cloneable, Serializable {
 
         if (rank != tensor.rank) return false;
         if (length != tensor.length) return false;
-        if (num1 != tensor.num1) return false;
-        if (num2 != tensor.num2) return false;
+        if (iMax != tensor.iMax) return false;
+        if (jMax != tensor.jMax) return false;
         if (num3 != tensor.num3) return false;
         if (num4 != tensor.num4) return false;
         if (num2x3x4 != tensor.num2x3x4) return false;
@@ -563,8 +563,8 @@ public class Tensor implements Cloneable, Serializable {
         result = 31 * result + Arrays.hashCode(values);
         result = 31 * result + Arrays.hashCode(shape);
         result = 31 * result + FORMAT.hashCode();
-        result = 31 * result + num1;
-        result = 31 * result + num2;
+        result = 31 * result + iMax;
+        result = 31 * result + jMax;
         result = 31 * result + num3;
         result = 31 * result + num4;
         result = 31 * result + num2x3x4;
