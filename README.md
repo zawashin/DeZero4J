@@ -76,7 +76,7 @@ public abstract class Function {
 
 ### Step06：手作業によるバックプロパゲーション
 - Variableクラス
-    - 勾配を表すgradフィールドを追加
+  - 勾配を表すgradフィールドを追加
 ```java
 public class Variable {
   protected double data;
@@ -119,17 +119,17 @@ public class Variable {
 ```
 
 - Functionクラス
-    - 逆伝播計算自動化するのためにoutputフィールドを追加
+  - 逆伝播計算自動化するのためにoutputフィールドを追加
   - 逆伝播を計算するためのbackwardメソッドを定義
 
 ```java
 public abstract class Function {
     protected Variable input;
-    protected Variable output;
+  protected Variable output;
 
     public Variable forward(Variable input) {
-       // ... 略
-     }
+      // ... 略
+    }
 
     protected abstract double forward(double x);
     protected abstract double backward(double gy);
@@ -238,6 +238,9 @@ public class Variable {
 - Javaなので演算子の多重定義が出来ない
   - Variableクラスに各種演算メソッドを定義
   - **Scala**や**Kotlin**は演算子のオーバーロードが出来るけど
+  - 二項演算クラスの命名はKotlinに**準拠**
+    - Multiply → Times
+    - Divide → Div
 ### Step21：演算子のオーバーロード (2)
 - Javaなので演算子の多重定義が(以下略)
 ### Step22：演算子のオーバーロード (3)
@@ -285,7 +288,7 @@ public double[][] forward(double[]... xs) {
 public Variable[] backward(Variable... gys) {
     Variable[] gx = new Variable[numInputs];
     Variable x = inputs[0];
-    gx[0] = (x.sin().negative()).multiply(gys[0]);
+  gx[0] = (x.sin().negative()).times(gys[0]);
     return gx;
 }
 ```
