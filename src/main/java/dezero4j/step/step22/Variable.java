@@ -152,18 +152,18 @@ public class Variable {
         return function.forward(other, this)[0];
     }
 
-    public Variable multiply(Variable other) {
-        Function function = new Multiply();
+    public Variable times(Variable other) {
+        Function function = new Times();
         return function.forward(this, other)[0];
     }
 
-    public Variable divide(Variable other) {
-        Function function = new Divide();
+    public Variable div(Variable other) {
+        Function function = new Div();
         return function.forward(this, other)[0];
     }
 
-    public Variable rdivide(Variable other) {
-        Function function = new Divide();
+    public Variable rdiv(Variable other) {
+        Function function = new Div();
         return function.forward(other, this)[0];
     }
 

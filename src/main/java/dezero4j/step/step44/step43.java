@@ -109,10 +109,10 @@ public class step43 {
 
              */
 
-            w0.minusAssign(dw0.multiply(learningRate));
-            b0.minusAssign(db0.multiply(learningRate));
-            w1.minusAssign(dw1.multiply(learningRate));
-            b1.minusAssign(db1.multiply(learningRate));
+            w0.minusAssign(dw0.times(learningRate));
+            b0.minusAssign(db0.times(learningRate));
+            w1.minusAssign(dw1.times(learningRate));
+            b1.minusAssign(db1.times(learningRate));
         }
         /*
          */

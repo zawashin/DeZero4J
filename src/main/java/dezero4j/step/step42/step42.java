@@ -38,8 +38,8 @@ public class step42 {
             loss.backward(false, true);
             Variable dw = w.grad;
             Variable db = b.grad;
-            w.minusAssign(dw.multiply(learningRate));
-            b.minusAssign(db.multiply(learningRate));
+            w.minusAssign(dw.times(learningRate));
+            b.minusAssign(db.times(learningRate));
             /*
             for (int j = 0; j < w.getData().length; j++) {
                 w.getData().getValues()[j] -= dw.getData().getValues()[j]*learningRate;

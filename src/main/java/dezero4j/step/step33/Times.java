@@ -3,9 +3,9 @@ package dezero4j.step.step33;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Multiply extends Function {
+public class Times extends Function {
 
-    public Multiply() {
+    public Times() {
         numInputs = 2;
         numOutputs = 1;
     }
@@ -27,8 +27,8 @@ public class Multiply extends Function {
         Variable[] xs = new Variable[numInputs];
         xs[0] = inputs[0];
         xs[1] = inputs[1];
-        gx[0] = gys[0].multiply(xs[1]);
-        gx[1] = gys[0].multiply(xs[0]);
+        gx[0] = gys[0].times(xs[1]);
+        gx[1] = gys[0].times(xs[0]);
         return gx;
     }
 }

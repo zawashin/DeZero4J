@@ -142,8 +142,8 @@ public class Variable {
         return function.forward(this, other);
     }
 
-    public Variable[] multiply(Variable other) {
-        Function function = new Multiply();
+    public Variable[] times(Variable other) {
+        Function function = new Times();
         return function.forward(this, other);
     }
 

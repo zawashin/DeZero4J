@@ -35,7 +35,7 @@ public class Power extends Function {
         Variable[] gx = new Variable[1];
         Variable x = inputs[0];
         int length = x.length;
-        gx[0] = (x.pow(index - 1)).multiply(param(length, index)).multiply(gys[0]);
+        gx[0] = (x.pow(index - 1)).times(param(length, index)).times(gys[0]);
         return gx;
     }
 

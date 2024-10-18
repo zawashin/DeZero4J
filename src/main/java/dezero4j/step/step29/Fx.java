@@ -15,6 +15,6 @@ public class Fx extends MultivariateFunction {
 
         return new Variable(ys);
          */
-        return (xs[0].pow(4)).minus(xs[0].pow(2).multiply(constant(length, 2)));
+        return (xs[0].pow(4)).minus(xs[0].pow(2).times(constant(length, 2)));
     }
 }

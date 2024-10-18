@@ -51,7 +51,7 @@ public class Test {
                 }
 
                  */
-                Variable dx = gx.divide(gx2);
+                Variable dx = gx.div(gx2);
                 xs[0].minusAssign(dx);
             }
         }
@@ -75,7 +75,7 @@ public class Test {
                 System.out.println(x);
                 System.out.println(gx);
                 System.out.println(gx2 + "\n");
-                Variable dx = gx.divide(gx2);
+                Variable dx = gx.div(gx2);
                 xs[0].minusAssign(dx);
             }
         }

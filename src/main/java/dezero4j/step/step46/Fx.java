@@ -9,7 +9,7 @@ public class Fx extends LossFunction {
         Variable[] loss = new Variable[1];
         //int length = xs[0].getLength();
         //    z = x ** 4  - 2  * x ** 2
-        loss[0] = (xs[0].pow(4)).minus(xs[0].pow(2).multiply(parameter(2, xs[0].getShape())));
+        loss[0] = (xs[0].pow(4)).minus(xs[0].pow(2).times(parameter(2, xs[0].getShape())));
         return loss;
     }
 

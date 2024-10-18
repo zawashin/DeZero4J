@@ -8,7 +8,7 @@ public class Gx2 extends MultivariateFunction {
     public Variable forward(Variable... xs) {
         //    z = 12* x ** 2  - 4
         int length = xs[0].getLength();
-        return xs[0].square().multiply(constant(length, 12)).minus(constant(length, 4));
+        return xs[0].square().times(constant(length, 12)).minus(constant(length, 4));
         /*
         int length = xs[0].getLength();
         double[] dx = new double[length];

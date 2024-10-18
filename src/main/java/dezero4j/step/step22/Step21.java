@@ -11,7 +11,7 @@ public class Step21 {
         Variable c = new Variable(new double[]{1.0});
 
         // y = a * b + c
-        Variable y = (a.multiply(b)).plus(c);
+        Variable y = (a.times(b)).plus(c);
         y.backward();
 
         System.out.println(y.getData()[0]);
@@ -22,7 +22,7 @@ public class Step21 {
         a.cleaGrad();
         b.cleaGrad();
         c.cleaGrad();
-        y = (a.multiply(b.square())).plus(c);
+        y = (a.times(b.square())).plus(c);
         y.backward();
 
         System.out.println(y.getData()[0]);

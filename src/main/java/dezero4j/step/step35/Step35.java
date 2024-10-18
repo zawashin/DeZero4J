@@ -15,7 +15,7 @@ public class Step35 {
         Variable gx = x.grad;
         System.out.println(gx);
         x.clearGrad();
-        // retaiGrad = trueだと計算が不正確
+        // retainGrad = trueだと計算が不正確
         gx.backward(false, true);
         Variable gx2 = x.grad;
         System.out.println(gx2);

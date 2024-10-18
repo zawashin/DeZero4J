@@ -31,7 +31,7 @@ public abstract class Layer implements Serializable {
 
     public void update(double learningRate) {
         for (Variable param : params) {
-            param.minusAssign((param.grad).multiply(learningRate));
+            param.minusAssign((param.grad).times(learningRate));
         }
     }
 

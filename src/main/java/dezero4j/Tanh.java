@@ -23,8 +23,8 @@ public class Tanh extends ActivationFunction {
         Variable gy = gys[0];
         Variable y = outputs[0];
         int length = gys[0].getLength();
-        //gxs[0] = gy.multiply(param(1, length).minus(y.pow(2)));
-        gxs[0] = gy.multiply(parameter(1, gys[0].getShape()).minus(y.pow(2)));
+        //gxs[0] = gy.times(param(1, length).minus(y.pow(2)));
+        gxs[0] = gy.times(parameter(1, gys[0].getShape()).minus(y.pow(2)));
         gxs[0].setShape(inputs[0].getShape());
 
         return gxs;

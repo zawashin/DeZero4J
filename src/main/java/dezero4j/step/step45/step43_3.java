@@ -60,10 +60,10 @@ public class step43_3 {
             //System.out.println(Arrays.toString(b[1].getShape()));
             //System.out.println(Arrays.toString(db1.getShape()));
 
-            w[0].minusAssign(dw0.multiply(learningRate));
-            b[0].minusAssign(db0.multiply(learningRate));
-            w[1].minusAssign(dw1.multiply(learningRate));
-            b[1].minusAssign(db1.multiply(learningRate));
+            w[0].minusAssign(dw0.times(learningRate));
+            b[0].minusAssign(db0.times(learningRate));
+            w[1].minusAssign(dw1.times(learningRate));
+            b[1].minusAssign(db1.times(learningRate));
 
             /*
             System.out.println("dw1 = " + dw0);

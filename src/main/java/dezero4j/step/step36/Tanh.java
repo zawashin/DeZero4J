@@ -27,7 +27,7 @@ public class Tanh extends Function {
         Variable gy =  gys[0];
         Variable y = outputs[0];
         int length = gys[0].length;
-        gx[0] = gy.multiply(param(length,1).minus(y.pow(2)));
+        gx[0] = gy.times(param(length, 1).minus(y.pow(2)));
 
         return gx;
     }

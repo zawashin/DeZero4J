@@ -13,7 +13,7 @@ public class Exp extends Function {
     @Override
     public Tensor[] forward(Tensor... xs) {
         Tensor[] ys = new Tensor[numOutputs];
-        ys[0] = TensorOperator.exp((xs[0]));
+        ys[0] = xs[0].exp();
         return ys;
     }
 
@@ -21,7 +21,7 @@ public class Exp extends Function {
     public Variable[] backward(Variable... gys) {
         Variable[] gxs = new Variable[numInputs];
         Variable y = outputs[0];
-        gxs[0] = gys[0].multiply(y);
+        gxs[0] = gys[0].times(y);
         gxs[0].setShape(inputs[0].getShape());
         return gxs;
     }

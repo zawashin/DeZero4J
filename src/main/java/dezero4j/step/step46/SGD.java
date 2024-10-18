@@ -20,7 +20,7 @@ public class SGD extends Optimizer {
     public void update() {
         target.update(learningRate);
         for (Parameter param: target.params) {
-            param.minusAssign((param.grad).multiply(learningRate));
+            param.minusAssign((param.grad).times(learningRate));
         }
     }
 

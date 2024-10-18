@@ -18,7 +18,7 @@ public class Rosenbrock extends LostFunction {
         Variable[] lost = new Variable[1];
         int length = xs[0].getData().length;
         // z = 100 * (x0 - x0**2)**2 + (x0 - 1)**2
-        lost[0] = param(length, 100).multiply(xs[1].minus(xs[0].pow(2)).pow(2)).plus((xs[0].minus(param(length, 1)).pow(2)));
+        lost[0] = param(length, 100).times(xs[1].minus(xs[0].pow(2)).pow(2)).plus((xs[0].minus(param(length, 1)).pow(2)));
         return lost;
     }
 }

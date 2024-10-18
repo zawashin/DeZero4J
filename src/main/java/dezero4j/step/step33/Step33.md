@@ -19,7 +19,7 @@ public double[][] forward(double[]... xs) {
 public Variable[] backward(Variable... gys) {
     Variable[] gx = new Variable[numInputs];
     Variable x = inputs[0];
-    gx[0] = (x.sin().negative()).multiply(gys[0]);
+    gx[0] = (x.sin().negative()).times(gys[0]);
     return gx;
 }
 ```

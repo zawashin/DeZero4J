@@ -8,7 +8,7 @@ public class LossMeanSquaredError extends LossFunction {
     @Override
     public Variable[] forward(Variable... xs) {
         Variable[] ys = new Variable[1];
-        ys[0] = (((xs[0].minus(xs[1])).pow(2)).sum()).divide(parameter(xs[0].getLength(), new int[]{1, 1}));
+        ys[0] = (((xs[0].minus(xs[1])).pow(2)).sum()).div(parameter(xs[0].getLength(), new int[]{1, 1}));
         return ys;
     }
 

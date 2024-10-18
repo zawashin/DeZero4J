@@ -77,8 +77,8 @@ public class Linear extends Function {
             loss.backward(false, true);
             Variable dw = w.grad;
             Variable db = b.grad;
-            w.minusAssign(dw.multiply(learningRate));
-            b.minusAssign(db.multiply(learningRate));
+            w.minusAssign(dw.times(learningRate));
+            b.minusAssign(db.times(learningRate));
         }
         System.out.println(w + "\t" + b);
     }

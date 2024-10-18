@@ -7,7 +7,7 @@ public class Matyas extends LossFunction {
 
     public Variable[] forward(Variable... xs) {
         Variable[] loss = new Variable[1];
-        loss[0] = xs[0].pow(2).plus(xs[1].pow(2)).multiply(0.26).minus(xs[0].multiply(xs[1]).multiply(0.48));
+        loss[0] = xs[0].pow(2).plus(xs[1].pow(2)).times(0.26).minus(xs[0].times(xs[1]).times(0.48));
         //    z = 0.26 * (x ** 2 + y ** 2) - 0.48 * x * y
         return loss;
     }

@@ -14,7 +14,7 @@ public class SoftmaxFunction {
         double[][] expX = exponential(shiftedX);
         double[] sumExpX = sum(expX, axis);
 
-        return divide(expX, sumExpX, axis);
+        return div(expX, sumExpX, axis);
     }
 
     private static double[][] shiftValues(double[][] x, int axis) {
@@ -65,7 +65,7 @@ public class SoftmaxFunction {
         return sum;
     }
 
-    private static double[][] divide(double[][] x, double[] sum, int axis) {
+    private static double[][] div(double[][] x, double[] sum, int axis) {
         double[][] result = new double[x.length][x[0].length];
         if (axis == 1) {
             for (int i = 0; i < x.length; i++) {

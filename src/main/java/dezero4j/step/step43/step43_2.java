@@ -56,10 +56,10 @@ public class step43_2 {
             Variable dw2 = w[1].grad;
             Variable db2 = b[1].grad;
 
-            w[0].minusAssign(dw1.multiply(learningRate));
-            b[0].minusAssign(db1.multiply(learningRate));
-            w[1].minusAssign(dw2.multiply(learningRate));
-            b[1].minusAssign(db2.multiply(learningRate));
+            w[0].minusAssign(dw1.times(learningRate));
+            b[0].minusAssign(db1.times(learningRate));
+            w[1].minusAssign(dw2.times(learningRate));
+            b[1].minusAssign(db2.times(learningRate));
         }
         Variable y = predict(x, w, b);
         for(int i = 0; i < x.getLength(); i++) {

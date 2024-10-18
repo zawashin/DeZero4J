@@ -36,7 +36,7 @@ public class Power extends Function {
         Variable[] gxs = new Variable[numInputs];
         Variable x = inputs[0];
         int length = x.getLength();
-        gxs[0] = (x.pow(index - 1)).multiply(param(index, x.getShape())).multiply(gys[0]);
+        gxs[0] = (x.pow(index - 1)).times(param(index, x.getShape())).times(gys[0]);
         gxs[0].setShape(inputs[0].getShape());
 
         return gxs;

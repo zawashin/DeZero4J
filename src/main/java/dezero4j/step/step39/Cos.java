@@ -27,7 +27,7 @@ public class Cos extends Function {
     public Variable[] backward(Variable... gys) {
         Variable[] gx = new Variable[numInputs];
         Variable x = inputs[0];
-        gx[0] = (x.sin().neg()).multiply(gys[0]);
+        gx[0] = (x.sin().neg()).times(gys[0]);
         gx[0].setShape(inputs[0].getShape());
         return gx;
     }

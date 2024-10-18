@@ -199,7 +199,7 @@ public class Tensor implements Cloneable, Serializable {
         }
     }
 
-    public void multiplyAssign(Tensor other) {
+    public void timesAssign(Tensor other) {
         double[] x0 = values;
         double[] x1 = other.values;
         for (int i = 0; i < length; i++) {
@@ -207,7 +207,7 @@ public class Tensor implements Cloneable, Serializable {
         }
     }
 
-    public void divideAssign(Tensor other) {
+    public void divAssign(Tensor other) {
         double[] x0 = values;
         double[] x1 = other.values;
         for (int i = 0; i < length; i++) {
@@ -223,12 +223,12 @@ public class Tensor implements Cloneable, Serializable {
         return TensorOperator.minus(this, other);
     }
 
-    public Tensor multiply(Tensor other) {
-        return TensorOperator.multiply(this, other);
+    public Tensor times(Tensor other) {
+        return TensorOperator.times(this, other);
     }
 
-    public Tensor divide(Tensor other) {
-        return TensorOperator.divide(this, other);
+    public Tensor div(Tensor other) {
+        return TensorOperator.div(this, other);
     }
 
     public Tensor dot(Tensor other) {

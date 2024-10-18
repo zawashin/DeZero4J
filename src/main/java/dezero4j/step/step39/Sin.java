@@ -26,7 +26,7 @@ public class Sin extends Function {
     @Override
     public Variable[] backward(Variable... gys) {
         Variable[] gx = new Variable[numInputs];
-        gx[0] = (inputs[0].cos()).multiply(gys[0]);
+        gx[0] = (inputs[0].cos()).times(gys[0]);
         gx[0].setShape(inputs[0].getShape());
         return gx;
     }

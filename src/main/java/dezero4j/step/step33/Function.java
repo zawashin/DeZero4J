@@ -35,8 +35,8 @@ public abstract class Function {
 
     public abstract double[][] forward(double[]... xs);
 
-    public Variable[] forward(Variable... xs) {
-        length = inputs[0].length;
+    public Variable[] forward(Variable... inputs) {
+        //length = inputs[0].length;
         double[][] xsArray = new double[inputs.length][];
         for (int i = 0; i < inputs.length; i++) {
             xsArray[i] = inputs[i].getData();

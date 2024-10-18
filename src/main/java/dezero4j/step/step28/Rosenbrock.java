@@ -7,8 +7,8 @@ public class Rosenbrock extends MultivariateFunction {
     public Variable forward(Variable... xs) {
         int length = xs[0].getData().length;
         // z = 100 * (x0 - x0**2)**2 + (x0 - 1)**2
-        Variable z = constant(length, 100).multiply(xs[1].minus(xs[0].pow(2)).pow(2)).plus((xs[0].minus(constant(length, 1)).pow(2)));
-        //Variable z1 = constant(length, 100).multiply(xs[1].minus(xs[0].pow(2)).pow(2));
+        Variable z = constant(length, 100).times(xs[1].minus(xs[0].pow(2)).pow(2)).plus((xs[0].minus(constant(length, 1)).pow(2)));
+        //Variable z1 = constant(length, 100).times(xs[1].minus(xs[0].pow(2)).pow(2));
         //Variable z2 = xs[0].minus(constant(length, 1)).pow(2);
         //z = z1.plus(z2);
         //System.out.println(z1.getData()[0]);

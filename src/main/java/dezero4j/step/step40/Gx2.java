@@ -12,7 +12,7 @@ public class Gx2 extends LostFunction {
         //int length = xs[0].getLength();
         int[] shape = xs[0].getShape();
         //    z = 12* x ** 2  - 4
-        lost[0] = xs[0].pow(2).multiply(param(12, shape)).minus(param(4, shape));
+        lost[0] = xs[0].pow(2).times(param(12, shape)).minus(param(4, shape));
         return lost;
     }
 }

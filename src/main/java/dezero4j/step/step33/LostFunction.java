@@ -5,6 +5,7 @@ package dezero4j.step.step33;
  */
 public abstract class LostFunction extends Function {
     public Variable calc(Variable... xs) {
+        inputs = xs;
         return forward(xs)[0];
     }
 

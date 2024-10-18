@@ -17,8 +17,8 @@ public class Minus extends Function {
         Tensor[] xs_ = new Tensor[numInputs];
         xs_[0] = xs[0].broadcastTo(broadcast);
         xs_[1] = xs[1].broadcastTo(broadcast);
-        ys[0] = TensorOperator.minus(xs_);
         //ys[0] = TensorOperator.minus(xs_[0], xs_[1]);
+        ys[0] = xs_[0].minus(xs_[1]);
         return ys;
     }
 

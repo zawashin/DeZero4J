@@ -412,7 +412,7 @@ public class Tensor implements Cloneable, Serializable {
         return new Tensor(y, shape);
     }
 
-    public Tensor multiply(Tensor other) {
+    public Tensor times(Tensor other) {
         double[] xArray0 = values;
         double[] xArray1 = other.values;
         double[] y = new double[length];
@@ -423,7 +423,7 @@ public class Tensor implements Cloneable, Serializable {
 
     }
 
-    public Tensor divide(Tensor other) {
+    public Tensor div(Tensor other) {
         double[] x0 = values;
         double[] x1 = other.values;
         double[] y = new double[length];

@@ -233,13 +233,13 @@ public class Variable implements Cloneable, Serializable {
         data.minusAssign(other.getData());
     }
 
-    public Variable multiply(Variable other) {
-        Function function = new Multiply();
+    public Variable times(Variable other) {
+        Function function = new Times();
         return function.forward(this, other)[0];
     }
 
-    public Variable multiply(double other) {
-        Function function = new Multiply();
+    public Variable times(double other) {
+        Function function = new Times();
         double[] array = new double[data.length];
         for (int i = 0; i < data.length; i++) {
             array[i] = other;
@@ -248,13 +248,13 @@ public class Variable implements Cloneable, Serializable {
         return function.forward(this, otherVariable)[0];
     }
 
-    public Variable divide(Variable other) {
-        Function function = new Divide();
+    public Variable div(Variable other) {
+        Function function = new Div();
         return function.forward(this, other)[0];
     }
 
-    public Variable rdivide(Variable other) {
-        Function function = new Divide();
+    public Variable rdiv(Variable other) {
+        Function function = new Div();
         return function.forward(other, this)[0];
     }
 
@@ -363,7 +363,7 @@ public class Variable implements Cloneable, Serializable {
             }
 
              */
-            xs[0].minusAssign(gxs.divide(gxs2));
+            xs[0].minusAssign(gxs.div(gxs2));
 
         }
     }

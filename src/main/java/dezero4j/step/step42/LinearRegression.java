@@ -71,8 +71,8 @@ public class LinearRegression {
             loss.backward(false, true);
             Variable dw = a.grad;
             Variable db = b.grad;
-            a.minusAssign(dw.multiply(learningRate));
-            b.minusAssign(db.multiply(learningRate));
+            a.minusAssign(dw.times(learningRate));
+            b.minusAssign(db.times(learningRate));
         }
 
         double[] x = x0.getDataAsArray();

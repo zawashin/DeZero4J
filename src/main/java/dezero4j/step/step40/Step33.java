@@ -25,7 +25,7 @@ public class Step33 {
             System.out.println(x);
             System.out.println(gxs);
             System.out.print(gxs2 + "\n");
-            Variable dx = gxs.divide(gxs2);
+            Variable dx = gxs.div(gxs2);
             xs[0].minusAssign(dx);
         }
     }

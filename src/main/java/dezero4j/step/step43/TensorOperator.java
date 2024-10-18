@@ -29,7 +29,7 @@ public class TensorOperator {
         return new Tensor(values, xs[0].shape);
     }
 
-    public static Tensor multiply(Tensor... xs) {
+    public static Tensor times(Tensor... xs) {
         double[] x0 = xs[0].values;
         double[] x1 = xs[1].values;
         int length = x0.length;
@@ -40,7 +40,7 @@ public class TensorOperator {
         return new Tensor(values, xs[0].shape);
     }
 
-    public static Tensor divide(Tensor... xs) {
+    public static Tensor div(Tensor... xs) {
         double[] x0 = xs[0].values;
         double[] x1 = xs[1].values;
         int length = xs[0].length;

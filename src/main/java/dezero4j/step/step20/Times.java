@@ -1,9 +1,9 @@
-package dezero4j.step.step29;
+package dezero4j.step.step20;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Multiply extends Function {
+public class Times extends Function {
 	@Override
     public double[][] forward(double[][] xs) {
         double[] x0 = xs[0];

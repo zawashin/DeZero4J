@@ -16,7 +16,7 @@ public class Square extends Function {
     @Override
     public double[] backward(double[] gy) {
         double[] x = getInput().getData();
-        //double[] gx = x.mapMultiply(2).ebeMultiply(gy);
+        //double[] gx = x.maptimes(2).ebetimes(gy);
         double[] gx = new double[x.length];
         for(int i = 0; i < x.length; i++) {
             gx[i] = 2.0 * x[i] * gy[i];

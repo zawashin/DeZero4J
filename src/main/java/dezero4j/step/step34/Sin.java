@@ -24,7 +24,7 @@ public class Sin extends Function {
     public Variable[] backward(Variable... gys) {
         Variable[] gx = new Variable[numInputs];
         Variable x = inputs[0];
-        gx[0] = (x.cos()).multiply(gys[0]);
+        gx[0] = (x.cos()).times(gys[0]);
         return gx;
     }
 

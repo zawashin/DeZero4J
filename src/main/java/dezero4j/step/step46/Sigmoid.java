@@ -21,7 +21,7 @@ public class Sigmoid extends ActivationFunction {
         double[] values = new double[length];
         Arrays.fill(values,0.5);
         Tensor param05 = new Tensor(values, x.getShape());
-        Tensor y = (((x.multiply(param05)).tanh()).multiply(param05)).plus(param05);
+        Tensor y = (((x.times(param05)).tanh()).times(param05)).plus(param05);
         ys[0] = y;
         return ys;
     }
@@ -33,7 +33,7 @@ public class Sigmoid extends ActivationFunction {
         Variable y = outputs[0];
         Variable gy = gys[0];
         Variable param1 = new Variable(1.0, y.getShape());
-        gxs[0] = gy.multiply(y).multiply(param1.minus(y));
+        gxs[0] = gy.times(y).times(param1.minus(y));
         return gxs;
     }
 

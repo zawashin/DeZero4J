@@ -27,7 +27,7 @@ public class Log extends Function {
     public Variable[] backward(Variable... gys) {
         Variable[] gx = new Variable[numInputs];
         Variable x = inputs[0];
-        gx[0] = gys[0].divide(x);
+        gx[0] = gys[0].div(x);
         gx[0].setShape(inputs[0].getShape());
 
         return gx;
