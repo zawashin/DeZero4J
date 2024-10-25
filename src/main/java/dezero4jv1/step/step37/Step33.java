@@ -1,0 +1,34 @@
+package dezero4jv1.step.step37;
+
+/**
+ * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
+ */
+public class Step33 {
+
+    public static void main(String[] args) {
+        Variable[] xs = new Variable[1];
+        xs[0] = new Variable(new double[]{2, 3});
+        xs[0] = new Variable(new double[][]{{2, 3},{3,2}});
+        Variable x = xs[0];
+        Fx fx = new Fx();
+        int maxIteration = 10;
+
+        for (int i = 0; i < maxIteration; i++) {
+            Variable y = fx.calc(xs);
+            x.clearGrad();
+            y.backward(true, true);
+            Variable gx = x.getGrad();
+            x.clearGrad();
+            gx.backward(false, true);
+            Variable gx2 = x.getGrad();
+
+            System.out.println(x);
+            System.out.println(gx);
+            System.out.print(gx2 + "\n");
+            for (int j = 0; j < x.getData().length; j++) {
+                xs[0].getData().values[j] -= gx.getData().values[j] / gx2.getData().values[j];
+            }
+
+        }
+    }
+}
