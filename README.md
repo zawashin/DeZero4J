@@ -11,7 +11,7 @@
   - 以前のステップの例題でも動作確認を可能な限り行う
     [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
 - 外部ライブラリをできる限り使わない
-  - Numpy代わりのTensorクラスの実装**も**目指す
+  - NumPy代わりの[Tensorを扱うクラスライブラリ](https://github.com/zawashin/Tensor4J)の実装**も**目指す
     - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
   - 4階まで対応
@@ -161,7 +161,7 @@ public abstract class Function {
 
 - Variableクラス
     - dataフィールドとgradフィールドをdoubleからTensorクラスに変更
-        - Numpyの代わり
+      - NumPyの代わり
 
 ```java
 import tensor4j.Tensor;
