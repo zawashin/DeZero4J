@@ -14,6 +14,7 @@ public class Minus extends Function {
 
     @Override
     public Tensor[] backward(Tensor[] gys) {
+        Tensor[] gxs = new Tensor[]{gys[0], gys[0].neg()};
         return new Tensor[]{gys[0], gys[0].neg()};
     }
 

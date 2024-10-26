@@ -199,8 +199,8 @@ public class Variable {
         return f.forward(this)[0];
     }
 
-    public Variable power(double index) {
-        Function f = new Power(index);
+    public Variable pow(double index) {
+        Function f = new Pow(index);
         return f.forward(this)[0];
     }
 

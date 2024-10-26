@@ -5,11 +5,11 @@ import tensor4j.Tensor;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Power extends Function {
+public class Pow extends Function {
 
     private double index = 0;
 
-    public Power(double index) {
+    public Pow(double index) {
         this.index = index;
     }
 

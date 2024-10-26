@@ -264,7 +264,6 @@ public class Variable {
 
 
 ### Step18：メモリ使用量を減らすモード
-
 - Configクラス、- NoGradクラス、UsingConfigクラスを定義
   - 正直、良く解らなかったのでChatGPTでJavaに変換
 
@@ -283,7 +282,6 @@ public class Variable {
     - Mul → Times
     - Add → Plus
 - Variableクラスに四則演算のメソッド
-
 ```java
 public class Variable {
 // ... 略
@@ -300,7 +298,6 @@ public class Variable {
 - Javaなので演算子の多重定義が(以下略)
 - Variableクラスの四則演算のメソッドを修正
   - 引数がプリミティブ型(double)の場合を追加
-
 ```java
 public class Variable {
 // ... 略
@@ -316,9 +313,7 @@ public class Variable {
 // ... 略
 }
 ```
-
 -
-
 ### Step22：演算子のオーバーロード (3)
 
 - Javaなので(以下略)
@@ -328,7 +323,7 @@ public class Variable {
 - 負数演算クラス
   - Neg
 - 累乗演算クラス
-  - Power
+  - Pow
 - Variableクラスに各演算のメソッドを追加
 
 ### Step23：パッケージとしてまとめる

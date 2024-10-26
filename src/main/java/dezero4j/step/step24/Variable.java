@@ -52,7 +52,6 @@ public class Variable {
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
-            //Function f = funcs.remove(funcs.size() - 1);
             Function f = funcs.removeLast();
             Tensor[] gys = new Tensor[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
@@ -199,10 +198,14 @@ public class Variable {
         return f.forward(this)[0];
     }
 
-    public Variable power(double index) {
+    public Variable pow(double index) {
         Function f = new Power(index);
         return f.forward(this)[0];
     }
 
+    public Variable neg() {
+        Function f = new Neg();
+        return f.forward(this)[0];
+    }
 
 }
