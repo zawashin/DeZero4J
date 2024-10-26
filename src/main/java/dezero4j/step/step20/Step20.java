@@ -14,7 +14,7 @@ public class Step20 {
         Variable y = (a.times(b)).plus(c);
         y.backward();
 
-        System.out.println(y.getData());
+        System.out.println(y);
         System.out.println(a.getGrad());
         System.out.println(b.getGrad());
     }

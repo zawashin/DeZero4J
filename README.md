@@ -264,7 +264,9 @@ public class Variable {
 
 
 ### Step18：メモリ使用量を減らすモード
-- Configクラスを定義
+
+- Configクラス、- NoGradクラス、UsingConfigクラスを定義
+  - 正直、良く解らなかったのでChatGPTでJavaに変換
 
 ### Step19：変数を使いやすく
 - Tenssorクラスで実装済み
@@ -279,7 +281,55 @@ public class Variable {
   - **Scala**や**Kotlin**は演算子のオーバーロードが出来る
   - 二項演算クラスの命名はKotlinに**準拠**
     - Mul → Times
+    - Add → Plus
+- Variableクラスに四則演算のメソッド
+
+```java
+public class Variable {
+// ... 略
+    public Variable plus(Variable other) {
+        Function f = new Plus();
+        return f.forward(this, other)[0];
+    }
+
+// ... 略
+}
+```
 
 ### Step21：演算子のオーバーロード (2)
 - Javaなので演算子の多重定義が(以下略)
+- Variableクラスの四則演算のメソッドを修正
+  - 引数がプリミティブ型(double)の場合を追加
+
+```java
+public class Variable {
+// ... 略
+    public Variable plus(Variable other) {
+        Function f = new Plus();
+        return f.forward(this, other)[0];
+    }
+
+    public Variable plus(double other) {
+        Function f = new Plus();
+        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+    }
+// ... 略
+}
+```
+
+-
+
+### Step22：演算子のオーバーロード (3)
+
+- Javaなので(以下略)
+- 四則演算のクラス
+  - Minus
+  - Div
+- 負数演算クラス
+  - Neg
+- 累乗演算クラス
+  - Power
+- Variableクラスに各演算のメソッドを追加
+
+### Step23：パッケージとしてまとめる
 

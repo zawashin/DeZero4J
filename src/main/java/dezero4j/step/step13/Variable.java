@@ -4,7 +4,6 @@ import tensor4j.Tensor;
 import tensor4j.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -42,7 +41,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.createTensor(1.0, data.getShape());
+            grad = Utils.create(1.0, data.getShape());
         }
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);

@@ -49,7 +49,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.createTensor(1.0, data.getShape());
+            grad = Utils.create(1.0, data.getShape());
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -57,7 +57,7 @@ public class Variable {
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
-            Function f = funcs.remove(funcs.size() - 1);
+            Function f = funcs.removeLast();
             Tensor[] gys = new Tensor[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
@@ -135,12 +135,17 @@ public class Variable {
 
     public Variable plus(double other) {
         Function f = new Plus();
-        return f.forward(this, new Variable(Utils.createTensor(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
     }
 
     public Variable times(Variable other) {
         Function f = new Times();
         return f.forward(this, other)[0];
+    }
+
+    public Variable times(double other) {
+        Function f = new Times();
+        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
     }
 
     public Variable exp() {

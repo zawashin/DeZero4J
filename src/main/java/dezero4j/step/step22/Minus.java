@@ -7,7 +7,7 @@ import tensor4j.Tensor;
  */
 public class Minus extends Function {
 
-	@Override
+    @Override
     public Tensor[] forward(Tensor[] xs) {
         return new Tensor[]{xs[0].minus(xs[1])};
     }

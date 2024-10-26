@@ -5,9 +5,9 @@ import tensor4j.Tensor;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Negative extends Function {
+public class Neg extends Function {
 
-	@Override
+    @Override
     public Tensor[] forward(Tensor[] xs) {
         return new Tensor[]{xs[0].neg()};
     }

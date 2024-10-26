@@ -1,11 +1,11 @@
-package dezero4j.step.step22;
+package dezero4j.step.step21;
 
 import dezero4j.Step;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Step20 extends Step {
+public class Step21 extends Step {
 
     @Override
     public void calc() {
@@ -14,7 +14,7 @@ public class Step20 extends Step {
         Variable c = new Variable(new double[]{1.0});
 
         // y = a * b + c
-        Variable y = (a.times(b)).plus(c);
+        Variable y = (a.times(b)).plus(1);
         y.backward();
 
         System.out.println(y.getData());
@@ -23,6 +23,6 @@ public class Step20 extends Step {
     }
 
     public static void main(String[] args) {
-        new Step20().calc();
+        new Step21().calc();
     }
 }
