@@ -1,6 +1,6 @@
 package dezero4j.step.step03;
 
-import dezero4j.Step;
+import dezero4j.step.Step;
 import dezero4j.step.step02.Square;
 import dezero4j.step.step02.Variable;
 

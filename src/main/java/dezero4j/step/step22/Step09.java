@@ -1,6 +1,6 @@
 package dezero4j.step.step22;
 
-import dezero4j.Step;
+import dezero4j.step.Step;
 
 public class Step09 extends Step {
 

@@ -1,6 +1,6 @@
 package dezero4j.step.step08;
 
-import dezero4j.Step;
+import dezero4j.step.Step;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>

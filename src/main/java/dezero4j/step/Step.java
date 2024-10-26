@@ -1,4 +1,4 @@
-package dezero4j;
+package dezero4j.step;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
