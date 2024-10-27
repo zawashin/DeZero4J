@@ -1,4 +1,4 @@
-package dezero4j.step.step22;
+package dezero4j.step.step27;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -199,9 +199,24 @@ public class Variable {
     }
 
     public Variable pow(double index) {
-        Function f = new Pow(index);
+        Function f = new Power(index);
         return f.forward(this)[0];
     }
 
+    public Variable neg() {
+        Function f = new Neg();
+        return f.forward(this)[0];
+    }
+
+    public Variable cos() {
+        Function f = new Cos();
+        return f.forward(this)[0];
+    }
+
+    public Variable sin() {
+        Function f = new Sin();
+        Variable[] y = f.forward(this);
+        return f.forward(this)[0];
+    }
 
 }

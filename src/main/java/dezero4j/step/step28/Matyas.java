@@ -1,10 +1,11 @@
-package dezero4j.step.step24;
+package dezero4j.step.step28;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Matyas {
+public class Matyas extends MultivariateFunction {
 
+    @Override
     public Variable calc(Variable... xs) {
         //    z = 0.26 * (x ** 2 + y ** 2) - 0.48 * x * y
         // $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$

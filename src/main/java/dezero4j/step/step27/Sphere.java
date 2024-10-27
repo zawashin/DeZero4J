@@ -1,4 +1,4 @@
-package dezero4j.step.step24;
+package dezero4j.step.step27;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -19,5 +19,13 @@ public class Sphere {
         System.out.println(x.getGrad());
         System.out.println(y.getGrad());
 
+        x = new Variable(4);
+        y = new Variable(3);
+        Sphere sphere = new Sphere();
+        z = sphere.calc(x, y);
+        System.out.println(z);
+        z.backward();
+        System.out.println(x.getGrad());
+        System.out.println(y.getGrad());
     }
 }

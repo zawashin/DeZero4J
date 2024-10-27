@@ -1,16 +1,15 @@
 package dezero4j.step.step24;
 
-import tensor4j.Tensor;
 import tensor4j.Utils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Goldstein {
+public class GoldsteinPrice {
 
     private int[] shape;
 
-    public Variable forward(Variable... xs) {
+    public Variable calc(Variable... xs) {
         shape = xs[0].getShape();
         /*
         val z = (1 + (xs[0] + xs[1] + 1).pow(2) * (19 - 14*xs[0] + 3*xs[0].pow(2) - 14*xs[1] + 6*xs[0]*xs[1] + 3*xs[1].pow(2))) *
@@ -24,16 +23,17 @@ public class Goldstein {
     private Variable constant(double value) {
         return new Variable(Utils.create(value, shape));
     }
+
     public static void main(String[] args) {
-        /*
         Variable x = new Variable(new double[]{1, 1});
         Variable y = new Variable(new double[]{2, 1});
 
-         */
+        /*
         Variable x = new Variable(new double[]{1});
         Variable y = new Variable(new double[]{1});
-        Goldstein goldstein = new Goldstein();
-        Variable z = goldstein.forward(x, y);
+         */
+        GoldsteinPrice goldstein = new GoldsteinPrice();
+        Variable z = goldstein.calc(x, y);
         z.backward();
         System.out.println(x.getGrad());
         System.out.println(y.getGrad());

@@ -1,4 +1,4 @@
-package dezero4j.step.step24;
+package dezero4j.step.step29;
 
 import tensor4j.Tensor;
 

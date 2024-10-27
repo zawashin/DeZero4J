@@ -1,19 +1,17 @@
-package dezero4j.step.step22;
+package dezero4j.step.step32;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Variable {
+public class Variable implements Cloneable, Serializable {
     protected Tensor data;
-    protected Tensor grad;
+    protected Variable grad;
     protected Function creator;
     protected int generation;
 
@@ -42,7 +40,38 @@ public class Variable {
         this.data = data.clone();
     }
 
-    public void backward() {
+    public Variable(Variable variable) {
+        this.data = variable.data.clone();
+        this.grad = variable.grad.clone();
+        this.creator = variable.creator.clone();
+        this.generation = variable.generation;
+    }
+
+    @Override
+    public Variable clone() {
+        return clone(new IdentityHashMap<>());
+    }
+
+    protected Variable clone(Map<Variable, Variable> clones) {
+        // すでにクローンされたインスタンスがある場合はそれを返す
+        if (clones.containsKey(this)) {
+            return clones.get(this);
+        }
+
+        try {
+            Variable cloned = (Variable) super.clone();
+            clones.put(this, cloned); // クローンをマップに登録
+            cloned.data = data != null ? data.clone() : null;
+            cloned.grad = grad != null ? grad.clone(clones) : null; // 再帰的にクローン
+            cloned.creator = creator;  // Functionに対する処理（必要ならdeep copyする）
+            cloned.generation = generation;
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
             grad = Utils.create(1.0, data.getShape());
         }
@@ -53,7 +82,7 @@ public class Variable {
 
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
-            Tensor[] gys = new Tensor[f.outputs.length];
+            Variable[] gys = f.outputs.length;
             for (int i = 0; i < f.outputs.length; i++) {
                 gys[i] = f.outputs[i].grad;
             }
@@ -83,16 +112,20 @@ public class Variable {
         }
     }
 
+    public void backward() {
+        backward(true, true);
+    }
+
     public Tensor getData() {
         return data;
     }
 
-    public Tensor getGrad() {
+    public Variable getGrad() {
         return grad;
     }
 
     public void setGrad(Tensor grad) {
-        this.grad = grad;
+        this.grad = new Variable(grad);
     }
 
     public int getGeneration() {
@@ -148,6 +181,10 @@ public class Variable {
         return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
     }
 
+    public void minusAssign(Variable other) {
+        data.minusAssign(other.data);
+    }
+
     public Variable rminus(Variable other) {
         Function f = new Minus();
         return f.forward(other, this)[0];
@@ -199,9 +236,13 @@ public class Variable {
     }
 
     public Variable pow(double index) {
-        Function f = new Pow(index);
+        Function f = new Power(index);
         return f.forward(this)[0];
     }
 
+    public Variable neg() {
+        Function f = new Neg();
+        return f.forward(this)[0];
+    }
 
 }

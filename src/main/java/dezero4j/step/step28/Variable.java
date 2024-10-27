@@ -1,4 +1,4 @@
-package dezero4j.step.step22;
+package dezero4j.step.step28;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -148,6 +148,10 @@ public class Variable {
         return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
     }
 
+    public void minusAssign(Variable other) {
+        data.minusAssign(other.data);
+    }
+
     public Variable rminus(Variable other) {
         Function f = new Minus();
         return f.forward(other, this)[0];
@@ -199,9 +203,13 @@ public class Variable {
     }
 
     public Variable pow(double index) {
-        Function f = new Pow(index);
+        Function f = new Power(index);
         return f.forward(this)[0];
     }
 
+    public Variable neg() {
+        Function f = new Neg();
+        return f.forward(this)[0];
+    }
 
 }

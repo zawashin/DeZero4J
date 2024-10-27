@@ -1,4 +1,4 @@
-package dezero4j.step.step24;
+package dezero4j.step.step27;
 
 import tensor4j.Tensor;
 
@@ -14,6 +14,7 @@ public class Minus extends Function {
 
     @Override
     public Tensor[] backward(Tensor[] gys) {
+        Tensor[] gxs = new Tensor[]{gys[0], gys[0].neg()};
         return new Tensor[]{gys[0], gys[0].neg()};
     }
 

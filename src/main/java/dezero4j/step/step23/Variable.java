@@ -1,4 +1,4 @@
-package dezero4j.step.step22;
+package dezero4j.step.step23;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -52,6 +52,7 @@ public class Variable {
         seenSet.add(creator);
 
         while (!funcs.isEmpty()) {
+            //Function f = funcs.remove(funcs.size() - 1);
             Function f = funcs.removeLast();
             Tensor[] gys = new Tensor[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {

@@ -1,11 +1,11 @@
-package dezero4j.step.step24;
+package dezero4j.step.step27;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Matyas {
 
-    public Variable calc(Variable... xs) {
+    public Variable forward(Variable... xs) {
         //    z = 0.26 * (x ** 2 + y ** 2) - 0.48 * x * y
         // $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
@@ -16,7 +16,7 @@ public class Matyas {
         Variable x = new Variable(1);
         Variable y = new Variable(1);
         Matyas matyas = new Matyas();
-        Variable z = matyas.calc(x, y);
+        Variable z = matyas.forward(x, y);
         System.out.println(z);
         z.backward();
         System.out.println(x.getGrad());

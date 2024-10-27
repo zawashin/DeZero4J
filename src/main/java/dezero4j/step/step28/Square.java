@@ -1,20 +1,20 @@
-package dezero4j.step.step24;
+package dezero4j.step.step28;
 
 import tensor4j.Tensor;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Minus extends Function {
+public class Square extends Function {
 
     @Override
     public Tensor[] forward(Tensor[] xs) {
-        return new Tensor[]{xs[0].minus(xs[1])};
+        return new Tensor[]{xs[0].square()};
     }
 
     @Override
     public Tensor[] backward(Tensor[] gys) {
-        return new Tensor[]{gys[0], gys[0].neg()};
+        Tensor x = getInputs()[0].getData();
+        return new Tensor[]{x.times(gys[0]).times(2)};
     }
-
 }
