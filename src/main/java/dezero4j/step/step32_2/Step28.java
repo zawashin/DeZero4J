@@ -1,4 +1,4 @@
-package dezero4j.step.step32;
+package dezero4j.step.step32_2;
 
 import dezero4j.step.Step;
 
@@ -29,12 +29,13 @@ public class Step28 extends Step {
             }
             System.out.print(xs[0] + "\t");
             System.out.print(xs[1] + "\t");
-            System.out.println(z.getData());
+            System.out.println();
             //System.out.println(z);
         }
         System.out.print(xs[0].getData() + "\t");
         System.out.print(xs[1].getData() + "\t");
-        System.out.println(z.getData());
+        System.out.println();
+        //System.out.println(z.getData());
     }
 
     public static void main(String[] args) {

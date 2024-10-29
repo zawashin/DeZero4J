@@ -1,25 +1,21 @@
 package dezero4j.step.step32;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Config {
-    private static Config instance = new Config();
-    private Map<String, Boolean> param;
 
-    private Config() {
-        param = new HashMap<>();
-        param.put("enable_backprop", true);
+    public static boolean enableBackprop = true;
+    public static boolean oldValue = enableBackprop;
+    public static boolean train = false;
+    /*
+    public void close() {
+        /enableBackprop = oldValue;
     }
 
-    public static Config getInstance() {
-        return instance;
-    }
+     */
 
-    public Map<String, Boolean> getParam() {
-        return param;
+    public void print() {
+        System.out.println(Config.enableBackprop);
     }
 }

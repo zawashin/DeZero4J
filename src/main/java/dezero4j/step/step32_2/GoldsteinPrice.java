@@ -1,14 +1,11 @@
-package dezero4j.step.step27;
-
-import tensor4j.Utils;
+package dezero4j.step.step32_2;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class GoldsteinPrice {
+public class GoldsteinPrice extends MultivariateFunction {
 
-    private int[] shape;
-
+    @Override
     public Variable calc(Variable... xs) {
         shape = xs[0].getShape();
         /*
@@ -16,13 +13,10 @@ public class GoldsteinPrice {
                 (30 + (2*xs[0] - 3*xs[1]).pow(2) * (18 - 32*xs[0] + 12*xs[0].pow(2) + 48*xs[1] - 36*xs[0]*xs[1] + 27*xs[1].pow(2)))
          */
         Variable z = null;
-        z = ((xs[0].plus(xs[1]).plus(1)).pow(2)).plus(1).times(constant(19).minus(constant(14).times(xs[0])).plus(constant(3).times(xs[0].pow(2))).minus(constant(14).times(xs[1])).plus(constant(6).times(xs[0]).times(xs[1])).plus(constant(3).times(xs[1].pow(2)))).times(constant(30).plus(constant(2).times(xs[0]).minus(constant(3).times(xs[1])).pow(2).times(constant(18).minus(constant(32).times(xs[0])).plus(constant(12).times(xs[0].pow(2))).plus(constant(48).times(xs[1])).minus(constant(36).times(xs[0]).times(xs[1])).plus(constant(27).times(xs[1].pow(2))))));
+        z = ((xs[0].plus(xs[1]).plus(1)).pow(2)).plus(1).times(c(19).minus(c(14).times(xs[0])).plus(c(3).times(xs[0].pow(2))).minus(c(14).times(xs[1])).plus(c(6).times(xs[0]).times(xs[1])).plus(c(3).times(xs[1].pow(2)))).times(c(30).plus(c(2).times(xs[0]).minus(c(3).times(xs[1])).pow(2).times(c(18).minus(c(32).times(xs[0])).plus(c(12).times(xs[0].pow(2))).plus(c(48).times(xs[1])).minus(c(36).times(xs[0]).times(xs[1])).plus(c(27).times(xs[1].pow(2))))));
         return z;
     }
 
-    private Variable constant(double value) {
-        return new Variable(Utils.create(value, shape));
-    }
     public static void main(String[] args) {
         /*
         Variable x = new Variable(new double[]{1, 1});

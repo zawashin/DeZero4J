@@ -1,4 +1,4 @@
-package dezero4j.step.step32;
+package dezero4j.step.step32_2;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -96,8 +96,7 @@ public class Variable implements Cloneable, Serializable {
                     gys[i] = f.outputs[i].grad;
                 }
             }
-            try (UsingConfig config = new UsingConfig("enableBackprop", createGraph)) {
-
+            try (UsingConfig config = new UsingConfig("enable_backprop", createGraph)) {
                 if (createGraph) {
                     this.generation = Arrays.stream(inputs)
                             .mapToInt(Variable::getGeneration)

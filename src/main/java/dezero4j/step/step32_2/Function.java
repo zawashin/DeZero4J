@@ -1,4 +1,4 @@
-package dezero4j.step.step32;
+package dezero4j.step.step32_2;
 
 import tensor4j.Tensor;
 
@@ -18,7 +18,7 @@ public abstract class Function implements Cloneable, Serializable {
         for (int i = 0; i < inputs.length; i++) {
             xs[i] = inputs[i].getData();
         }
-        if (Config.enableBackprop) {
+        if (Config.getInstance().getParam().get("enable_backprop")) {
             generation = Arrays.stream(inputs).mapToInt(Variable::getGeneration).max().orElse(0);
             Tensor[] ys = forward(xs);
             outputs = new Variable[ys.length];
