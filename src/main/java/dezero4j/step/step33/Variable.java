@@ -163,6 +163,11 @@ public class Variable implements Cloneable, Serializable {
         this.grad = new Variable(grad);
     }
 
+    public void clearGrad() {
+        grad = null;
+    }
+
+
     public int getGeneration() {
         return generation;
     }

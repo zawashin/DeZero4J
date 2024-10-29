@@ -95,6 +95,10 @@ public class Variable {
         this.grad = grad;
     }
 
+    public void clearGrad() {
+        grad = null;
+    }
+
     public int getGeneration() {
         return generation;
     }
