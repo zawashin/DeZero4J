@@ -29,12 +29,11 @@ public class Step28 extends Step {
             }
             System.out.print(xs[0] + "\t");
             System.out.print(xs[1] + "\t");
-            System.out.println(z.getData());
-            //System.out.println(z);
+            System.out.println(z);
         }
         System.out.print(xs[0].getData() + "\t");
         System.out.print(xs[1].getData() + "\t");
-        System.out.println(z.getData());
+        System.out.println(z);
     }
 
     public static void main(String[] args) {

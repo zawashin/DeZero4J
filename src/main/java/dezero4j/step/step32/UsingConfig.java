@@ -16,7 +16,7 @@ public class UsingConfig implements AutoCloseable {
             oldValue = Config.train;
             Config.train = value;
         } else {
-            System.err.println("Unknown nameL" + name);
+            System.err.println("Unknown name: " + name);
         }
     }
 
@@ -27,7 +27,7 @@ public class UsingConfig implements AutoCloseable {
         } else if (name.equals("train")) {
             Config.train = oldValue;
         } else {
-            System.err.println("Unknown nameL" + name);
+            System.err.println("Unknown name: " + name);
         }
     }
 

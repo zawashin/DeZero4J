@@ -43,3 +43,4 @@ build/
 /src/main/java/dezero4j/step/make_readme.sh
 /src/main/java/dezero4j/step/*/*.md
 /src/main/java/dezero4j/step/step00/
+*zip

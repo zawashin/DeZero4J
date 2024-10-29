@@ -354,7 +354,6 @@ public class Matyas {
     // ... 略
 }
 ```
-
 - GoldsteinPrice-Price関数
   - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
 ```java
@@ -365,7 +364,6 @@ public class Matyas {
     // ... 略
 }
 ```
-
 - **参考記事**
   - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 ### Step25：計算グラフの可視化 (1)
@@ -375,15 +373,13 @@ public class Matyas {
 - 省略
 
 ### Step27：テイラー展開の微分
-
 - Sinクラスの実装
   - 逆伝播の確認のためにCosクラスを実装
 
-### Step28：関数の最適化
 
+### Step28：関数の最適化
 - 疑問
   - Variableとして演算したが、Tensorを取り出して計算するべきか？
-
 ```java
 public class Step28 extends Step {
     @Override
@@ -401,9 +397,9 @@ public class Step28 extends Step {
     }
 }
 ```
-
 ### Step29：ニュートン法を用いた最適化（手計算）
 
+- UsingConfigクラスの単純化
 - 2階微分を計算するGx2クラスを実装
 
 ### Step30：高階微分（準備編）
