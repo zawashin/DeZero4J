@@ -42,8 +42,12 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable(Variable variable) {
         this.data = variable.data.clone();
-        this.grad = variable.grad.clone();
-        this.creator = variable.creator.clone();
+        if (variable.grad != null) {
+            this.grad = variable.grad.clone();
+        }
+        if (variable.creator != null) {
+            this.creator = variable.creator.clone();
+        }
         this.generation = variable.generation;
     }
 
@@ -73,42 +77,72 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = Utils.create(1.0, data.getShape());
+            grad = new Variable(Utils.create(1.0, data.getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
         Set<Function> seenSet = new HashSet<>();
-        seenSet.add(creator);
+        //seenSet.add(creator);
+        addFunc(creator, funcs, seenSet);
 
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
-            Variable[] gys = f.outputs.length;
+            Variable[] inputs = f.getInputs();
+            Variable[] gys = f.outputs;
             for (int i = 0; i < f.outputs.length; i++) {
-                gys[i] = f.outputs[i].grad;
-            }
-            Tensor[] gxs = f.backward(gys);
-            if (gxs.length != f.inputs.length) {
-                throw new IllegalStateException("Length of gradients and inputs do not match");
-            }
-            for (int i = 0; i < gxs.length; i++) {
-                Variable x = f.inputs[i];
-
-                if (f.inputs[i].grad == null) {
-                    //f.inputs[i].grad = gxs[i];
-                    // 複製しないとダメ
-                    f.inputs[i].grad = gxs[i].clone();
+                if (f.outputs[i].grad == null) {
+                    grad = new Variable(Utils.create(1.0, data.getShape()));
                 } else {
-                    f.inputs[i].grad.plusAssign(gxs[i]);
+                    gys[i] = f.outputs[i].grad;
                 }
+            }
+            try (UsingConfig config = new UsingConfig("enable_backprop", createGraph)) {
+                if (createGraph) {
+                    this.generation = Arrays.stream(inputs)
+                            .mapToInt(Variable::getGeneration)
+                            .max()
+                            .orElse(0);
+                    Variable[] gxs = f.backward(gys);
+                    if (gxs.length != f.inputs.length) {
+                        throw new IllegalStateException("Length of gradients and inputs do not match");
+                    }
+                    for (int i = 0; i < gxs.length; i++) {
+                        Variable x = f.inputs[i];
+                        Variable gx = gxs[i];
 
-                if (x.getCreator() != null) {
-                    if (!seenSet.contains(x.creator)) {
-                        funcs.add(x.creator);
-                        seenSet.add(x.creator);
-                        funcs.sort(Comparator.comparingInt(Function::getGeneration));
+                        if (x.grad == null) {
+                            //f.inputs[i].grad = gxs[i];
+                            // 複製しないとダメ
+                            x.grad = gx.clone();
+                        } else {
+                            x.grad.plusAssign(gxs[i]);
+                        }
+
+                        if (x.getCreator() != null) {
+                            if (!seenSet.contains(x.creator)) {
+                                funcs.add(x.creator);
+                                seenSet.add(x.creator);
+                                funcs.sort(Comparator.comparingInt(Function::getGeneration));
+                            }
+                        }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            if (!retainGrad) {
+                for (int i = 0; i < f.outputs.length; i++) {
+                    f.outputs[i].grad = null;//  #y is weakref
+                }
+            }
+        }
+    }
+
+    private void addFunc(Function f, List<Function> funcs, Set<Function> seenSet) {
+        if (!seenSet.contains(f) && f != null) {
+            funcs.add(f);
+            seenSet.add(f);
+            funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
         }
     }
 
@@ -169,6 +203,10 @@ public class Variable implements Cloneable, Serializable {
     public Variable plus(double other) {
         Function f = new Plus();
         return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+    }
+
+    public void plusAssign(Variable other) {
+        data.plusAssign(other.data);
     }
 
     public Variable minus(Variable other) {

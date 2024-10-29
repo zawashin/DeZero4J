@@ -8,13 +8,12 @@ import tensor4j.Tensor;
 public class Exp extends Function {
 
     @Override
-    public Tensor[] forward(Tensor[] xs) {
+    public Tensor[] forward(Tensor... xs) {
         return new Tensor[]{xs[0].exp()};
     }
 
-    @Override
-    public Tensor[] backward(Tensor[] gys) {
-        Tensor x = getInput(0).getData();
-        return new Tensor[]{x.exp().times(gys[0])};
+    public Variable[] backward(Variable... gys) {
+        Variable x = getInput(0);
+        return new Variable[]{x.exp().times(gys[0])};
     }
 }

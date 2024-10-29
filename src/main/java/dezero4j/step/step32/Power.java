@@ -18,14 +18,19 @@ public class Power extends Function {
     }
 
     @Override
-    public Tensor[] forward(Tensor[] xs) {
+    public Tensor[] forward(Tensor... xs) {
         return new Tensor[]{xs[0].pow(index)};
     }
 
     @Override
-    public Tensor[] backward(Tensor[] gys) {
+    public Variable[] backward(Variable[] gys) {
+        /*
         Tensor x = inputs[0].getData();
         return new Tensor[]{x.pow(index - 1).times(gys[0]).times(index)};
+
+         */
+        Variable x = inputs[0];
+        return new Variable[]{x.pow(index - 1).times(gys[0]).times(index)};
     }
 
 }

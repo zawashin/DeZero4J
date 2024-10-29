@@ -2,12 +2,13 @@ package dezero4j.step.step32;
 
 import tensor4j.Tensor;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public abstract class Function {
+public abstract class Function implements Cloneable, Serializable {
     protected Variable[] inputs;
     protected Variable[] outputs;
     protected int generation;
@@ -17,7 +18,7 @@ public abstract class Function {
         for (int i = 0; i < inputs.length; i++) {
             xs[i] = inputs[i].getData();
         }
-        if (Config.enableBackprop) {
+        if (Config.getInstance().getParam().get("enable_backprop")) {
             generation = Arrays.stream(inputs).mapToInt(Variable::getGeneration).max().orElse(0);
             Tensor[] ys = forward(xs);
             outputs = new Variable[ys.length];
@@ -31,10 +32,6 @@ public abstract class Function {
             this.outputs = outputs;
         }
         return outputs;
-    }
-
-    public Variable[] getInputs() {
-        return inputs;
     }
 
     public Variable getInput(int n) {
@@ -53,7 +50,24 @@ public abstract class Function {
         return generation;
     }
 
-    public abstract Tensor[] forward(Tensor[] xs);
+    public abstract Tensor[] forward(Tensor... xs);
 
-    public abstract Tensor[] backward(Tensor[] gys);
+    public abstract Variable[] backward(Variable... gys);
+
+    public Variable[] getInputs() {
+        return inputs;
+    }
+
+
+    public Function clone() {
+        Function clone;
+        try {
+            clone = (Function) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        clone.inputs = this.inputs.clone();
+        clone.outputs = this.outputs.clone();
+        return clone;
+    }
 }

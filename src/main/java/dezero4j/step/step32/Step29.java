@@ -23,7 +23,7 @@ public class Step29 {
             Variable gx1 = xs[0].getGrad();
             Variable dfx2 = df2.calc(xs[0]);
 
-            System.out.print(xs[0].toString() + "  " + gx1 + "  " + dfx2.toString() + "\n");
+            System.out.print(xs[0] + "  " + gx1 + "  " + dfx2 + "\n");
             xs[0].getData().minusAssign(gx1.getData().div(dfx2.getData()));
         }
     }

@@ -334,7 +334,6 @@ public class Variable {
   - Copilotに丸投げ
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
-
 ```java
 public class Sphere {
     public Variable calc(Variable... xs) {
@@ -356,11 +355,10 @@ public class Matyas {
 }
 ```
 
-- Goldstein関数
+- GoldsteinPrice-Price関数
   - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
-
 ```java
-public Variable forward(Variable... xs) {
+public class Matyas {
     public Variable calc(Variable... xs) {
         // ... 長過ぎるので略
     }
@@ -368,14 +366,47 @@ public Variable forward(Variable... xs) {
 }
 ```
 
-- 参考記事
+- **参考記事**
   - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
-
 ### Step25：計算グラフの可視化 (1)
-
 - 省略
 
 ### Step26：計算グラフの可視化 (2)
-
 - 省略
+
+### Step27：テイラー展開の微分
+
+- Sinクラスの実装
+  - 逆伝播の確認のためにCosクラスを実装
+
+### Step28：関数の最適化
+
+- 疑問
+  - Variableとして演算したが、Tensorを取り出して計算するべきか？
+
+```java
+public class Step28 extends Step {
+    @Override
+    public void calc() {
+        // ... 略
+        for (int i = 0; i < maxIteration; i++) {
+            // ... 略
+            for (Variable x : xs) {
+                //x.getData().minusAssign(x.getGrad().times(learningRate));
+                x.minusAssign(new Variable(x.getGrad().times(learningRate)));
+            }
+            // ... 略
+        }
+        // ... 略
+    }
+}
+```
+
+### Step29：ニュートン法を用いた最適化（手計算）
+
+- 2階微分を計算するGx2クラスを実装
+
+### Step30：高階微分（準備編）
+
+### Step31：高階微分（理論編）
 

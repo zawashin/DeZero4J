@@ -12,7 +12,7 @@ public class Step18 extends Step {
         Variable x = new Variable(new double[]{2.0});
         Variable a = x.square();
         Variable y = a.square().plus(a.square());
-        Config.enableBackprop = false;
+        //Config.enableBackprop = false;
         y.backward();
 
         System.out.println(y);
