@@ -11,7 +11,7 @@
   - 以前のステップの例題でも動作確認を可能な限り行う
     [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
 - 外部ライブラリをできる限り使わない
-    - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
+  - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
     - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
   - 4階まで対応
@@ -20,7 +20,6 @@
     - 四階までは、**必要に応じて**対応は可能(なはず)
 
 ## 開発環境構成
-
 | DeZero     | DeZero4J                                        |
 |------------|-------------------------------------------------|
 | Python 3   | Eclipse Temurin™ JDK 21-LTS                     |
@@ -355,7 +354,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
@@ -415,14 +414,13 @@ public class Step28 extends Step {
 
 ### Step30：高階微分（準備編）
 
+
 ### Step31：高階微分（理論編）
 
 ### Step32：高階微分（実装偏）
-
 - Variableクラス
-    - gradフィールドをTensorクラスからVariableクラスに変更
-    - backwardメソッドを修正
-
+  - gradフィールドをTensorクラスからVariableクラスに変更
+  - backwardメソッドを修正
 ```java
 public class Variable {
     // ... 略
@@ -438,7 +436,6 @@ public class Variable {
 
 - backwardメソッド実装時の注意点
     - 逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
-
 ```java
 // Example 
 public Tensor[][] forward(Tensor... xs) {
@@ -448,5 +445,5 @@ public Tensor[][] forward(Tensor... xs) {
 @Override
 public Variable[] backward(Variable... gys) {
     Variable x = inputs[0];
-    return new Variable[]{(x.sin().negative()).multiply(gys[0])};
+    return new Variable[]{(x.sin().neg()).times(gys[0])};
 }
