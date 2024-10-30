@@ -17,7 +17,7 @@
   - 4階まで対応
     - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
   - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
-    - 四階までは、**必要に応じて**対応は可能(なはず)
+      - 4階までは、**必要に応じて**対応は可能(なはず)
 
 ## 開発環境構成
 | DeZero     | DeZero4J                                        |
@@ -25,9 +25,9 @@
 | Python 3   | Eclipse Temurin™ JDK 21-LTS                     |
 | NumPy      | [Tensor4J](https://github.com/zawahin/Tensor4J) |
 | matplotlib |                                                 |
-| CuPy       | 未定                                              |
-| Pillow     | 未定                                              |
-| Graphviz   |
+| CuPy       |                                                 |
+| Pillow     |                                                 |
+| Graphviz   |                                                 |
 
 ## 現状
 - ~~ステップ46の途中まで実装~~
@@ -354,7 +354,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
