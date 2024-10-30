@@ -1,4 +1,4 @@
-package dezero4j.step.step33;
+package dezero4j.step.step33_2;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -83,7 +83,8 @@ public class Variable implements Cloneable, Serializable {
         funcs.add(creator);
         Set<Function> seenSet = new HashSet<>();
         seenSet.add(creator);
-        funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
+        //addFunc(creator, funcs, seenSet);
+
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
             Variable[] inputs = f.getInputs();
@@ -95,7 +96,7 @@ public class Variable implements Cloneable, Serializable {
                     gys[i] = f.outputs[i].grad;
                 }
             }
-            try (UsingConfig config = new UsingConfig("enableBackprop", createGraph)) {
+            try (UsingConfig config = new UsingConfig("enable_backprop", createGraph)) {
                 if (createGraph) {
                     this.generation = Arrays.stream(inputs)
                             .mapToInt(Variable::getGeneration)
@@ -114,7 +115,6 @@ public class Variable implements Cloneable, Serializable {
                             // 複製しないとダメ
                             x.grad = gx.clone();
                         } else {
-                            //x.grad = x.grad.plus(gx);
                             x.grad.plusAssign(gxs[i]);
                         }
 
@@ -122,9 +122,7 @@ public class Variable implements Cloneable, Serializable {
                             if (!seenSet.contains(x.creator)) {
                                 funcs.add(x.creator);
                                 seenSet.add(x.creator);
-                                funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
-
-                                //funcs.sort(Comparator.comparingInt(Function::getGeneration));
+                                funcs.sort(Comparator.comparingInt(Function::getGeneration));
                             }
                         }
                     }
@@ -137,6 +135,14 @@ public class Variable implements Cloneable, Serializable {
                     f.outputs[i].grad = null;//  #y is weakref
                 }
             }
+        }
+    }
+
+    private void addFunc(Function f, List<Function> funcs, Set<Function> seenSet) {
+        if (!seenSet.contains(f) && f != null) {
+            funcs.add(f);
+            seenSet.add(f);
+            funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
         }
     }
 
@@ -157,7 +163,7 @@ public class Variable implements Cloneable, Serializable {
     }
 
     public void clearGrad() {
-        grad = null;
+        this.grad = null;
     }
 
     public int getGeneration() {

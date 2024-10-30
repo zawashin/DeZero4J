@@ -274,7 +274,6 @@ public class Variable {
 
 
 ### Step18：メモリ使用量を減らすモード
-
 - Configクラス、NoGradクラス、UsingConfigクラスを定義
   - 正直、良く解らなかったのでChatGPTでJavaに変換
 
@@ -342,7 +341,11 @@ public class Variable {
 ### Step24：複雑な関数の微分
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
+    - **参考記事**
+        - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
   - Copilotに丸投げ
+
+
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
 ```java
@@ -355,7 +358,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
@@ -365,18 +368,18 @@ public class Matyas {
     // ... 略
 }
 ```
-- GoldsteinPrice-Price関数
+
+- Goldstein-Price関数
   - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
 ```java
 public class Matyas {
     public Variable calc(Variable... xs) {
-        // ... 長過ぎるので略
+        return ((xs[0].plus(xs[1]).plus(1)).pow(2)).plus(1).times(constant(19).minus(constant(14).times(xs[0])).plus(constant(3).times(xs[0].pow(2))).minus(constant(14).times(xs[1])).plus(constant(6).times(xs[0]).times(xs[1])).plus(constant(3).times(xs[1].pow(2)))).times(constant(30).plus(constant(2).times(xs[0]).minus(constant(3).times(xs[1])).pow(2).times(constant(18).minus(constant(32).times(xs[0])).plus(constant(12).times(xs[0].pow(2))).plus(constant(48).times(xs[1])).minus(constant(36).times(xs[0]).times(xs[1])).plus(constant(27).times(xs[1].pow(2))))));
     }
     // ... 略
 }
 ```
-- **参考記事**
-  - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+
 ### Step25：計算グラフの可視化 (1)
 - 省略
 
