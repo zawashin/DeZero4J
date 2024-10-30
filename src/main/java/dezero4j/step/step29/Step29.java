@@ -1,11 +1,15 @@
 package dezero4j.step.step29;
 
+import dezero4j.step.Step;
+import tensor4j.Tensor;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Step29 {
+public class Step29 extends Step {
 
-    public static void main(String[] args) {
+    @Override
+    public void calc() {
         Variable[] xs = new Variable[1];
         xs[0] = new Variable(new double[]{2, 3});
         Fx fx = new Fx();
@@ -19,11 +23,16 @@ public class Step29 {
                 x.cleaGrad();
             }
             y.backward();
-            Variable gx1 = new Variable(xs[0].getGrad());
+            //Variable gx1 = new Variable(xs[0].getGrad());
+            Tensor gx1 = xs[0].getGrad();
             Variable dfx2 = df2.calc(xs[0]);
 
-            System.out.print(xs[0].toString() + "  " + gx1 + "  " + dfx2.toString() + "\n");
-            xs[0].getData().minusAssign(gx1.getData().div(dfx2.getData()));
+            System.out.print(xs[0] + "  " + gx1 + "  " + dfx2 + "\n");
+            xs[0].getData().minusAssign(gx1.div(dfx2.getData()));
         }
+    }
+
+    public static void main(String[] args) {
+        new Step29().calc();
     }
 }

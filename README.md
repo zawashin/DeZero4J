@@ -11,13 +11,24 @@
   - 以前のステップの例題でも動作確認を可能な限り行う
     [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
 - 外部ライブラリをできる限り使わない
-  - NumPy代わりの[Tensorを扱うクラスライブラリ](https://github.com/zawashin/Tensor4J)の実装**も**目指す
+    - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
     - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
   - 4階まで対応
     - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
-  - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装ない
+  - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
     - 四階までは、**必要に応じて**対応は可能(なはず)
+
+## 開発環境構成
+
+| DeZero     | DeZero4J                                        |
+|------------|-------------------------------------------------|
+| Python 3   | Eclipse Temurin™ JDK 21-LTS                     |
+| NumPy      | [Tensor4J](https://github.com/zawahin/Tensor4J) |
+| matplotlib |                                                 |
+| CuPy       | 未定                                              |
+| Pillow     | 未定                                              |
+| Graphviz   |
 
 ## 現状
 - ~~ステップ46の途中まで実装~~
@@ -161,7 +172,7 @@ public abstract class Function {
 
 - Variableクラス
     - dataフィールドとgradフィールドをdoubleからTensorクラスに変更
-      - NumPyの代わり
+        - NumPyの代わり
 
 ```java
 import tensor4j.Tensor;
@@ -318,12 +329,12 @@ public class Variable {
 
 - Javaなので(以下略)
 - 四則演算のクラス
-  - Minus
-  - Div
+    - Minus
+    - Div
 - 負数演算クラス
-  - Neg
+    - Neg
 - 累乗演算クラス
-  - Pow
+    - Pow
 - Variableクラスに各演算のメソッドを追加
 
 ### Step23：パッケージとしてまとめる
@@ -344,7 +355,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
@@ -398,11 +409,44 @@ public class Step28 extends Step {
 }
 ```
 ### Step29：ニュートン法を用いた最適化（手計算）
-
 - UsingConfigクラスの単純化
 - 2階微分を計算するGx2クラスを実装
+
 
 ### Step30：高階微分（準備編）
 
 ### Step31：高階微分（理論編）
 
+### Step32：高階微分（実装偏）
+
+- Variableクラス
+    - gradフィールドをTensorクラスからVariableクラスに変更
+    - backwardメソッドを修正
+
+```java
+public class Variable {
+    // ... 略
+    Variable grad;
+    // ... 略
+    public void backward(boolean retainGrad, boolean createGraph) {
+        // ... 略
+    }
+    // ... 略
+}
+
+```
+
+- backwardメソッド実装時の注意点
+    - 逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
+
+```java
+// Example 
+public Tensor[][] forward(Tensor... xs) {
+    return new Tensor[]{xs[0].cos()};
+}
+
+@Override
+public Variable[] backward(Variable... gys) {
+    Variable x = inputs[0];
+    return new Variable[]{(x.sin().negative()).multiply(gys[0])};
+}

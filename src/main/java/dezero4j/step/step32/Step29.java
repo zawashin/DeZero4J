@@ -1,11 +1,14 @@
 package dezero4j.step.step32;
 
+import dezero4j.step.Step;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Step29 {
+public class Step29 extends Step {
 
-    public static void main(String[] args) {
+    @Override
+    public void calc() {
         Variable[] xs = new Variable[1];
         xs[0] = new Variable(new double[]{2, 3});
         Fx fx = new Fx();
@@ -26,5 +29,9 @@ public class Step29 {
             System.out.print(xs[0] + "  " + gx1 + "  " + dfx2 + "\n");
             xs[0].getData().minusAssign(gx1.getData().div(dfx2.getData()));
         }
+    }
+
+    public static void main(String[] args) {
+        new Step29().calc();
     }
 }
