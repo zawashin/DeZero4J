@@ -17,7 +17,7 @@
   - 4階まで対応
     - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
   - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
-      - 4階までは、**必要に応じて**対応は可能(なはず)
+    - 4階までは、**必要に応じて**対応は可能(なはず)
 
 ## 開発環境構成
 | DeZero     | DeZero4J                                        |
@@ -274,7 +274,8 @@ public class Variable {
 
 
 ### Step18：メモリ使用量を減らすモード
-- Configクラス、- NoGradクラス、UsingConfigクラスを定義
+
+- Configクラス、NoGradクラス、UsingConfigクラスを定義
   - 正直、良く解らなかったのでChatGPTでJavaに変換
 
 ### Step19：変数を使いやすく
@@ -354,7 +355,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {

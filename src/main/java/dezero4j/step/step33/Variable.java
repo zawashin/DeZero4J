@@ -120,10 +120,12 @@ public class Variable implements Cloneable, Serializable {
                         System.out.println(x.getGrad());
 
                         if (x.getCreator() != null) {
-                            if (!seenSet.contains(x.creator) && f != null) {
+                            if (!seenSet.contains(x.creator)) {
                                 funcs.add(x.creator);
                                 seenSet.add(x.creator);
-                                funcs.sort(Comparator.comparingInt(Function::getGeneration));
+                                funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
+
+                                //funcs.sort(Comparator.comparingInt(Function::getGeneration));
                             }
                         }
                     }
