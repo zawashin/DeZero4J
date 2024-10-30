@@ -83,7 +83,6 @@ public class Variable implements Cloneable, Serializable {
         funcs.add(creator);
         Set<Function> seenSet = new HashSet<>();
         seenSet.add(creator);
-        //addFunc(creator, funcs, seenSet);
 
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
@@ -97,7 +96,6 @@ public class Variable implements Cloneable, Serializable {
                 }
             }
             try (UsingConfig config = new UsingConfig("enableBackprop", createGraph)) {
-
                 if (createGraph) {
                     this.generation = Arrays.stream(inputs)
                             .mapToInt(Variable::getGeneration)
@@ -116,11 +114,13 @@ public class Variable implements Cloneable, Serializable {
                             // 複製しないとダメ
                             x.grad = gx.clone();
                         } else {
+                            //x.grad = x.grad.plus(gx);
                             x.grad.plusAssign(gxs[i]);
                         }
+                        System.out.println(x.getGrad());
 
                         if (x.getCreator() != null) {
-                            if (!seenSet.contains(x.creator)) {
+                            if (!seenSet.contains(x.creator) && f != null) {
                                 funcs.add(x.creator);
                                 seenSet.add(x.creator);
                                 funcs.sort(Comparator.comparingInt(Function::getGeneration));
@@ -136,14 +136,6 @@ public class Variable implements Cloneable, Serializable {
                     f.outputs[i].grad = null;//  #y is weakref
                 }
             }
-        }
-    }
-
-    private void addFunc(Function f, List<Function> funcs, Set<Function> seenSet) {
-        if (!seenSet.contains(f) && f != null) {
-            funcs.add(f);
-            seenSet.add(f);
-            funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
         }
     }
 
@@ -166,7 +158,6 @@ public class Variable implements Cloneable, Serializable {
     public void clearGrad() {
         grad = null;
     }
-
 
     public int getGeneration() {
         return generation;
