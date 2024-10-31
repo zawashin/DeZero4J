@@ -223,12 +223,10 @@ public abstract class Function {
   - クラス名をAddからPlusに変更
 
 ### Step12：可変長の引数（改善偏）
-
 - 特になし
 
 
 ### Step13：可変長の引数（逆伝播偏）
-
 - 特になし
 
 
@@ -359,8 +357,8 @@ public class Variable {
 - Variableクラスに各演算のメソッドを追加
 
 ### Step23：パッケージとしてまとめる
-
 - 特になし
+
 
 ### Step24：複雑な関数の微分
 
@@ -449,46 +447,67 @@ public class Step28 extends Step {
 
 
 ### Step30：高階微分（準備編）
-
 - 特になし
 
 
 ### Step31：高階微分（理論編）
-
 - 特になし
+
 
 ### Step32：高階微分（実装偏）
 
 - Variableクラス
   - gradフィールドをTensorクラスからVariableクラスに変更
   - backwardメソッドを修正
-
 ```java
 public class Variable {
     // ... 略
     Variable grad;
-
-    // ... 略
-    public void backward(boolean retainGrad, boolean createGraph) {
-        // ... 略
-    }
-    // ... 略
 }
-
 ```
 
-- backwardメソッド実装時の注意点
-    - 逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
+```java
+public class Variable {
+    public void backward(boolean retainGrad, boolean createGraph) {
+    // ... 略
+        while (!funcs.isEmpty()) {
+          // ... 略
+            try (UsingConfig config = new UsingConfig("enableBackprop", createGraph)) {
+              // ... 略
+                    for (int i = 0; i < gxs.length; i++) {
+                      // ... 略
+                        if (x.grad == null) {
+                            x.grad = gx;
+                        } else {
+                            x.grad = x.grad.plus(gx);
+                        }
+                    }
+                }
+            } catch (Exception e){
+            // ... 略
+        }
+    }
+}
+```
 
+- Functionクラス
+  - backwardメソッドは順伝播のメソッドを使う
 ```java
 // Example 
-public Tensor[][] forward(Tensor... xs) {
-    return new Tensor[]{xs[0].cos()};
-}
+public class Cos extends Function {
+    public Tensor[][] forward(Tensor... xs) {
+        return new Tensor[]{xs[0].cos()};
+    }
 
-@Override
-public Variable[] backward(Variable... gys) {
-    Variable x = inputs[0];
-    return new Variable[]{(x.sin().neg()).times(gys[0])};
+    @Override
+    public Variable[] backward(Variable... gys) {
+        Variable x = inputs[0];
+        return new Variable[]{(x.sin().neg()).times(gys[0])};
+    }
 }
+```
+
+### Step33：ニュートン法を使った最適化(自動計算)
+
+- Step32までの実装が**正しければ**問題なく動作する
 
