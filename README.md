@@ -8,17 +8,17 @@
 ## 方針
 
 - ステップごとにパッケージを作って進める
-  - 各ステップごとにStepNクラスを作って検証する
-  - 以前のステップの例題でも動作確認を可能な限り行う
-    [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
+    - 各ステップごとにStepNクラスを作って検証する
+    - 以前のステップの例題でも動作確認を可能な限り行う
+      [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
 - 外部ライブラリをできる限り使わない
-  - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
-    - 車輪の再発明？それがどうした！
+    - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
+        - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
-  - 4階まで対応
-    - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
-  - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
-    - 4階までは、**必要に応じて**対応は可能(なはず)
+    - 4階まで対応
+        - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
+    - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
+        - **必要に応じて**対応は可能(なはず)
 
 ## 開発環境構成
 
@@ -44,7 +44,7 @@
 - [ゼロから作るDeep Learning ③ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
 - DeZeroのC++版移植[DeZeroCpp](https://github.com/bugph0bia/DeZeroCpp)
 - DeZeroのC移植版[Dezero-with-C](https://github.com/Rn86222/Dezero-with-Cp)
-  - ここまでやった猛者もいるという自分への励まし
+    - ここまでやった猛者もいるという自分への励まし
 
 ## 各ステップの実装についてのメモ
 
@@ -198,9 +198,9 @@ public class Variable {
 ### Step11：可変長の引数（順伝播編）
 
 - Functionクラス
-  - 多入力多出力に対応
-  - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
-  - 逆伝播は未実装
+    - 多入力多出力に対応
+    - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
+    - 逆伝播は未実装
 
 ```java
 import tensor4j.Tensor;
@@ -219,7 +219,7 @@ public abstract class Function {
 ```
 
 - 加算演算クラス
-  - クラス名をAddからPlusに変更
+    - クラス名をAddからPlusに変更
 
 ### Step12：可変長の引数（改善偏）
 - 特になし
@@ -289,23 +289,23 @@ public class Variable {
 ### Step18：メモリ使用量を減らすモード
 
 - Configクラス、NoGradクラス、UsingConfigクラスを定義
-  - 良く解らなかったのでChatGPTでJavaに変換
+    - 良く解らなかったのでChatGPTでJavaに変換
 
 ### Step19：変数を使いやすく
 
 - Tenssorクラスで実装済み
-  - toStringメソッド
-  - getLengthメソッド
+    - toStringメソッド
+    - getLengthメソッド
 
 
 ### Step20：演算子のオーバーロード (1)
 
 - Javaなので演算子の多重定義が出来ない
-  - Variableクラスに各種演算メソッドを定義
-  - **Scala**や**Kotlin**は演算子のオーバーロードが出来る
-  - 二項演算クラスの命名はKotlinに**倣う**
-    - Mul → Times
-    - Add → Plus
+    - Variableクラスに各種演算メソッドを定義
+    - **Scala**や**Kotlin**は演算子のオーバーロードが出来る
+    - 二項演算クラスの命名はKotlinに**倣う**
+        - Mul → Times
+        - Add → Plus
 - Variableクラスに四則演算のメソッド
 
 ```java
@@ -324,7 +324,7 @@ public class Variable {
 
 - Javaなので演算子の多重定義が(以下略)
 - Variableクラスの四則演算のメソッドを修正
-  - 引数がプリミティブ型(double)の場合を追加
+    - 引数がプリミティブ型(double)の場合を追加
 
 ```java
 public class Variable {
@@ -364,7 +364,7 @@ public class Variable {
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
   - Copilotに丸投げ
     - **参考記事**
-      - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+        - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
@@ -379,7 +379,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
@@ -391,7 +391,7 @@ public class Matyas {
 ```
 
 - Goldstein-Price関数
-  - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
+    - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
 
 ```java
 public class Matyas {
@@ -413,7 +413,7 @@ public class Matyas {
 ### Step27：テイラー展開の微分
 
 - Sinクラスの実装
-  - 逆伝播の確認のためにCosクラスを実装
+    - 逆伝播の確認のためにCosクラスを実装
 
 
 ### Step28：関数の最適化
@@ -455,8 +455,8 @@ public class Step28 extends Step {
 ### Step32：高階微分（実装偏）
 
 - Variableクラス
-  - gradフィールドをTensorクラスからVariableクラスに変更
-  - backwardメソッドを修正
+    - gradフィールドをTensorクラスからVariableクラスに変更
+    - backwardメソッドを修正
 ```java
 public class Variable {
     // ... 略
