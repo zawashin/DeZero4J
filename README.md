@@ -96,6 +96,8 @@ public abstract class Function {
 
 ### Step05：計算グラフで表す
 
+- 特になし
+
 
 ### Step06：手作業によるバックプロパゲーション
 
@@ -166,6 +168,8 @@ public abstract class Function {
 
 ### Step08：再帰からループへ
 
+	- 特になし 
+
 
 ### Step09：関数をより便利に
 
@@ -187,6 +191,7 @@ public class Variable {
 
 ### Step10：テストを行う
 
+	- 特になし 
 
 ### Step11：可変長の引数（順伝播編）
 - Functionクラス
@@ -215,7 +220,11 @@ public abstract class Function {
 
 ### Step12：可変長の引数（改善偏）
 
+    - 特になし
+
 ### Step13：可変長の引数（逆伝播偏）
+
+    - 特になし
 
 
 ### Step14：同じ変数を繰り返し使う
@@ -249,6 +258,8 @@ public class Variable {
 
 
 ### Step15：複雑な計算グラフ（理論編）
+
+    - 特になし
 
 
 ### Step16：複雑な計算グラフ（実装編）
@@ -338,6 +349,8 @@ public class Variable {
 
 ### Step23：パッケージとしてまとめる
 
+    - 特になし
+
 ### Step24：複雑な関数の微分
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
@@ -417,8 +430,12 @@ public class Step28 extends Step {
 
 ### Step30：高階微分（準備編）
 
+    - 特になし
+
 
 ### Step31：高階微分（理論編）
+
+    - 特になし
 
 ### Step32：高階微分（実装偏）
 - Variableクラス
@@ -450,3 +467,4 @@ public Variable[] backward(Variable... gys) {
     Variable x = inputs[0];
     return new Variable[]{(x.sin().neg()).times(gys[0])};
 }
+
