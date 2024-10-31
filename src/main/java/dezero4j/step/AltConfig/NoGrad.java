@@ -1,4 +1,4 @@
-package dezero4j.step.step33.AltConfig;
+package dezero4j.step.AltConfig;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>

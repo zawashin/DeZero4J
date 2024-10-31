@@ -22,15 +22,14 @@
 
 ## 開発環境構成
 
-| DeZero     | DeZero4J                                        |
-|------------|-------------------------------------------------|
-| Python 3   | Eclipse Temurin™ JDK 21-LTS                     |
-| NumPy      | [Tensor4J](https://github.com/zawahin/Tensor4J) |
-| matplotlib |                                                 |
-| CuPy       |                                                 |
-| Pillow     |                                                 |
-| Graphviz   | 計算グラフの可視化は行わないので不要                              |
-
+| DeZero     | DeZero4J                                                  |
+|------------|-----------------------------------------------------------|
+| Python 3   | Eclipse Temurin™ JDK 21-LTS                               |
+| NumPy      | [Tensor4J](https://github.com/zawahin/Tensor4J)           |
+| matplotlib | **必要に応じて**[JFreeChart](https://www.jfree.org/jfreechart/) |
+| CuPy       | CUDAは使えないので不要                                             |
+| Pillow     | 画像認識などは行う予定がないので不要                                        |
+| Graphviz   | 計算グラフの可視化は行わないので不要                                        
 ## 現状
 
 - ~~ステップ46の途中まで実装~~
@@ -304,7 +303,7 @@ public class Variable {
 - Javaなので演算子の多重定義が出来ない
   - Variableクラスに各種演算メソッドを定義
   - **Scala**や**Kotlin**は演算子のオーバーロードが出来る
-  - 二項演算クラスの命名はKotlinに**準拠**
+  - 二項演算クラスの命名はKotlinに**倣う**
     - Mul → Times
     - Add → Plus
 - Variableクラスに四則演算のメソッド
@@ -363,10 +362,9 @@ public class Variable {
 ### Step24：複雑な関数の微分
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
-  - **参考記事**
-    - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
   - Copilotに丸投げ
-
+    - **参考記事**
+      - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
@@ -465,7 +463,6 @@ public class Variable {
     Variable grad;
 }
 ```
-
 ```java
 public class Variable {
     public void backward(boolean retainGrad, boolean createGraph) {
@@ -508,6 +505,32 @@ public class Cos extends Function {
 ```
 
 ### Step33：ニュートン法を使った最適化(自動計算)
-
 - Step32までの実装が**正しければ**問題なく動作する
+
+### Step34：sin 関数の高階微分
+
+- 特になし
+
+### Step35：高階微分の計算グラフ
+
+- Tanhクラスを実装
+
+### Step36：高階微分以外の用途
+
+- 特になし
+
+### Step37：テンソルを使う
+
+- Tensorクラスを事前に実装していたのでこの時点では問題なし
+
+```java
+public class Tensor implements Cloneable, Serializable {
+    public int rank;
+    protected int length;
+    protected double[] values;
+    protected int[] shape;
+// ... 略
+}
+```
+
 

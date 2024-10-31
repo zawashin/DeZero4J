@@ -1,4 +1,4 @@
-package dezero4j.step.step33.AltConfig;
+package dezero4j.step.AltConfig;
 
 import java.util.HashMap;
 import java.util.Map;
