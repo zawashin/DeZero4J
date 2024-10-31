@@ -80,17 +80,17 @@ public class Variable implements Cloneable, Serializable {
             grad = new Variable(Utils.create(1.0, data.getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
-        funcs.add(creator);
         Set<Function> seenSet = new HashSet<>();
+        funcs.add(creator);
         seenSet.add(creator);
         funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
             Variable[] inputs = f.getInputs();
-            Variable[] gys = f.outputs;
+            Variable[] gys = new Variable[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
                 if (f.outputs[i].grad == null) {
-                    grad = new Variable(Utils.create(1.0, data.getShape()));
+                    gys[i] = new Variable(Utils.create(1.0, data.getShape()));
                 } else {
                     gys[i] = f.outputs[i].grad;
                 }
@@ -110,21 +110,16 @@ public class Variable implements Cloneable, Serializable {
                         Variable gx = gxs[i];
 
                         if (x.grad == null) {
-                            //f.inputs[i].grad = gxs[i];
-                            // 複製しないとダメ
-                            x.grad = gx.clone();
+                            x.grad = gx;
                         } else {
-                            //x.grad = x.grad.plus(gx);
-                            x.grad.plusAssign(gxs[i]);
+                            x.grad = x.grad.plus(gx);
                         }
 
                         if (x.getCreator() != null) {
                             if (!seenSet.contains(x.creator)) {
                                 funcs.add(x.creator);
                                 seenSet.add(x.creator);
-                                funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
-
-                                //funcs.sort(Comparator.comparingInt(Function::getGeneration));
+                                funcs.sort(Comparator.comparingInt(Function::getGeneration));
                             }
                         }
                     }

@@ -1,4 +1,4 @@
-package dezero4j.step.step33_2;
+package dezero4j.step.step33.step33_2;
 
 import java.io.Closeable;
 

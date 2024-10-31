@@ -12,7 +12,7 @@ public class Step33 {
         xs[0] = new Variable(new double[]{2, 3});
         Variable x = xs[0];
         Fx fx = new Fx();
-        int maxIteration = 1;
+        int maxIteration = 10;
 
         for (int i = 0; i < maxIteration; i++) {
             Variable y = fx.calc(xs);

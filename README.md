@@ -341,8 +341,8 @@ public class Variable {
 ### Step24：複雑な関数の微分
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
-    - **参考記事**
-        - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+  - **参考記事**
+    - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
   - Copilotに丸投げ
 
 
@@ -358,7 +358,7 @@ public class Sphere {
 ```
 
 - Matyas関数
-    - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
+  - $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
 ```java
 public class Matyas {
@@ -368,7 +368,6 @@ public class Matyas {
     // ... 略
 }
 ```
-
 - Goldstein-Price関数
   - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
 ```java
