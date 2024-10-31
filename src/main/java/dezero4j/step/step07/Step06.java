@@ -3,6 +3,10 @@ package dezero4j.step.step07;
 import dezero4j.step.Step;
 
 public class Step06 extends Step {
+    public static void main(String[] args) {
+        new Step06().calc();
+    }
+
     @Override
     public void calc() {
         Function A = new Square();
@@ -19,10 +23,6 @@ public class Step06 extends Step {
         System.out.println(b.grad);
         a.grad = B.backward(b.grad);
         System.out.println(a.grad);
-    }
-
-    public static void main(String[] args) {
-        new Step06().calc();
     }
 
 }

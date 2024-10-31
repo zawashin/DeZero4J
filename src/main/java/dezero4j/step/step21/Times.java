@@ -7,15 +7,15 @@ import tensor4j.Tensor;
  */
 public class Times extends Function {
 
-	@Override
+    @Override
     public Tensor[] forward(Tensor[] xs) {
         return new Tensor[]{xs[0].times(xs[1])};
     }
 
     @Override
     public Tensor[] backward(Tensor[] gys) {
-        Tensor[] xs = new Tensor[]{ inputs[0].getData() ,inputs[1].getData()};
-        return new Tensor[]{ xs[1].times(gys[0]), xs[0].times(gys[0])};
+        Tensor[] xs = new Tensor[]{inputs[0].getData(), inputs[1].getData()};
+        return new Tensor[]{xs[1].times(gys[0]), xs[0].times(gys[0])};
     }
 
 }

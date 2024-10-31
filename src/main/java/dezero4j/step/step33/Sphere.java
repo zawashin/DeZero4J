@@ -5,12 +5,6 @@ package dezero4j.step.step33;
  */
 public class Sphere extends MultivariateFunction {
 
-    // $f(x, y) = x^2 + y^2$
-    @Override
-    public Variable calc(Variable... xs) {
-        return xs[0].square().plus(xs[1].square());
-    }
-
     public static void main(String[] args) {
         Variable x = new Variable(2);
         Variable y = new Variable(2);
@@ -28,5 +22,11 @@ public class Sphere extends MultivariateFunction {
         z.backward();
         System.out.println(x.getGrad());
         System.out.println(y.getGrad());
+    }
+
+    // $f(x, y) = x^2 + y^2$
+    @Override
+    public Variable calc(Variable... xs) {
+        return xs[0].square().plus(xs[1].square());
     }
 }

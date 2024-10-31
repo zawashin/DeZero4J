@@ -4,6 +4,10 @@ import dezero4j.step.Step;
 
 public class Step03 extends Step {
 
+    public static void main(String[] args) {
+        new Step03().calc();
+    }
+
     public void calc() {
         Function A = new Square();
         Function B = new Exp();
@@ -14,9 +18,5 @@ public class Step03 extends Step {
         Variable b = B.forward(a);
         Variable y = C.forward(b);
         System.out.println(y.getData());
-    }
-
-    public static void main(String[] args) {
-        new Step03().calc();
     }
 }

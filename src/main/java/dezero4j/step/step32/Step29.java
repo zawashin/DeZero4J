@@ -7,6 +7,10 @@ import dezero4j.step.Step;
  */
 public class Step29 extends Step {
 
+    public static void main(String[] args) {
+        new Step29().calc();
+    }
+
     @Override
     public void calc() {
         Variable[] xs = new Variable[1];
@@ -29,9 +33,5 @@ public class Step29 extends Step {
             System.out.print(xs[0] + "  " + gx1 + "  " + dfx2 + "\n");
             xs[0].getData().minusAssign(gx1.getData().div(dfx2.getData()));
         }
-    }
-
-    public static void main(String[] args) {
-        new Step29().calc();
     }
 }

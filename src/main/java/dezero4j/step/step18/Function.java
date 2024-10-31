@@ -17,7 +17,7 @@ public abstract class Function {
         for (int i = 0; i < inputs.length; i++) {
             xs[i] = inputs[i].getData();
         }
-        if(Config.enableBackprop) {
+        if (Config.enableBackprop) {
             generation = Arrays.stream(inputs).mapToInt(Variable::getGeneration).max().orElse(0);
             Tensor[] ys = forward(xs);
             outputs = new Variable[ys.length];

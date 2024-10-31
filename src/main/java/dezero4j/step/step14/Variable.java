@@ -35,10 +35,6 @@ public class Variable {
         this.data = data.clone();
     }
 
-    public void setCreator(Function func) {
-        this.creator = func;
-    }
-
     public void backward() {
         if (grad == null) {
             grad = Utils.create(1.0, data.getShape());
@@ -85,6 +81,10 @@ public class Variable {
 
     public Function getCreator() {
         return creator;
+    }
+
+    public void setCreator(Function func) {
+        this.creator = func;
     }
 
     public void cleaGrad() {

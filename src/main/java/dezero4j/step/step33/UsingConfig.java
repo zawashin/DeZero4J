@@ -4,7 +4,7 @@ package dezero4j.step.step33;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class UsingConfig implements AutoCloseable {
-    private String name;
+    private final String name;
     private boolean oldValue;
 
     public UsingConfig(String name, boolean value) {
@@ -20,6 +20,14 @@ public class UsingConfig implements AutoCloseable {
         }
     }
 
+    public static UsingConfig noGrad() {
+        return new UsingConfig("enableBackprop", false);
+    }
+
+    public static UsingConfig testMode() {
+        return new UsingConfig("train", false);
+    }
+
     @Override
     public void close() {
         if (name.equals("enableBackprop")) {
@@ -29,13 +37,5 @@ public class UsingConfig implements AutoCloseable {
         } else {
             System.err.println("Unknown name: " + name);
         }
-    }
-
-    public static UsingConfig noGrad() {
-        return new UsingConfig("enableBackprop", false);
-    }
-
-    public static UsingConfig testMode() {
-        return new UsingConfig("train", false);
     }
 }

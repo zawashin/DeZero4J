@@ -1,4 +1,4 @@
-package dezero4j.step.step33.step33_2;
+package dezero4j.step.step33.AltConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,8 +7,8 @@ import java.util.Map;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Config {
-    private static Config instance = new Config();
-    private Map<String, Boolean> param;
+    private static final Config instance = new Config();
+    private final Map<String, Boolean> param;
 
     private Config() {
         param = new HashMap<>();

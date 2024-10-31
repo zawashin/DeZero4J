@@ -56,12 +56,12 @@ public class Variable implements Serializable {
         return data;
     }
 
-    public void setGrad(Tensor grad) {
-        this.grad = grad;
-    }
-
     public Tensor getGrad() {
         return grad;
+    }
+
+    public void setGrad(Tensor grad) {
+        this.grad = grad;
     }
 
     public Function getCreator() {

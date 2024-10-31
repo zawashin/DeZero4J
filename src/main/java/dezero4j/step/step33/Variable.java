@@ -276,4 +276,13 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
+    public Variable cos() {
+        Function f = new Cos();
+        return f.forward(this)[0];
+    }
+
+    public Variable sin() {
+        Function f = new Sin();
+        return f.forward(this)[0];
+    }
 }

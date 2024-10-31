@@ -6,6 +6,10 @@ import dezero4j.step.Step;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Step23 extends Step {
+    public static void main(String[] args) {
+        new Step23().calc();
+    }
+
     @Override
     public void calc() {
         Variable[] xs = new Variable[2];
@@ -15,9 +19,5 @@ public class Step23 extends Step {
         System.out.println(xs[0].minus(xs[1]));
         System.out.println(xs[0].rminus(xs[1]));
         System.out.println(xs[0].times(xs[1]));
-    }
-
-    public static void main(String[] args) {
-        new Step23().calc();
     }
 }

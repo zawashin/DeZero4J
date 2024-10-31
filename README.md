@@ -6,6 +6,7 @@
   」のフレームワークDezeroをJavaで(出来るところまで）実装してみる。
 
 ## 方針
+
 - ステップごとにパッケージを作って進める
   - 各ステップごとにStepNクラスを作って検証する
   - 以前のステップの例題でも動作確認を可能な限り行う
@@ -20,6 +21,7 @@
     - 4階までは、**必要に応じて**対応は可能(なはず)
 
 ## 開発環境構成
+
 | DeZero     | DeZero4J                                        |
 |------------|-------------------------------------------------|
 | Python 3   | Eclipse Temurin™ JDK 21-LTS                     |
@@ -27,15 +29,18 @@
 | matplotlib |                                                 |
 | CuPy       |                                                 |
 | Pillow     |                                                 |
-| Graphviz   |                                                 |
+| Graphviz   | 計算グラフの可視化は行わないので不要                              |
 
 ## 現状
+
 - ~~ステップ46の途中まで実装~~
 - ~~OutOfMemoryで落ちる~~
 - ~~例題で**しか**動作しない~~
 - Tensor関連のクラスを再実装して仕切り直し
+- Step33の2階微分まで
 
 ## 参考資料
+
 - [ゼロから作るDeep Learning](https://github.com/oreilly-japan/deep-learning-from-scratch)
 - [ゼロから作るDeep Learning ③ ―フレームワーク編](https://github.com/oreilly-japan/deep-learning-from-scratch-3)
 - DeZeroのC++版移植[DeZeroCpp](https://github.com/bugph0bia/DeZeroCpp)
@@ -45,7 +50,6 @@
 ## 各ステップの実装についてのメモ
 
 ### Step01：箱としての変数
-
 - Variableクラス
     - NumPyは使えないので取り敢えずdataフィールドはプリミティブ型
 
@@ -168,8 +172,7 @@ public abstract class Function {
 
 ### Step08：再帰からループへ
 
-	- 特になし 
-
+- 特になし
 
 ### Step09：関数をより便利に
 
@@ -191,9 +194,10 @@ public class Variable {
 
 ### Step10：テストを行う
 
-	- 特になし 
+- 特になし
 
 ### Step11：可変長の引数（順伝播編）
+
 - Functionクラス
   - 多入力多出力に対応
   - 順伝播を計算するforwardメソッドと逆伝播を計算するbackwardメソッドを修正
@@ -220,11 +224,12 @@ public abstract class Function {
 
 ### Step12：可変長の引数（改善偏）
 
-    - 特になし
+- 特になし
+
 
 ### Step13：可変長の引数（逆伝播偏）
 
-    - 特になし
+- 特になし
 
 
 ### Step14：同じ変数を繰り返し使う
@@ -259,7 +264,7 @@ public class Variable {
 
 ### Step15：複雑な計算グラフ（理論編）
 
-    - 特になし
+- 特になし
 
 
 ### Step16：複雑な計算グラフ（実装編）
@@ -285,10 +290,12 @@ public class Variable {
 
 
 ### Step18：メモリ使用量を減らすモード
+
 - Configクラス、NoGradクラス、UsingConfigクラスを定義
-  - 正直、良く解らなかったのでChatGPTでJavaに変換
+  - 良く解らなかったのでChatGPTでJavaに変換
 
 ### Step19：変数を使いやすく
+
 - Tenssorクラスで実装済み
   - toStringメソッド
   - getLengthメソッド
@@ -303,6 +310,7 @@ public class Variable {
     - Mul → Times
     - Add → Plus
 - Variableクラスに四則演算のメソッド
+
 ```java
 public class Variable {
 // ... 略
@@ -316,9 +324,11 @@ public class Variable {
 ```
 
 ### Step21：演算子のオーバーロード (2)
+
 - Javaなので演算子の多重定義が(以下略)
 - Variableクラスの四則演算のメソッドを修正
   - 引数がプリミティブ型(double)の場合を追加
+
 ```java
 public class Variable {
 // ... 略
@@ -334,6 +344,7 @@ public class Variable {
 // ... 略
 }
 ```
+
 -
 ### Step22：演算子のオーバーロード (3)
 
@@ -349,7 +360,7 @@ public class Variable {
 
 ### Step23：パッケージとしてまとめる
 
-    - 特になし
+- 特になし
 
 ### Step24：複雑な関数の微分
 
@@ -361,6 +372,7 @@ public class Variable {
 
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
+
 ```java
 public class Sphere {
     public Variable calc(Variable... xs) {
@@ -381,8 +393,10 @@ public class Matyas {
     // ... 略
 }
 ```
+
 - Goldstein-Price関数
   - $f(x, y) = \left[1 + (x + y + 1)^2 \cdot (19 - 14x + 3x^2 - 14y + 6xy + 3y^2)\right] \cdot \left[30 + (2x - 3y)^2 \cdot (18 - 32x + 12x^2 + 48y - 36xy + 27y^2)\right]$
+
 ```java
 public class Matyas {
     public Variable calc(Variable... xs) {
@@ -393,19 +407,24 @@ public class Matyas {
 ```
 
 ### Step25：計算グラフの可視化 (1)
+
 - 省略
 
 ### Step26：計算グラフの可視化 (2)
+
 - 省略
 
 ### Step27：テイラー展開の微分
+
 - Sinクラスの実装
   - 逆伝播の確認のためにCosクラスを実装
 
 
 ### Step28：関数の最適化
+
 - 疑問
-  - Variableとして演算したが、Tensorを取り出して計算するべきか？
+- Variableとして演算したが、Tensorを取り出して計算するべきか？
+
 ```java
 public class Step28 extends Step {
     @Override
@@ -424,27 +443,31 @@ public class Step28 extends Step {
 }
 ```
 ### Step29：ニュートン法を用いた最適化（手計算）
+
 - UsingConfigクラスの単純化
 - 2階微分を計算するGx2クラスを実装
 
 
 ### Step30：高階微分（準備編）
 
-    - 特になし
+- 特になし
 
 
 ### Step31：高階微分（理論編）
 
-    - 特になし
+- 特になし
 
 ### Step32：高階微分（実装偏）
+
 - Variableクラス
   - gradフィールドをTensorクラスからVariableクラスに変更
   - backwardメソッドを修正
+
 ```java
 public class Variable {
     // ... 略
     Variable grad;
+
     // ... 略
     public void backward(boolean retainGrad, boolean createGraph) {
         // ... 略
@@ -456,6 +479,7 @@ public class Variable {
 
 - backwardメソッド実装時の注意点
     - 逆伝播は逐一書かず、**順伝播の演算メソッド**を用いないと高階微分が計算されない
+
 ```java
 // Example 
 public Tensor[][] forward(Tensor... xs) {

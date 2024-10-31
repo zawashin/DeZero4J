@@ -24,6 +24,7 @@ public abstract class Function {
         }
         return outputs;
     }
+
     public abstract Tensor[] forward(Tensor[] xs);
 
     public abstract Tensor[] backward(Tensor[] gys);

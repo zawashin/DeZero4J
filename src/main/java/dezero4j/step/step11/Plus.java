@@ -15,6 +15,6 @@ public class Plus extends Function {
     @Override
     public Tensor[] backward(Tensor[] gys) {
         Tensor[] xs = new Tensor[]{getInput(0).getData(), getInput(1).getData()};
-        return new Tensor[]{xs[0].times(gys[0]), xs[1].times(gys[0]) };
+        return new Tensor[]{xs[0].times(gys[0]), xs[1].times(gys[0])};
     }
 }

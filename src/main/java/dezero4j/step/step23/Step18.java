@@ -7,6 +7,10 @@ import dezero4j.step.Step;
  */
 public class Step18 extends Step {
 
+    public static void main(String[] args) {
+        new Step18().calc();
+    }
+
     @Override
     public void calc() {
         Variable x = new Variable(new double[]{2.0});
@@ -18,9 +22,5 @@ public class Step18 extends Step {
         System.out.println(y);
         System.out.println(x.getGrad());
         System.out.println(y.getGrad());
-    }
-
-    public static void main(String[] args) {
-        new Step18().calc();
     }
 }

@@ -4,6 +4,10 @@ import dezero4j.step.Step;
 
 public class Step11 extends Step {
 
+    public static void main(String[] args) {
+
+    }
+
     @Override
     public void calc() {
         Variable x0 = new Variable(new double[]{2});
@@ -17,9 +21,5 @@ public class Step11 extends Step {
         System.out.println(y);
         y = x0.plus(x1);
         System.out.println(y);
-    }
-
-    public static void main(String[] args) {
-
     }
 }

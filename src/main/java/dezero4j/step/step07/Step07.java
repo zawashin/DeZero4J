@@ -4,6 +4,10 @@ import dezero4j.step.Step;
 
 public class Step07 extends Step {
 
+    public static void main(String[] args) {
+        new Step07().calc();
+    }
+
     public void calc() {
         Square A = new Square();
         Exp B = new Exp();
@@ -18,8 +22,5 @@ public class Step07 extends Step {
         y.setGrad(1.0);
         y.backward();
         System.out.println(x.getGrad());
-    }
-    public static void main(String[] args) {
-         new Step07().calc();
     }
 }
