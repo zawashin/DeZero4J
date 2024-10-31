@@ -461,10 +461,7 @@ public class Step28 extends Step {
 public class Variable {
     // ... 略
     Variable grad;
-}
-```
-```java
-public class Variable {
+  // ... 略
     public void backward(boolean retainGrad, boolean createGraph) {
     // ... 略
         while (!funcs.isEmpty()) {
@@ -508,29 +505,12 @@ public class Cos extends Function {
 - Step32までの実装が**正しければ**問題なく動作する
 
 ### Step34：sin 関数の高階微分
-
 - 特になし
 
 ### Step35：高階微分の計算グラフ
-
 - Tanhクラスを実装
 
 ### Step36：高階微分以外の用途
-
 - 特になし
-
-### Step37：テンソルを使う
-
-- Tensorクラスを事前に実装していたのでこの時点では問題なし
-
-```java
-public class Tensor implements Cloneable, Serializable {
-    public int rank;
-    protected int length;
-    protected double[] values;
-    protected int[] shape;
-// ... 略
-}
-```
 
 
