@@ -418,8 +418,8 @@ public class Matyas {
 
 ### Step28：関数の最適化
 
-- 疑問
-- Variableとして演算したが、Tensorを取り出して計算するべきか？
+- 保留
+  - Variableとして演算したが、Tensorを取り出して計算するべきか？
 
 ```java
 public class Step28 extends Step {
