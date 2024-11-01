@@ -83,7 +83,7 @@ public class Variable implements Cloneable, Serializable {
         Set<Function> seenSet = new HashSet<>();
         funcs.add(creator);
         seenSet.add(creator);
-        funcs.sort((f1, f2) -> Integer.compare(f1.getGeneration(), f2.getGeneration()));
+        funcs.sort(Comparator.comparingInt(Function::getGeneration));
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
             Variable[] inputs = f.getInputs();
@@ -291,13 +291,13 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
-    public Variable sum() {
-        Function f = new Sum();
+    public Variable sum(int axis) {
+        Function f = new Sum(axis);
         return f.forward(this)[0];
     }
 
-    public Variable sumTo() {
-        Function f = new SumTo();
+    public Variable sumTo(int[] shape) {
+        Function f = new SumTo(shape);
         return f.forward(this)[0];
     }
 }

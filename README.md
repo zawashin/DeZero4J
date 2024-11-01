@@ -10,7 +10,6 @@
 - ステップごとにパッケージを作って進める
     - 各ステップごとにStepNクラスを作って検証する
     - 以前のステップの例題でも動作確認を可能な限り行う
-      [](Markdown書きが後になり次ステップで修正したクラスを前ステップで利用する形になった場合がある)
 - 外部ライブラリをできる限り使わない
     - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
         - 車輪の再発明？それがどうした！
@@ -29,7 +28,8 @@
 | matplotlib | **必要に応じて**[JFreeChart](https://www.jfree.org/jfreechart/) |
 | CuPy       | CUDAは使えないので不要                                             |
 | Pillow     | 画像認識などは行う予定がないので不要                                        |
-| Graphviz   | 計算グラフの可視化は行わないので不要                                        
+| Graphviz   | 計算グラフの可視化は行わないので不要                                        |
+
 ## 現状
 
 - ~~ステップ46の途中まで実装~~
@@ -363,8 +363,8 @@ public class Variable {
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
   - Copilotに丸投げ
-    - **参考記事**
-        - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+  - **参考記事**
+    - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
