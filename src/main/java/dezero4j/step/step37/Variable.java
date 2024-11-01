@@ -286,8 +286,18 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
-    public Variable tanh() {
-        Function f = new Tanh();
+    public Variable broadcastTo(int[] shape) {
+        Function f = new BroadcastTo(shape);
+        return f.forward(this)[0];
+    }
+
+    public Variable sum() {
+        Function f = new Sum();
+        return f.forward(this)[0];
+    }
+
+    public Variable sumTo() {
+        Function f = new SumTo();
         return f.forward(this)[0];
     }
 }

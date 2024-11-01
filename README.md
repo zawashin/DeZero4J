@@ -25,7 +25,7 @@
 | DeZero     | DeZero4J                                                  |
 |------------|-----------------------------------------------------------|
 | Python 3   | Eclipse Temurin™ JDK 21-LTS                               |
-| NumPy      | [Tensor4J](https://github.com/zawahin/Tensor4J)           |
+| NumPy      | [Tensor4J](https://github.com/zawashin/Tensor4J)          |
 | matplotlib | **必要に応じて**[JFreeChart](https://www.jfree.org/jfreechart/) |
 | CuPy       | CUDAは使えないので不要                                             |
 | Pillow     | 画像認識などは行う予定がないので不要                                        |
@@ -35,7 +35,7 @@
 - ~~ステップ46の途中まで実装~~
 - ~~OutOfMemoryで落ちる~~
 - ~~例題で**しか**動作しない~~
-- Tensor関連のクラスを再実装して仕切り直し
+- Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
 - Step36まで完了
 
 ## 参考資料
