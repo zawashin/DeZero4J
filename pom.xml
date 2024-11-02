@@ -6,7 +6,7 @@
 
     <groupId>zawashin</groupId>
     <artifactId>dezero4j</artifactId>
-    <version>0.13</version>
+    <version>0.38</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
