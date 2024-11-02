@@ -1,4 +1,4 @@
-package dezero4j.step.step37;
+package dezero4j.step.step39;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -10,26 +10,23 @@ import java.util.Arrays;
  */
 public class SumTo extends Function {
 
-    private int[] shape;
+    private final int[] shape;
+    private int[] xShape;
 
     public SumTo(int[] shape) {
-        if (shape.length == Tensor.RANK_MAX) {
-            this.shape = shape.clone();
-        } else {
-            this.shape = new int[Tensor.RANK_MAX];
-            Arrays.fill(this.shape, 1);
-            System.arraycopy(shape, 0, this.shape, 0, shape.length);
-        }
+        this.shape = shape;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.sumTo(xs[0], shape)};
+        this.xShape = xs[0].getShape();
+        Tensor y = Utils.sumTo(xs[0], shape);
+        return new Tensor[]{y};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
+        return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), xShape))};
     }
 
     public static void main(String[] args) {

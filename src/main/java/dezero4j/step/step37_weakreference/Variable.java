@@ -1,4 +1,4 @@
-package dezero4j.step.step37;
+package dezero4j.step.step37_weakreference;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -46,7 +46,7 @@ public class Variable implements Cloneable, Serializable {
             this.grad = variable.grad.clone();
         }
         if (variable.creator != null) {
-            this.creator = variable.creator.clone();
+            this.creator = variable.creator;
         }
         this.generation = variable.generation;
     }
@@ -87,12 +87,12 @@ public class Variable implements Cloneable, Serializable {
         while (!funcs.isEmpty()) {
             Function f = funcs.removeLast();
             Variable[] inputs = f.getInputs();
-            Variable[] gys = new Variable[f.outputs.length];
-            for (int i = 0; i < f.outputs.length; i++) {
-                if (f.outputs[i].grad == null) {
+            Variable[] gys = new Variable[f.outputs.size()];
+            for (int i = 0; i < f.outputs.size(); i++) {
+                if (f.getOutput(i).grad == null) {
                     gys[i] = new Variable(Utils.create(1.0, data.getShape()));
                 } else {
-                    gys[i] = f.outputs[i].grad;
+                    gys[i] = f.getOutput(i).grad;
                 }
             }
             try (UsingConfig config = new UsingConfig("enableBackprop", createGraph)) {
@@ -128,8 +128,8 @@ public class Variable implements Cloneable, Serializable {
                 e.printStackTrace();
             }
             if (!retainGrad) {
-                for (int i = 0; i < f.outputs.length; i++) {
-                    f.outputs[i].grad = null;//  #y is weakref
+                for (int i = 0; i < f.outputs.size(); i++) {
+                    f.getOutput(i).grad = null;//  #y is weakref
                 }
             }
         }

@@ -1,4 +1,4 @@
-package dezero4j.step.step37;
+package dezero4j.step.step38;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -176,6 +176,10 @@ public class Variable implements Cloneable, Serializable {
         return this.data.toString();
     }
 
+    public int getRank() {
+        return data.getRank();
+    }
+
     public int getLength() {
         return data.getLength();
     }
@@ -288,6 +292,11 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable tanh() {
         Function f = new Tanh();
+        return f.forward(this)[0];
+    }
+
+    public Variable transpose(int... axes) {
+        Function f = new Transpose(axes);
         return f.forward(this)[0];
     }
 

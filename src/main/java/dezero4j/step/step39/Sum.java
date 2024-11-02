@@ -1,29 +1,42 @@
-package dezero4j.step.step37;
+package dezero4j.step.step39;
 
 import tensor4j.Tensor;
+import tensor4j.Utils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Sum extends Function {
 
-    private int axis;
-    private int[] shape;
+    private final int axis;
+    private int[] xShape;
+    private final boolean keepDims;
+
+    public Sum() {
+        this(-1, true);
+    }
 
     public Sum(int axis) {
+        this(axis, true);
+    }
+
+    public Sum(int axis, boolean keepDims) {
         this.axis = axis;
+        this.keepDims = keepDims;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        this.shape = xs[0].getShape().clone();
-        return new Tensor[]{xs[0].sum(axis)};
+        this.xShape = xs[0].getShape();
+        Tensor y = Utils.sum(xs[0], axis, keepDims);
+        return new Tensor[]{y};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].broadcastTo(shape)};
-
+        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, axis, keepDims);
+        Variable gx = new Variable(Utils.broadcastTo(gy, xShape));
+        return new Variable[]{gx};
     }
 
     public static void main(String[] args) {
