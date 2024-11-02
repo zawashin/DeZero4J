@@ -300,4 +300,9 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
+    public Variable reshape(int... shape) {
+        Function f = new Transpose(shape);
+        return f.forward(this)[0];
+    }
+
 }
