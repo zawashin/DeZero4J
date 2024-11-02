@@ -283,7 +283,9 @@ public class Variable {
 ### Step17：メモリ管理と循環参照
 
 - WeakReferenceの導入
-    - 理解出来なかったので保留
+  - ~~理解出来なかったので保留~~
+  - ChatGPTで実装できたが、採用保留
+- AutoCloseableインターフェースを検討してみる**予定**
 
 
 ### Step18：メモリ使用量を減らすモード
@@ -513,4 +515,34 @@ public class Cos extends Function {
 ### Step36：高階微分以外の用途
 - 特になし
 
+### Step37：テンソルを使う
+
+- Tensorクラスを事前に実装しておいた
+  - StepごとにTensorを拡張してったら破綻した
+
+```java
+public class Tensor implements Cloneable, Serializable {
+  public int rank;
+  protected int length;
+  protected double[] values;
+  protected int[] shape;
+// ... 略
+}
+
+```
+
+- テンソルでの逆伝播の確認
+  - Step39で登場するSumクラスの使用
+    - backwardメソッドでBroadcastToクラスが必要
+    - BroadcastToクラスのbackwardメソッドでSumToクラスが必要
+  - Step39、40まで保留
+
+### Step38：形状を変える関数
+
+- Reshapeクラス
+  - 1階のテンソルと2階以上のテンソルまたはその逆の場合のみ計算可能
+- Transoposeクラス
+  - NumPyと同じように0階と1階のテンソルは同値を返すようにした
+    - 0階と1階のテンソルの倒置は、**数学的には存在しない**
+  - 2階まで対応
 
