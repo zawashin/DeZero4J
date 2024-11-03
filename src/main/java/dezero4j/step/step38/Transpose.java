@@ -2,6 +2,7 @@ package dezero4j.step.step38;
 
 import tensor4j.Operators;
 import tensor4j.Tensor;
+import tensor4j.Utils;
 
 import java.util.Arrays;
 
@@ -22,9 +23,9 @@ public class Transpose extends Function {
     @Override
     public Tensor[] forward(Tensor... xs) {
         if (xs[0].getRank() <= 2) {
-            return new Tensor[]{Operators.transpose(xs[0])};
+            return new Tensor[]{Utils.transpose(xs[0])};
         } else {
-            return new Tensor[]{Operators.transpose(xs[0], axes[0], axes[1])};
+            return new Tensor[]{Utils.transpose(xs[0], axes[0], axes[1])};
         }
     }
 
@@ -32,9 +33,9 @@ public class Transpose extends Function {
     public Variable[] backward(Variable... gys) {
         Tensor gx;
         if (gys[0].getRank() <= 2) {
-            gx = Operators.transpose(gys[0].getData());
+            gx = Utils.transpose(gys[0].getData());
         } else {
-            gx = Operators.transpose(gys[0].getData(), axes[1], axes[0]);
+            gx = Utils.transpose(gys[0].getData(), axes[1], axes[0]);
         }
         return new Variable[]{new Variable(gx)};
     }
