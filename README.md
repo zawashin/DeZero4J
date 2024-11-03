@@ -283,9 +283,9 @@ public class Variable {
 ### Step17：メモリ管理と循環参照
 
 - WeakReferenceの導入
-  - ~~理解出来なかったので保留~~
-  - ChatGPTで実装できたが、採用保留
-- AutoCloseableインターフェースを検討してみる**予定**
+    - ~~理解出来なかったので保留~~
+    - ChatGPTで実装できたが、採用保留
+- ~~AutoCloseableインターフェースも検討してみる**予定**~~
 
 
 ### Step18：メモリ使用量を減らすモード
@@ -366,7 +366,7 @@ public class Variable {
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
   - Copilotに丸投げ
   - **参考記事**
-    - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+      - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 
 - Sphere関数
   - $f(x, y) = x^2 + y^2$
@@ -503,6 +503,7 @@ public class Cos extends Function {
 }
 ```
 
+
 ### Step33：ニュートン法を使った最適化(自動計算)
 - Step32までの実装が**正しければ**問題なく動作する
 
@@ -522,15 +523,14 @@ public class Cos extends Function {
 
 ```java
 public class Tensor implements Cloneable, Serializable {
-  public int rank;
-  protected int length;
-  protected double[] values;
-  protected int[] shape;
+    public int rank;
+    protected int length;
+    protected double[] values;
+    protected int[] shape;
 // ... 略
 }
 
 ```
-
 - テンソルでの逆伝播の確認
   - Step39で登場するSumクラスの使用
     - backwardメソッドでBroadcastToクラスが必要
@@ -538,11 +538,11 @@ public class Tensor implements Cloneable, Serializable {
   - Step39、40まで保留
 
 ### Step38：形状を変える関数
-
 - Reshapeクラス
-  - 1階のテンソルと2階以上のテンソルまたはその逆の場合のみ計算可能
 - Transoposeクラス
   - NumPyと同じように0階と1階のテンソルは同値を返すようにした
     - 0階と1階のテンソルの倒置は、**数学的には存在しない**
   - 2階まで対応
+
+### Step39：和を求める関数
 
