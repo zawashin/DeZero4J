@@ -176,6 +176,10 @@ public class Variable implements Cloneable, Serializable {
         return this.data.toString();
     }
 
+    public int getRank() {
+        return data.getRank();
+    }
+
     public int getLength() {
         return data.getLength();
     }
@@ -291,23 +295,14 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
-    public Variable broadcastTo(int[] shape) {
-        Function f = new BroadcastTo(shape);
+    public Variable transpose(int... axes) {
+        Function f = new Transpose(axes);
         return f.forward(this)[0];
     }
 
-    public Variable sum(int axis) {
-        Function f = new Sum(axis);
+    public Variable reshape(int... shape) {
+        Function f = new Reshape(shape);
         return f.forward(this)[0];
     }
 
-    public Variable sum() {
-        Function f = new Sum(0);
-        return f.forward(this)[0];
-    }
-
-    public Variable sumTo(int[] shape) {
-        Function f = new SumTo(shape);
-        return f.forward(this)[0];
-    }
 }

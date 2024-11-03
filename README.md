@@ -544,5 +544,3 @@ public class Tensor implements Cloneable, Serializable {
     - 0階と1階のテンソルの倒置は、**数学的には存在しない**
   - 2階まで対応
 
-### Step39：和を求める関数
-
