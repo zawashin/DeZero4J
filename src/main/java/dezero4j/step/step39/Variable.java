@@ -305,4 +305,29 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
+    public Variable broadcastTo(int... shape) {
+        Function f = new BroadcastTo(shape);
+        return f.forward(this)[0];
+    }
+
+    public Variable sum() {
+        Function f = new Sum(-1, true);
+        return f.forward(this)[0];
+    }
+
+    public Variable sum(int axis) {
+        Function f = new Sum(axis, true);
+        return f.forward(this)[0];
+    }
+
+    public Variable sum(int axis, boolean keepDims) {
+        Function f = new Sum(axis, keepDims);
+        return f.forward(this)[0];
+    }
+
+    public Variable sumTo(int... shape) {
+        Function f = new SumTo(shape);
+        return f.forward(this)[0];
+    }
+
 }
