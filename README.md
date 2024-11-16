@@ -34,10 +34,9 @@
 - ~~ステップ46の途中まで実装~~
 - ~~OutOfMemoryで落ちる~~
 - ~~例題で**しか**動作しない~~
-
 ## 現状
 - Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
-- Step38まで完了
+- Step40まで完了
 
 ## 参考資料
 
@@ -544,4 +543,14 @@ public class Tensor implements Cloneable, Serializable {
   - NumPyと同じように0階と1階のテンソルは同値を返すようにした
     - 0階と1階のテンソルの倒置は、**数学的には存在しない**
   - 2階まで対応
+
+### Step39：和を求める関数
+
+- Sumクラス
+    - keepDimsについては保留
+- BroadcastToクラス
+    - Sumクラスのbackwarddメソッドで必要なforwardメソッドのみ
+
+### Step40：ブロードキャストを行う関数
+
 
