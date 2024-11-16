@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class SumTo extends Function {
 
     private final int[] shape;
-    private int[] xShape;
+    //private int[] xShape;
 
     public SumTo(int[] shape) {
         this.shape = shape;
@@ -19,14 +19,15 @@ public class SumTo extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        this.xShape = xs[0].getShape();
+        //this.xShape = xs[0].getShape();
         Tensor y = Utils.sumTo(xs[0], shape);
         return new Tensor[]{y};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), xShape))};
+        return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), inputs[0].getShape()))};
+        //return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), xShape))};
     }
 
     public static void main(String[] args) {

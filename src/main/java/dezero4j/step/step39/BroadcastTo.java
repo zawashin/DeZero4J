@@ -9,7 +9,6 @@ import tensor4j.Utils;
 public class BroadcastTo extends Function {
 
     private int[] shape;
-    private int[] xShape;
 
     public BroadcastTo(int[] shape) {
         this.shape = shape;
@@ -17,13 +16,12 @@ public class BroadcastTo extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        this.xShape = xs[0].getShape();
         return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Tensor gx = Utils.sumTo(gys[0].getData(), xShape);
+        Tensor gx = Utils.sumTo(gys[0].getData(), inputs[0].getShape());
         return new Variable[]{new Variable(gx)};
     }
 
