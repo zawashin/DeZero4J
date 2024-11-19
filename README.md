@@ -36,7 +36,7 @@
 - ~~例題で**しか**動作しない~~
 ## 現状
 - Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
-- Step40まで完了
+- Step39まで完了
 
 ## 参考資料
 
@@ -420,9 +420,6 @@ public class Matyas {
 
 ### Step28：関数の最適化
 
-- 保留
-  - Variableとして演算したが、Tensorを取り出して計算するべきか？
-
 ```java
 public class Step28 extends Step {
     @Override
@@ -516,6 +513,7 @@ public class Cos extends Function {
 ### Step36：高階微分以外の用途
 - 特になし
 
+
 ### Step37：テンソルを使う
 
 - Tensorクラスを事前に実装しておいた
@@ -545,7 +543,6 @@ public class Tensor implements Cloneable, Serializable {
   - 2階まで対応
 
 ### Step39：和を求める関数
-
 - Sumクラス
     - keepDimsについては保留
 - BroadcastToクラス
@@ -553,4 +550,5 @@ public class Tensor implements Cloneable, Serializable {
 
 ### Step40：ブロードキャストを行う関数
 
+- 四則演算クラスのbroadcast対応
 
