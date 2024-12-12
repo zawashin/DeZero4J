@@ -44,7 +44,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.create(1.0, data.getShape());
+            grad = Utils.fill(1.0, data.getShape());
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -145,7 +145,7 @@ public class Variable {
 
     public Variable plus(double other) {
         Function f = new Plus();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
 }

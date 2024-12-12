@@ -13,9 +13,7 @@ public class Reshape extends Function {
     int[] shape;
 
     public Reshape(int... shape) {
-        this.shape = new int[Tensor.RANK_MAX];
-        Arrays.fill(this.shape, 1);
-        System.arraycopy(shape, 0, this.shape, 0, shape.length);
+        this.shape = shape.clone();
     }
 
     @Override

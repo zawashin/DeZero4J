@@ -36,6 +36,6 @@ public class GoldsteinPrice {
     }
 
     private Variable constant(double value) {
-        return new Variable(Utils.create(value, shape));
+        return new Variable(Utils.fill(value, shape));
     }
 }

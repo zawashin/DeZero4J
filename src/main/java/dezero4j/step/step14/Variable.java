@@ -37,7 +37,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.create(1.0, data.getShape());
+            grad = Utils.fill(1.0, data.getShape());
         }
         ArrayList<Function> funcList = new ArrayList<>();
         funcList.add(creator);

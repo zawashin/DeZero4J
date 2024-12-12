@@ -44,7 +44,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.create(1.0, data.getShape());
+            grad = Utils.fill(1.0, data.getShape());
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -135,7 +135,7 @@ public class Variable {
 
     public Variable plus(double other) {
         Function f = new Plus();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable minus(Variable other) {
@@ -145,7 +145,7 @@ public class Variable {
 
     public Variable minus(double other) {
         Function f = new Minus();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable rminus(Variable other) {
@@ -155,7 +155,7 @@ public class Variable {
 
     public Variable rminus(double other) {
         Function f = new Minus();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable times(Variable other) {
@@ -165,7 +165,7 @@ public class Variable {
 
     public Variable times(double other) {
         Function f = new Times();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable div(Variable other) {
@@ -175,7 +175,7 @@ public class Variable {
 
     public Variable div(double other) {
         Function f = new Div();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable rdiv(Variable other) {
@@ -185,7 +185,7 @@ public class Variable {
 
     public Variable rdiv(double other) {
         Function f = new Div();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable exp() {

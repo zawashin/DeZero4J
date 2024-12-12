@@ -32,7 +32,7 @@ public class Variable implements Serializable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.create(1.0, data.getShape());
+            grad = Utils.fill(1.0, data.getShape());
         }
 
         Function[] funcs = {creator};

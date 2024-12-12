@@ -11,6 +11,6 @@ public abstract class MultivariateFunction {
     public abstract Variable calc(Variable... xs);
 
     protected Variable c(double value) {
-        return new Variable(Utils.create(value, shape));
+        return new Variable(Utils.fill(value, shape));
     }
 }

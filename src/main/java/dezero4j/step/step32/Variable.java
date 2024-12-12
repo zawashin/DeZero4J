@@ -77,7 +77,7 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = new Variable(Utils.create(1.0, data.getShape()));
+            grad = new Variable(Utils.fill(1.0, data.getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -91,7 +91,7 @@ public class Variable implements Cloneable, Serializable {
             Variable[] gys = f.outputs;
             for (int i = 0; i < f.outputs.length; i++) {
                 if (f.outputs[i].grad == null) {
-                    grad = new Variable(Utils.create(1.0, data.getShape()));
+                    grad = new Variable(Utils.fill(1.0, data.getShape()));
                 } else {
                     gys[i] = f.outputs[i].grad;
                 }
@@ -203,7 +203,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable plus(double other) {
         Function f = new Plus();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public void plusAssign(Variable other) {
@@ -217,7 +217,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable minus(double other) {
         Function f = new Minus();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public void minusAssign(Variable other) {
@@ -231,7 +231,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rminus(double other) {
         Function f = new Minus();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable times(Variable other) {
@@ -241,7 +241,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable times(double other) {
         Function f = new Times();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable div(Variable other) {
@@ -251,7 +251,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable div(double other) {
         Function f = new Div();
-        return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable rdiv(Variable other) {
@@ -261,7 +261,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rdiv(double other) {
         Function f = new Div();
-        return f.forward(new Variable(Utils.create(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable exp() {
