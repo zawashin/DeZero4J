@@ -32,7 +32,7 @@ public class Step29 extends Step {
             Variable dfx2 = df2.calc(xs[0]);
 
             System.out.print(xs[0] + "  " + gx1 + "  " + dfx2 + "\n");
-            xs[0].getData().minusAssign(gx1.div(dfx2.getData()));
+            xs[0].getData().subtractAssign(gx1.divide(dfx2.getData()));
         }
     }
 }

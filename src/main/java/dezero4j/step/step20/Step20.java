@@ -11,7 +11,7 @@ public class Step20 {
         Variable c = new Variable(new double[]{1.0});
 
         // y = a * b + c
-        Variable y = (a.times(b)).plus(c);
+        Variable y = (a.multiply(b)).add(c);
         y.backward();
 
         System.out.println(y);

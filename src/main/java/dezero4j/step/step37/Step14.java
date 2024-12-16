@@ -14,22 +14,22 @@ public class Step14 extends Step {
     @Override
     public void calc() {
         Variable x = new Variable(new double[]{3.0});
-        Function plus = new Plus();
-        Function plus2 = new Plus();
-        Variable y = plus.forward(x, x)[0];
+        Function add = new Add();
+        Function plus2 = new Add();
+        Variable y = add.forward(x, x)[0];
         y.backward();
         System.out.println(x.getGrad());
         x.cleaGrad();
-        y = plus2.forward(plus.forward(x, x)[0], x)[0];
+        y = plus2.forward(add.forward(x, x)[0], x)[0];
         y.backward();
         System.out.println(x.getGrad());
 
         x = new Variable(new double[]{3.0});
-        y = x.plus(x);
+        y = x.add(x);
         y.backward();
         System.out.println(x.getGrad());
         x.cleaGrad();
-        y = x.plus(x).plus(x);
+        y = x.add(x).add(x);
         y.backward();
         System.out.println(x.getGrad());
     }

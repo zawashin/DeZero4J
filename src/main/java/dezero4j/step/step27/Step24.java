@@ -16,7 +16,7 @@ public class Step24 extends Step {
         {
             Variable x = new Variable(2);
             Variable y = new Variable(2);
-            Variable z = x.square().plus(y.square());
+            Variable z = x.square().add(y.square());
             System.out.println(z);
             z.backward();
             System.out.println(x.getGrad());

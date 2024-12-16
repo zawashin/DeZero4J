@@ -26,10 +26,10 @@ public class Step33 {
             System.out.print(x);
             System.out.print(gx + "  ");
             System.out.print(gx2 + "\n");
-            Tensor dx = gx.getData().div(gx2.getData());
+            Tensor dx = gx.getData().divide(gx2.getData());
 
-            //xs[0].getData().minusAssign(gx.getData().div(gx2.getData()));
-            xs[0].minusAssign(gx.div(gx2));
+            //xs[0].getData().minusAssign(gx.getData().divide(gx2.getData()));
+            xs[0].minusAssign(gx.divide(gx2));
             System.out.print(x);
 
         }

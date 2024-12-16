@@ -10,32 +10,27 @@ public class Sum extends Function {
 
     private final int axis;
     private int[] xShape;
-    private final boolean keepDims;
 
     public Sum() {
-        this(-1, false);
+        this(-1);
     }
 
     public Sum(int axis) {
-        this(axis, false);
-    }
-
-    public Sum(int axis, boolean keepDims) {
         this.axis = axis;
-        this.keepDims = keepDims;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
         this.xShape = xs[0].getShape();
-        Tensor y = Utils.sum(xs[0], axis, keepDims);
+        Tensor y = Utils.sum(xs[0], axis);
         return new Tensor[]{y};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, keepDims, axis);
+        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, axis);
         Variable gx = new Variable(Utils.broadcastTo(gy, xShape));
+
         //Variable gx = new Variable(gy);
         return new Variable[]{gx};
     }

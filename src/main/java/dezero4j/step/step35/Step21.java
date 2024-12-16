@@ -17,7 +17,7 @@ public class Step21 extends Step {
         Variable b = new Variable(new double[]{2.0, 3, 4});
 
         // y = a * b + c
-        Variable y = (a.times(b)).plus(1);
+        Variable y = (a.multiply(b)).add(1);
         y.backward();
 
         System.out.println(y.getData());

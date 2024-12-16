@@ -9,8 +9,8 @@ public class Step18 {
         Variable x = new Variable(new double[]{2.0});
         Function square = new Square();
         Variable a = square.forward(x)[0];
-        Function plus = new Plus();
-        Variable y = plus.forward(a.square(), a.square())[0];
+        Function add = new Add();
+        Variable y = add.forward(a.square(), a.square())[0];
         Config.enableBackprop = false;
         y.backward();
 

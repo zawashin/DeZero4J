@@ -10,36 +10,29 @@ import java.util.Arrays;
  */
 public class Sum extends Function {
 
-    private final int axis;
+    private int axis;
     private int[] xShape;
-    private final boolean keepDims;
 
     public Sum() {
-        this(-1, false);
+        this(-1);
     }
 
     public Sum(int axis) {
-        this(axis, false);
-    }
-
-    public Sum(int axis, boolean keepDims) {
         this.axis = axis;
-        this.keepDims = keepDims;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
         this.xShape = xs[0].getShape();
-        Tensor y = Utils.sum(xs[0], axis, keepDims);
+        Tensor y = Utils.sum(xs[0], axis);
         return new Tensor[]{y};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, keepDims, axis);
+        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, axis);
         Variable gx = new Variable(Utils.broadcastTo(gy, xShape));
-        //Variable gx = new Variable(gy);
-        return new Variable[]{gx};
+        return new Variable[]{new Variable(gx)};
     }
 
     public static void main(String[] args) {
@@ -57,8 +50,8 @@ public class Sum extends Function {
         }
         x = new Variable(t);
         System.out.println(x);
-        System.out.println(x.sum());
         y = x.sum();
+        System.out.println(y);
         y.backward(false, true);
         System.out.println(x.getGrad());
 
@@ -85,24 +78,6 @@ public class Sum extends Function {
         y = x.sum();
         y.backward(false, true);
         System.out.println(x.grad);
-        /*
-        x.clearGrad();
-        f = new Sum(0);
-        y = f.forward(xs)[0];
-        System.out.println("axis 0:");
-        System.out.println(y);
-        x.clearGrad();
-        y.backward(false, true);
-        System.out.println(x.grad);
-        System.out.println("axis 1:");
-        f = new Sum(1);
-        y = f.forward(xs)[0];
-        System.out.println(y);
-        x.clearGrad();
-        y.backward(false, true);
-        System.out.println(x.grad);
-
-         */
     }
 
 }

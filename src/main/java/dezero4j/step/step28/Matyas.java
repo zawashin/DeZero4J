@@ -21,6 +21,6 @@ public class Matyas extends MultivariateFunction {
         //    z = 0.26 * (x ** 2 + y ** 2) - 0.48 * x * y
         // $f(x, y) = 0.26 \cdot (x^2 + y^2) - 0.48 \cdot x \cdot y$
 
-        return xs[0].square().plus(xs[1].square()).times(0.26).minus(xs[0].times(xs[1]).times(0.48));
+        return xs[0].square().add(xs[1].square()).multiply(0.26).subtract(xs[0].multiply(xs[1]).multiply(0.48));
     }
 }

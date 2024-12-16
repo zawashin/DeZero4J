@@ -29,8 +29,8 @@ public class Step28 extends Step {
             }
             z.backward();
             for (Variable x : xs) {
-                //x.minusAssign(new Variable(x.getGrad().times(learningRate)));
-                x.getData().minusAssign(x.getGrad().times(learningRate));
+                //x.minusAssign(new Variable(x.getGrad().multiply(learningRate)));
+                x.getData().subtractAssign(x.getGrad().multiply(learningRate));
             }
             System.out.print(xs[0] + "\t");
             System.out.print(xs[1] + "\t");

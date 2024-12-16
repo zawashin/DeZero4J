@@ -14,6 +14,6 @@ public class Exp extends Function {
 
     public Variable[] backward(Variable... gys) {
         Variable x = getInput(0);
-        return new Variable[]{x.exp().times(gys[0])};
+        return new Variable[]{x.exp().multiply(gys[0])};
     }
 }

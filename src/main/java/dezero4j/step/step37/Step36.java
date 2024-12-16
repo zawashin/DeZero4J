@@ -14,7 +14,7 @@ public class Step36 extends Step {
         y.backward(false, true);
         Variable gx = x.grad;
         x.clearGrad();
-        Variable z = gx.pow(3).plus(y);
+        Variable z = gx.pow(3).add(y);
         z.backward(false, true);
         System.out.println(x.data);
         System.out.println(y.data);

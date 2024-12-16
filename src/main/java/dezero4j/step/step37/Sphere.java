@@ -8,7 +8,7 @@ public class Sphere extends MultivariateFunction {
     public static void main(String[] args) {
         Variable x = new Variable(2);
         Variable y = new Variable(2);
-        Variable z = x.square().plus(y.square());
+        Variable z = x.square().add(y.square());
         System.out.println(z);
         z.backward();
         System.out.println(x.getGrad());
@@ -27,6 +27,6 @@ public class Sphere extends MultivariateFunction {
     // $f(x, y) = x^2 + y^2$
     @Override
     public Variable calc(Variable... xs) {
-        return xs[0].square().plus(xs[1].square());
+        return xs[0].square().add(xs[1].square());
     }
 }

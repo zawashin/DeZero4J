@@ -15,6 +15,6 @@ public class Exp extends Function {
     @Override
     public Tensor[] backward(Tensor[] gys) {
         Tensor x = getInput(0).getData();
-        return new Tensor[]{x.exp().times(gys[0])};
+        return new Tensor[]{x.exp().multiply(gys[0])};
     }
 }

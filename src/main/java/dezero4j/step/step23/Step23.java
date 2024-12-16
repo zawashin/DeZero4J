@@ -15,9 +15,9 @@ public class Step23 extends Step {
         Variable[] xs = new Variable[2];
         xs[0] = new Variable(1.0);
         xs[1] = new Variable(2.0);
-        System.out.println(xs[0].plus(xs[1]));
-        System.out.println(xs[0].minus(xs[1]));
+        System.out.println(xs[0].add(xs[1]));
+        System.out.println(xs[0].subtract(xs[1]));
         System.out.println(xs[0].rminus(xs[1]));
-        System.out.println(xs[0].times(xs[1]));
+        System.out.println(xs[0].multiply(xs[1]));
     }
 }

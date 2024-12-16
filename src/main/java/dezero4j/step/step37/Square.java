@@ -16,10 +16,10 @@ public class Square extends Function {
     public Variable[] backward(Variable... gys) {
         /*
         Tensor x = getInputs()[0].getData();
-        return new Tensor[]{x.times(gys[0]).times(2)};
+        return new Tensor[]{x.multiply(gys[0]).multiply(2)};
 
          */
         Variable x = getInputs()[0];
-        return new Variable[]{x.times(gys[0]).times(2)};
+        return new Variable[]{x.multiply(gys[0]).multiply(2)};
     }
 }

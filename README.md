@@ -14,10 +14,7 @@
     - NumPy代わりの[Tensor](https://github.com/zawashin/Tensor4J)を扱うクラスライブラリの実装**も**目指す
         - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
-    - 4階まで対応
-        - [Deepnetts](https://github.com/deepnetts/deepnetts-communityedition)のTensorクラスに倣う
-    - 四則演算、数学関数を除くメソッドは深層学習で必要な2階までしか実装していない
-        - **必要に応じて**対応は可能(なはず)
+    - 四則演算、数学関数などのメソッドは深層学習で必要な2階までしか実装していない
 
 ## 開発環境構成
 
@@ -26,7 +23,7 @@
 | Python 3   | Eclipse Temurin™ JDK 21-LTS                               |
 | NumPy      | [Tensor4J](https://github.com/zawashin/Tensor4J)          |
 | matplotlib | **必要に応じて**[JFreeChart](https://www.jfree.org/jfreechart/) |
-| CuPy       | CUDAは使えないので不要                                             |
+| CuPy       | CUDAは~~使えない~~使わないので不要                                     |
 | Pillow     | 画像認識などは行う予定がないので不要                                        |
 | Graphviz   | 計算グラフの可視化は行わないので不要                                        |
 
@@ -305,16 +302,13 @@ public class Variable {
 - Javaなので演算子の多重定義が出来ない
     - Variableクラスに各種演算メソッドを定義
     - **Scala**や**Kotlin**は演算子のオーバーロードが出来る
-    - 二項演算クラスの命名はKotlinに**倣う**
-        - Mul → Times
-        - Add → Plus
 - Variableクラスに四則演算のメソッド
 
 ```java
 public class Variable {
 // ... 略
-    public Variable plus(Variable other) {
-        Function f = new Plus();
+    public Variable add(Variable other) {
+        Function f = new Add();
         return f.forward(this, other)[0];
     }
 
@@ -331,13 +325,13 @@ public class Variable {
 ```java
 public class Variable {
 // ... 略
-    public Variable plus(Variable other) {
-        Function f = new Plus();
+    public Variable add(Variable other) {
+        Function f = new Add();
         return f.forward(this, other)[0];
     }
 
-    public Variable plus(double other) {
-        Function f = new Plus();
+    public Variable add(double other) {
+        Function f = new Add();
         return f.forward(this, new Variable(Utils.create(other, this.getShape())))[0];
     }
 // ... 略
@@ -349,8 +343,8 @@ public class Variable {
 
 - Javaなので(以下略)
 - 四則演算のクラス
-    - Minus
-    - Div
+    - Subtract
+    - Divide
 - 負数演算クラス
     - Neg
 - 累乗演算クラス
@@ -374,7 +368,7 @@ public class Variable {
 ```java
 public class Sphere {
     public Variable calc(Variable... xs) {
-        return xs[0].square().plus(xs[1].square());
+        return xs[0].square().add(xs[1].square());
     }
     // ... 略
 }
@@ -386,7 +380,7 @@ public class Sphere {
 ```java
 public class Matyas {
     public Variable calc(Variable... xs) {
-        return xs[0].square().plus(xs[1].square()).times(0.26).minus(xs[0].times(xs[1]).times(0.48));
+        return xs[0].square().add(xs[1].square()).multiply(0.26).subtract(xs[0].multiply(xs[1]).multiply(0.48));
     }
     // ... 略
 }
@@ -398,7 +392,7 @@ public class Matyas {
 ```java
 public class Matyas {
     public Variable calc(Variable... xs) {
-        return ((xs[0].plus(xs[1]).plus(1)).pow(2)).plus(1).times(constant(19).minus(constant(14).times(xs[0])).plus(constant(3).times(xs[0].pow(2))).minus(constant(14).times(xs[1])).plus(constant(6).times(xs[0]).times(xs[1])).plus(constant(3).times(xs[1].pow(2)))).times(constant(30).plus(constant(2).times(xs[0]).minus(constant(3).times(xs[1])).pow(2).times(constant(18).minus(constant(32).times(xs[0])).plus(constant(12).times(xs[0].pow(2))).plus(constant(48).times(xs[1])).minus(constant(36).times(xs[0]).times(xs[1])).plus(constant(27).times(xs[1].pow(2))))));
+        return ((xs[0].add(xs[1]).add(1)).pow(2)).add(1).multiply(constant(19).subtract(constant(14).multiply(xs[0])).add(constant(3).multiply(xs[0].pow(2))).subtract(constant(14).multiply(xs[1])).add(constant(6).multiply(xs[0]).multiply(xs[1])).add(constant(3).multiply(xs[1].pow(2)))).multiply(constant(30).add(constant(2).multiply(xs[0]).subtract(constant(3).multiply(xs[1])).pow(2).multiply(constant(18).subtract(constant(32).multiply(xs[0])).add(constant(12).multiply(xs[0].pow(2))).add(constant(48).multiply(xs[1])).subtract(constant(36).multiply(xs[0]).multiply(xs[1])).add(constant(27).multiply(xs[1].pow(2))))));
     }
     // ... 略
 }
@@ -428,8 +422,8 @@ public class Step28 extends Step {
         for (int i = 0; i < maxIteration; i++) {
             // ... 略
             for (Variable x : xs) {
-                //x.getData().minusAssign(x.getGrad().times(learningRate));
-                x.minusAssign(new Variable(x.getGrad().times(learningRate)));
+                //x.getData().minusAssign(x.getGrad().multiply(learningRate));
+                x.minusAssign(new Variable(x.getGrad().multiply(learningRate)));
             }
             // ... 略
         }
@@ -472,7 +466,7 @@ public class Variable {
                         if (x.grad == null) {
                             x.grad = gx;
                         } else {
-                            x.grad = x.grad.plus(gx);
+                            x.grad = x.grad.add(gx);
                         }
                     }
                 }
@@ -495,7 +489,7 @@ public class Cos extends Function {
     @Override
     public Variable[] backward(Variable... gys) {
         Variable x = inputs[0];
-        return new Variable[]{(x.sin().neg()).times(gys[0])};
+        return new Variable[]{(x.sin().neg()).multiply(gys[0])};
     }
 }
 ```
@@ -549,6 +543,5 @@ public class Tensor implements Cloneable, Serializable {
     - Sumクラスのbackwarddメソッドで必要なforwardメソッドのみ
 
 ### Step40：ブロードキャストを行う関数
-
 - 四則演算クラスのbroadcast対応
 

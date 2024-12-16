@@ -15,7 +15,7 @@ public class Tanh extends Function {
     @Override
     public Variable[] backward(Variable... gys) {
         Variable y = getOutput(0);
-        Variable gx = gys[0].times(y.pow(2).rminus(1));
+        Variable gx = gys[0].multiply(y.pow(2).rminus(1));
         return new Variable[]{gx};
     }
 }

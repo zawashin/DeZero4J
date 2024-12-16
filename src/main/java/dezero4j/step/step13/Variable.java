@@ -108,13 +108,13 @@ public class Variable {
         return f.forward(this)[0];
     }
 
-    public Variable plus(Variable other) {
-        Function f = new Plus();
+    public Variable add(Variable other) {
+        Function f = new Add();
         return f.forward(this, other)[0];
     }
 
-    public Variable plus(double other) {
-        Function f = new Plus();
+    public Variable add(double other) {
+        Function f = new Add();
         return f.forward(this, new Variable(other))[0];
     }
 

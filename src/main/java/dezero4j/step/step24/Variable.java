@@ -69,7 +69,7 @@ public class Variable {
                     // 複製しないとダメ
                     f.inputs[i].grad = gxs[i].clone();
                 } else {
-                    f.inputs[i].grad.plusAssign(gxs[i]);
+                    f.inputs[i].grad.addAssign(gxs[i]);
                 }
 
                 if (x.getCreator() != null) {
@@ -128,63 +128,63 @@ public class Variable {
         return data.getValues();
     }
 
-    public Variable plus(Variable other) {
-        Function f = new Plus();
+    public Variable add(Variable other) {
+        Function f = new Add();
         return f.forward(this, other)[0];
     }
 
-    public Variable plus(double other) {
-        Function f = new Plus();
+    public Variable add(double other) {
+        Function f = new Add();
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
-    public Variable minus(Variable other) {
-        Function f = new Minus();
+    public Variable subtract(Variable other) {
+        Function f = new Subtract();
         return f.forward(this, other)[0];
     }
 
-    public Variable minus(double other) {
-        Function f = new Minus();
+    public Variable subtract(double other) {
+        Function f = new Subtract();
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable rminus(Variable other) {
-        Function f = new Minus();
+        Function f = new Subtract();
         return f.forward(other, this)[0];
     }
 
     public Variable rminus(double other) {
-        Function f = new Minus();
+        Function f = new Subtract();
         return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
-    public Variable times(Variable other) {
-        Function f = new Times();
+    public Variable multiply(Variable other) {
+        Function f = new Multiply();
         return f.forward(this, other)[0];
     }
 
-    public Variable times(double other) {
-        Function f = new Times();
+    public Variable multiply(double other) {
+        Function f = new Multiply();
         return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 
-    public Variable div(Variable other) {
-        Function f = new Div();
+    public Variable divide(Variable other) {
+        Function f = new Divide();
         return f.forward(this, other)[0];
     }
 
-    public Variable div(double other) {
-        Function f = new Div();
+    public Variable divide(double other) {
+        Function f = new Divide();
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
     public Variable rdiv(Variable other) {
-        Function f = new Div();
+        Function f = new Divide();
         return f.forward(other, this)[0];
     }
 
     public Variable rdiv(double other) {
-        Function f = new Div();
+        Function f = new Divide();
         return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
 

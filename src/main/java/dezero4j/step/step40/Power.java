@@ -26,11 +26,11 @@ public class Power extends Function {
     public Variable[] backward(Variable[] gys) {
         /*
         Tensor x = inputs[0].getData();
-        return new Tensor[]{x.pow(index - 1).times(gys[0]).times(index)};
+        return new Tensor[]{x.pow(index - 1).multiply(gys[0]).multiply(index)};
 
          */
         Variable x = inputs[0];
-        return new Variable[]{x.pow(index - 1).times(gys[0]).times(index)};
+        return new Variable[]{x.pow(index - 1).multiply(gys[0]).multiply(index)};
     }
 
 }

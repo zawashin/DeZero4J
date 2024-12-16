@@ -16,7 +16,7 @@ public class Sin extends Function {
     @Override
     public Tensor[] backward(Tensor[] gys) {
         Tensor x = inputs[0].getData();
-        return new Tensor[]{x.cos().times(gys[0])};
+        return new Tensor[]{x.cos().multiply(gys[0])};
     }
 
 }

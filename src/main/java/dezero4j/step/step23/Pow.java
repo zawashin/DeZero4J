@@ -25,7 +25,7 @@ public class Pow extends Function {
     @Override
     public Tensor[] backward(Tensor[] gys) {
         Tensor x = inputs[0].getData();
-        return new Tensor[]{x.pow(index - 1).times(gys[0]).times(index)};
+        return new Tensor[]{x.pow(index - 1).multiply(gys[0]).multiply(index)};
     }
 
 }

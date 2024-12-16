@@ -13,7 +13,7 @@ public class Step37 extends Step {
         System.out.println(x);
         Variable c = new Variable(new double[][]{{10, 20, 30}, {40, 50, 60}});
         System.out.println(c);
-        Variable t = x.plus(c);
+        Variable t = x.add(c);
         System.out.println(t);
         t.backward(false, true);
         System.out.println(x.grad);

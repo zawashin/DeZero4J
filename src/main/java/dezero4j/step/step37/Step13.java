@@ -18,8 +18,8 @@ public class Step13 extends Step {
 
         Function square = new Square();
         Function square2 = new Square();
-        Function plus = new Plus();
-        Variable z = plus.forward(square.forward(x)[0], square2.forward(y)[0])[0];
+        Function add = new Add();
+        Variable z = add.forward(square.forward(x)[0], square2.forward(y)[0])[0];
 
         z.backward();
         System.out.println(z.getData());

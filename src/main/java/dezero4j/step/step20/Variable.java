@@ -69,7 +69,7 @@ public class Variable {
                     // 複製しないとダメ
                     f.inputs[i].grad = gxs[i].clone();
                 } else {
-                    f.inputs[i].grad.plusAssign(gxs[i]);
+                    f.inputs[i].grad.addAssign(gxs[i]);
                 }
 
                 if (x.getCreator() != null) {
@@ -128,18 +128,18 @@ public class Variable {
         return data.getValues();
     }
 
-    public Variable plus(Variable other) {
-        Function f = new Plus();
+    public Variable add(Variable other) {
+        Function f = new Add();
         return f.forward(this, other)[0];
     }
 
-    public Variable plus(double other) {
-        Function f = new Plus();
+    public Variable add(double other) {
+        Function f = new Add();
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
-    public Variable times(Variable other) {
-        Function f = new Times();
+    public Variable multiply(Variable other) {
+        Function f = new Multiply();
         return f.forward(this, other)[0];
     }
 
