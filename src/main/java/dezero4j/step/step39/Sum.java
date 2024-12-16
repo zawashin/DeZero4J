@@ -3,15 +3,12 @@ package dezero4j.step.step39;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
-import java.util.Arrays;
-
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Sum extends Function {
 
     private int axis;
-    private int[] xShape;
 
     public Sum() {
         this(-1);
@@ -19,20 +16,31 @@ public class Sum extends Function {
 
     public Sum(int axis) {
         this.axis = axis;
+        System.out.println(this.axis);
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        this.xShape = xs[0].getShape();
-        Tensor y = Utils.sum(xs[0], axis);
-        return new Tensor[]{y};
+        return new Tensor[]{Utils.sum(xs[0], axis)};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Tensor gy = Utils.reshapeSumBackward(gys[0].getData(), xShape, axis);
-        Variable gx = new Variable(Utils.broadcastTo(gy, xShape));
-        return new Variable[]{new Variable(gx)};
+        //if(this.axis != -1||this.axis == Tensor.RANK_MAX) {
+        if (gys[0].getRank() > 0) {
+            System.err.println("Not Implemented");
+            throw new RuntimeException("Not Implemented Yet");
+        }
+        //return new Variable[]{gys[0].broadcastTo(inputs[0].getShapes())};
+        Tensor gy0 = Utils.fill(gys[0].getValues()[0], inputs[0].getShapes());
+        return new Variable[]{new Variable(gy0)};
+    }
+
+    @Override
+    public Sum clone() {
+        Sum clone = (Sum) super.clone();
+        clone.axis = this.axis;
+        return clone;
     }
 
     public static void main(String[] args) {
@@ -50,7 +58,7 @@ public class Sum extends Function {
         }
         x = new Variable(t);
         System.out.println(x);
-        y = x.sum();
+        y = (x.multiply(2)).sum();
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.getGrad());
@@ -64,20 +72,26 @@ public class Sum extends Function {
         }
         x = new Variable(t);
         System.out.println(x);
-        y = x.sum();
+        y = (x.multiply(Math.PI)).sum();
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
+        x.clearGrad();
         System.out.println(x.sum(0));
         y.backward(false, true);
         System.out.println(x.grad);
+        x.clearGrad();
         System.out.println(x.sum(1));
         y.backward(false, true);
         System.out.println(x.grad);
+        x.clearGrad();
         x = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
         y = x.sum();
         y.backward(false, true);
         System.out.println(x.grad);
+
+        /*
+         */
     }
 
 }

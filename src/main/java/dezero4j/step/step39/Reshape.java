@@ -3,8 +3,6 @@ package dezero4j.step.step39;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
-import java.util.Arrays;
-
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -23,7 +21,7 @@ public class Reshape extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].reshape(inputs[0].getShape())};
+        return new Variable[]{gys[0].reshape(inputs[0].getShapes())};
     }
 
     public static void main(String[] args) {

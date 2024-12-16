@@ -15,7 +15,7 @@ public class Rosenbrock extends MultivariateFunction {
     }
 
     public Variable calc(Variable... xs) {
-        shape = xs[0].getShape();
+        shape = xs[0].getShapes();
         // z = 100 * (x0 - x0**2)**2 + (x0 - 1)**2
         Variable z = c(100).multiply(xs[1].subtract(xs[0].pow(2)).pow(2)).add((xs[0].subtract(c(1)).pow(2)));
         return z;

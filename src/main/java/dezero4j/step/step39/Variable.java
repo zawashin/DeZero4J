@@ -3,6 +3,7 @@ package dezero4j.step.step39;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 
@@ -10,6 +11,8 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable implements Cloneable, Serializable {
+    @Serial
+    private static final long serialVersionUID = -5871953224193632639L;
     protected Tensor data;
     protected Variable grad;
     protected Function creator;
@@ -53,23 +56,19 @@ public class Variable implements Cloneable, Serializable {
 
     @Override
     public Variable clone() {
-        return clone(new IdentityHashMap<>());
-    }
-
-    protected Variable clone(Map<Variable, Variable> clones) {
-        // すでにクローンされたインスタンスがある場合はそれを返す
-        if (clones.containsKey(this)) {
-            return clones.get(this);
-        }
-
         try {
-            Variable cloned = (Variable) super.clone();
-            clones.put(this, cloned); // クローンをマップに登録
-            cloned.data = data != null ? data.clone() : null;
-            cloned.grad = grad != null ? grad.clone(clones) : null; // 再帰的にクローン
-            cloned.creator = creator;  // Functionに対する処理（必要ならdeep copyする）
-            cloned.generation = generation;
-            return cloned;
+            Variable clone = (Variable) super.clone();
+            // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+            if (data != null) {
+                clone.data = data.clone();
+            }
+            if (grad != null) {
+                clone.grad = grad.clone();
+            }
+            if (creator != null) {
+                clone.creator = creator.clone();
+            }
+            return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
@@ -77,7 +76,7 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = new Variable(Utils.fill(1.0, data.getShape()));
+            grad = new Variable(Utils.fill(1.0, data.getShapes()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         Set<Function> seenSet = new HashSet<>();
@@ -90,7 +89,7 @@ public class Variable implements Cloneable, Serializable {
             Variable[] gys = new Variable[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
                 if (f.outputs[i].grad == null) {
-                    gys[i] = new Variable(Utils.fill(1.0, data.getShape()));
+                    gys[i] = new Variable(Utils.fill(1.0, data.getShapes()));
                 } else {
                     gys[i] = f.outputs[i].grad;
                 }
@@ -184,8 +183,8 @@ public class Variable implements Cloneable, Serializable {
         return data.getLength();
     }
 
-    public int[] getShape() {
-        return data.getShape();
+    public int[] getShapes() {
+        return data.getShapes();
     }
 
     public double[] getValues() {
@@ -199,7 +198,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable add(double other) {
         Function f = new Add();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShapes())))[0];
     }
 
     public void plusAssign(Variable other) {
@@ -213,7 +212,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable subtract(double other) {
         Function f = new Subtract();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShapes())))[0];
     }
 
     public void minusAssign(Variable other) {
@@ -227,7 +226,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rminus(double other) {
         Function f = new Subtract();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShapes())), this)[0];
     }
 
     public Variable multiply(Variable other) {
@@ -237,7 +236,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable multiply(double other) {
         Function f = new Multiply();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShapes())), this)[0];
     }
 
     public Variable divide(Variable other) {
@@ -247,7 +246,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable divide(double other) {
         Function f = new Divide();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(Utils.fill(other, this.getShapes())))[0];
     }
 
     public Variable rdiv(Variable other) {
@@ -257,7 +256,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rdiv(double other) {
         Function f = new Divide();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(Utils.fill(other, this.getShapes())), this)[0];
     }
 
     public Variable exp() {
@@ -305,11 +304,6 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this)[0];
     }
 
-    public Variable broadcastTo(int... shape) {
-        Function f = new BroadcastTo(shape);
-        return f.forward(this)[0];
-    }
-
     public Variable sum() {
         Function f = new Sum(-1);
         return f.forward(this)[0];
@@ -317,6 +311,11 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable sum(int axis) {
         Function f = new Sum(axis);
+        return f.forward(this)[0];
+    }
+
+    public Variable broadcastTo(int... shape) {
+        Function f = new BroadcastTo(shape);
         return f.forward(this)[0];
     }
 

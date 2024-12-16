@@ -8,21 +8,20 @@ import tensor4j.Utils;
  */
 public class BroadcastTo extends Function {
 
-    private int[] shape;
+    private final int[] shapes;
 
-    public BroadcastTo(int[] shape) {
-        this.shape = shape;
+    public BroadcastTo(int[] shapes) {
+        this.shapes = shapes;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
+        return new Tensor[]{Utils.broadcastTo(xs[0], shapes)};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Tensor gx = Utils.sumTo(gys[0].getData(), inputs[0].getShape());
-        return new Variable[]{new Variable(gx)};
+        return new Variable[]{gys[0].sumTo(inputs[0].getShapes())};
     }
 
     public static void main(String[] args) {

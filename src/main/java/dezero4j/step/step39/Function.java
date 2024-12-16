@@ -60,14 +60,20 @@ public abstract class Function implements Cloneable, Serializable {
 
 
     public Function clone() {
-        Function clone;
         try {
-            clone = (Function) super.clone();
+            Function clone = (Function) super.clone();
+            // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+            if (clone.inputs != null) {
+                clone.inputs = inputs;
+                //clone.inputs = inputs.clone();
+            }
+            if (clone.outputs != null) {
+                clone.outputs = outputs;
+                //clone.outputs = outputs.clone();
+            }
+            return clone;
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
+            throw new AssertionError();
         }
-        clone.inputs = this.inputs.clone();
-        clone.outputs = this.outputs.clone();
-        return clone;
     }
 }

@@ -10,24 +10,20 @@ import java.util.Arrays;
  */
 public class SumTo extends Function {
 
-    private final int[] shape;
-    //private int[] xShape;
+    private final int[] shapes;
 
-    public SumTo(int[] shape) {
-        this.shape = shape;
+    public SumTo(int[] shapes) {
+        this.shapes = shapes;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        //this.xShape = xs[0].getShape();
-        Tensor y = Utils.sumTo(xs[0], shape);
-        return new Tensor[]{y};
+        return new Tensor[]{Utils.sumTo(xs[0], shapes)};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), inputs[0].getShape()))};
-        //return new Variable[]{new Variable(Utils.broadcastTo(gys[0].getData(), xShape))};
+        return new Variable[]{gys[0].broadcastTo(inputs[0].getShapes())};
     }
 
     public static void main(String[] args) {
@@ -50,7 +46,7 @@ public class SumTo extends Function {
         System.out.println("{4, 5, 6}");
         xs[0] = new Variable(new double[]{4, 5, 6});
         x = xs[0];
-        System.out.println(Arrays.toString(x.getShape()));
+        System.out.println(Arrays.toString(x.getShapes()));
         System.out.println(x);
         y = x.sumTo(new int[]{1, 1});
         System.out.println(y);
@@ -62,7 +58,7 @@ public class SumTo extends Function {
         System.out.println("{4, 5, 6}T");
         xs[0] = new Variable(new double[][]{{4}, {5}, {6}});
         x = xs[0];
-        System.out.println(Arrays.toString(x.getShape()));
+        System.out.println(Arrays.toString(x.getShapes()));
         System.out.println(x);
         y = x.sumTo(new int[]{1, 1});
         System.out.println(y);
