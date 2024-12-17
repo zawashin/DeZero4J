@@ -23,7 +23,7 @@ public class SumTo extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].broadcastTo(inputs[0].getShapes())};
+        return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
     }
 
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class SumTo extends Function {
         System.out.println("{4, 5, 6}");
         xs[0] = new Variable(new double[]{4, 5, 6});
         x = xs[0];
-        System.out.println(Arrays.toString(x.getShapes()));
+        System.out.println(Arrays.toString(x.getShape()));
         System.out.println(x);
         y = x.sumTo(new int[]{1, 1});
         System.out.println(y);
@@ -58,7 +58,7 @@ public class SumTo extends Function {
         System.out.println("{4, 5, 6}T");
         xs[0] = new Variable(new double[][]{{4}, {5}, {6}});
         x = xs[0];
-        System.out.println(Arrays.toString(x.getShapes()));
+        System.out.println(Arrays.toString(x.getShape()));
         System.out.println(x);
         y = x.sumTo(new int[]{1, 1});
         System.out.println(y);

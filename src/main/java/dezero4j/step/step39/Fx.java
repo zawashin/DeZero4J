@@ -6,7 +6,7 @@ package dezero4j.step.step39;
 public class Fx extends MultivariateFunction {
     public Variable calc(Variable... xs) {
         //    z = x ** 4  - 2  * x ** 2
-        shape = xs[0].getShapes();
+        shape = xs[0].getShape();
         return (xs[0].pow(4)).subtract(xs[0].pow(2).multiply(c(2)));
     }
 }

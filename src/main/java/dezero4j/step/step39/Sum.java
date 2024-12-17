@@ -16,7 +16,10 @@ public class Sum extends Function {
 
     public Sum(int axis) {
         this.axis = axis;
-        System.out.println(this.axis);
+    }
+
+    public void setAxis(int axis) {
+        this.axis = axis;
     }
 
     @Override
@@ -26,21 +29,35 @@ public class Sum extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
+        Tensor gy0 = null;
+        double[] values;
         //if(this.axis != -1||this.axis == Tensor.RANK_MAX) {
-        if (gys[0].getRank() > 0) {
-            System.err.println("Not Implemented");
-            throw new RuntimeException("Not Implemented Yet");
-        }
-        //return new Variable[]{gys[0].broadcastTo(inputs[0].getShapes())};
-        Tensor gy0 = Utils.fill(gys[0].getValues()[0], inputs[0].getShapes());
-        return new Variable[]{new Variable(gy0)};
-    }
+        if (gys[0].getRank() == 0) {
+            gy0 = Utils.fill(gys[0].getValues()[0], inputs[0].getShape());
+        } else if (gys[0].getRank() == 1) {
+            if (axis == 0) {
+                gy0 = new Tensor(inputs[0].getShape()[0], gys[0].getLength());
+                values = gys[0].getValues();
+                for (int i = 0; i < gy0.getShape(0); i++) {
+                    for (int j = 0; j < gy0.getShape(1); j++) {
+                        gy0.setValue(values[j], i, j);
+                    }
+                }
+            } else if (axis == 1) {
+                gy0 = new Tensor(gys[0].getLength(), inputs[0].getShape()[1]);
+                values = gys[0].getValues();
+                for (int i = 0; i < gy0.getShape(0); i++) {
+                    for (int j = 0; j < gy0.getShape(1); j++) {
+                        gy0.setValue(values[i], i, j);
+                    }
+                }
+            } else {
 
-    @Override
-    public Sum clone() {
-        Sum clone = (Sum) super.clone();
-        clone.axis = this.axis;
-        return clone;
+            }
+        } else {
+        }
+        return new Variable[]{new Variable(gy0)};
+        //return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
     }
 
     public static void main(String[] args) {
@@ -63,6 +80,9 @@ public class Sum extends Function {
         y.backward(false, true);
         System.out.println(x.getGrad());
 
+        /*
+         */
+
         double[][] matrix = new double[3][5];
         System.out.println("2D");
         t = new Tensor(matrix);
@@ -72,21 +92,17 @@ public class Sum extends Function {
         }
         x = new Variable(t);
         System.out.println(x);
-        y = (x.multiply(Math.PI)).sum();
+        y = (x.multiply(2)).sum();
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
         x.clearGrad();
-        System.out.println(x.sum(0));
+        y = (x.multiply(3)).sum(0);
+        System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
         x.clearGrad();
-        System.out.println(x.sum(1));
-        y.backward(false, true);
-        System.out.println(x.grad);
-        x.clearGrad();
-        x = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-        y = x.sum();
+        y = (x.multiply(3)).sum(0);
         y.backward(false, true);
         System.out.println(x.grad);
 

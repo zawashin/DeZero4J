@@ -53,23 +53,19 @@ public class Variable implements Cloneable, Serializable {
 
     @Override
     public Variable clone() {
-        return clone(new IdentityHashMap<>());
-    }
-
-    protected Variable clone(Map<Variable, Variable> clones) {
-        // すでにクローンされたインスタンスがある場合はそれを返す
-        if (clones.containsKey(this)) {
-            return clones.get(this);
-        }
-
         try {
-            Variable cloned = (Variable) super.clone();
-            clones.put(this, cloned); // クローンをマップに登録
-            cloned.data = data != null ? data.clone() : null;
-            cloned.grad = grad != null ? grad.clone(clones) : null; // 再帰的にクローン
-            cloned.creator = creator;  // Functionに対する処理（必要ならdeep copyする）
-            cloned.generation = generation;
-            return cloned;
+            Variable clone = (Variable) super.clone();
+            // TODO: このクローンが元の内部を変更できないようにミュータブルな状態をここにコピーします
+            if (data != null) {
+                clone.data = data.clone();
+            }
+            if (grad != null) {
+                clone.grad = grad.clone();
+            }
+            if (creator != null) {
+                clone.creator = creator.clone();
+            }
+            return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
@@ -77,7 +73,7 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = new Variable(Utils.fill(1.0, data.getShapes()));
+            grad = new Variable(Utils.fill(1.0, getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         Set<Function> seenSet = new HashSet<>();
@@ -90,7 +86,7 @@ public class Variable implements Cloneable, Serializable {
             Variable[] gys = new Variable[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
                 if (f.outputs[i].grad == null) {
-                    gys[i] = new Variable(Utils.fill(1.0, data.getShapes()));
+                    gys[i] = new Variable(Utils.fill(1.0, data.getShape()));
                 } else {
                     gys[i] = f.outputs[i].grad;
                 }
@@ -181,7 +177,7 @@ public class Variable implements Cloneable, Serializable {
     }
 
     public int[] getShape() {
-        return data.getShapes();
+        return data.getShape();
     }
 
     public double[] getValues() {

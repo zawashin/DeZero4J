@@ -37,7 +37,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.fill(1.0, data.getShapes());
+            grad = Utils.fill(1.0, data.getShape());
         }
 
         Function[] funcs = {creator};
@@ -86,7 +86,7 @@ public class Variable {
     }
 
     public int[] getShape() {
-        return data.getShapes();
+        return data.getShape();
     }
 
     public double[] getValues() {

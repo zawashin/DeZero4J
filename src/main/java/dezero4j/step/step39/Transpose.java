@@ -46,7 +46,7 @@ public class Transpose extends Function {
         System.out.println("xT = " + y);
         x = new Variable(new double[]{1, 4});
         System.out.println(x);
-        System.out.println(Arrays.toString(x.getShapes()));
+        System.out.println(Arrays.toString(x.getShape()));
         y = x.transpose();
         System.out.println(y);
         y.backward(false, true);

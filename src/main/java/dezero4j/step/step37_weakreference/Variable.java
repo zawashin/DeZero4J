@@ -77,7 +77,7 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = new Variable(Utils.fill(1.0, data.getShapes()));
+            grad = new Variable(Utils.fill(1.0, data.getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         Set<Function> seenSet = new HashSet<>();
@@ -90,7 +90,7 @@ public class Variable implements Cloneable, Serializable {
             Variable[] gys = new Variable[f.outputs.size()];
             for (int i = 0; i < f.outputs.size(); i++) {
                 if (f.getOutput(i).grad == null) {
-                    gys[i] = new Variable(Utils.fill(1.0, data.getShapes()));
+                    gys[i] = new Variable(Utils.fill(1.0, data.getShape()));
                 } else {
                     gys[i] = f.getOutput(i).grad;
                 }
@@ -181,7 +181,7 @@ public class Variable implements Cloneable, Serializable {
     }
 
     public int[] getShape() {
-        return data.getShapes();
+        return data.getShape();
     }
 
     public double[] getValues() {

@@ -21,7 +21,7 @@ public class Reshape extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].reshape(inputs[0].getShapes())};
+        return new Variable[]{gys[0].reshape(inputs[0].getShape())};
     }
 
     public static void main(String[] args) {

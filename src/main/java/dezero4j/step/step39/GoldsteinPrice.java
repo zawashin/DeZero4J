@@ -22,7 +22,7 @@ public class GoldsteinPrice extends MultivariateFunction {
 
     @Override
     public Variable calc(Variable... xs) {
-        shape = xs[0].getShapes();
+        shape = xs[0].getShape();
         /*
         val z = (1 + (xs[0] + xs[1] + 1).pow(2) * (19 - 14*xs[0] + 3*xs[0].pow(2) - 14*xs[1] + 6*xs[0]*xs[1] + 3*xs[1].pow(2))) *
                 (30 + (2*xs[0] - 3*xs[1]).pow(2) * (18 - 32*xs[0] + 12*xs[0].pow(2) + 48*xs[1] - 36*xs[0]*xs[1] + 27*xs[1].pow(2)))
