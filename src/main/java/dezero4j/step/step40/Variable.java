@@ -1,4 +1,4 @@
-package dezero4j.step.step39;
+package dezero4j.step.step40;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -311,6 +311,16 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable sum(int axis) {
         Function f = new Sum(axis);
+        return f.forward(this)[0];
+    }
+
+    public Variable broadcastTo(int... shape) {
+        Function f = new BroadcastTo(shape);
+        return f.forward(this)[0];
+    }
+
+    public Variable sumTo(int... shape) {
+        Function f = new SumTo(shape);
         return f.forward(this)[0];
     }
 
