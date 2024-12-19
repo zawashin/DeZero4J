@@ -8,15 +8,15 @@ import tensor4j.Utils;
  */
 public class BroadcastTo extends Function {
 
-    private final int[] shapes;
+    private final int[] shape;
 
-    public BroadcastTo(int[] shapes) {
-        this.shapes = shapes;
+    public BroadcastTo(int[] shape) {
+        this.shape = shape;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.broadcastTo(xs[0], shapes)};
+        return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
     }
 
     @Override

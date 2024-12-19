@@ -52,9 +52,12 @@ public class Sum extends Function {
                     }
                 }
             } else {
-
+                System.err.println(Utils.ERROR_RANK);
+                throw new RuntimeException(Utils.ERROR_RANK);
             }
         } else {
+            System.err.println(Utils.ERROR_RANK);
+            throw new RuntimeException(Utils.ERROR_RANK);
         }
         return new Variable[]{new Variable(gy0)};
         //return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
@@ -91,19 +94,22 @@ public class Sum extends Function {
             t.getValues()[n] = n++;
         }
         x = new Variable(t);
-        System.out.println(x);
         y = (x.multiply(2)).sum();
+        System.out.println(x);
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
         x.clearGrad();
         y = (x.multiply(3)).sum(0);
-        System.out.println(y);
         y.backward(false, true);
+        System.out.println(x);
+        System.out.println(y);
         System.out.println(x.grad);
         x.clearGrad();
-        y = (x.multiply(3)).sum(0);
+        y = (x.multiply(4)).sum(1);
         y.backward(false, true);
+        System.out.println(x);
+        System.out.println(y);
         System.out.println(x.grad);
 
         /*

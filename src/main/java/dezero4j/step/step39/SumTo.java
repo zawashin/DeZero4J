@@ -10,15 +10,15 @@ import java.util.Arrays;
  */
 public class SumTo extends Function {
 
-    private final int[] shapes;
+    private final int[] shape;
 
-    public SumTo(int[] shapes) {
-        this.shapes = shapes;
+    public SumTo(int[] shape) {
+        this.shape = shape;
     }
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.sumTo(xs[0], shapes)};
+        return new Tensor[]{Utils.sumTo(xs[0], shape)};
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SumTo extends Function {
         x = xs[0];
         System.out.println(Arrays.toString(x.getShape()));
         System.out.println(x);
-        y = x.sumTo(new int[]{1, 1});
+        y = x.sumTo(1);
         System.out.println(y);
         x.clearGrad();
         y.backward(false, true);
