@@ -31,16 +31,16 @@ public class Multiply extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Variable[] gys_ = new Variable[2];
-        if (broadcast) {
-            gys_[0] = gys[0].sumTo(inputs[0].getShape());
-            gys_[1] = gys[0].sumTo(inputs[1].getShape());
-        } else {
-            gys_[0] = gys[0].clone();
-            gys_[1] = gys[0].clone();
-        }
+        Variable[] gxs = new Variable[2];
         Variable[] xs = inputs;
-        return new Variable[]{xs[1].multiply(gys_[0]), xs[0].multiply(gys_[0])};
+        if (broadcast) {
+            gxs[0] = (xs[1].multiply(gys[0]).sumTo(inputs[0].getShape()));
+            gxs[1] = (xs[0].multiply(gys[0]).sumTo(inputs[1].getShape()));
+        } else {
+            gxs[0] = xs[1].multiply(gys[0]);
+            gxs[1] = xs[0].multiply(gys[0]);
+        }
+        return gxs;
     }
 
     public static void main(String[] args) {
@@ -48,7 +48,7 @@ public class Multiply extends Function {
             Variable[] xs = new Variable[2];
             xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
             xs[1] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-            System.out.println("x");
+            System.out.println("2x2");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
             Variable y = xs[0].multiply(xs[1]);
@@ -61,7 +61,7 @@ public class Multiply extends Function {
             Variable[] xs = new Variable[2];
             xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
             xs[1] = new Variable(3);
-            System.out.println("x");
+            System.out.println("2x0");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
 
@@ -73,9 +73,9 @@ public class Multiply extends Function {
         }
         {
             Variable[] xs = new Variable[2];
-            xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
+            xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 7}});
             xs[1] = new Variable(new double[]{1, 2, 4});
-            System.out.println("x");
+            System.out.println("2x1");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
 

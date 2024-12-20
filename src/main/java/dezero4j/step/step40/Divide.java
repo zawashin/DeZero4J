@@ -10,15 +10,16 @@ import java.util.Arrays;
  */
 public class Divide extends Function {
     boolean broadcast = false;
+    int[] shape;
 
     @Override
     public Tensor[] forward(Tensor... xs) {
         Tensor[] xs_ = new Tensor[2];
         if (!Arrays.equals(xs[0].getShape(), xs[1].getShape())) {
             broadcast = true;
-            int[] shape_ = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
-            xs_[0] = xs[0].broadcastTo(shape_);
-            xs_[1] = xs[1].broadcastTo(shape_);
+            shape = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
+            xs_[0] = xs[0].broadcastTo(shape);
+            xs_[1] = xs[1].broadcastTo(shape);
 
         } else {
             xs_[0] = xs[0];
@@ -29,56 +30,59 @@ public class Divide extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Variable[] gys_ = new Variable[2];
+        Variable[] gxs = new Variable[2];
+        Variable[] xs = new Variable[2];
         if (broadcast) {
-            gys_[0] = gys[0].sumTo(inputs[0].getShape());
-            gys_[1] = gys[0].sumTo(inputs[1].getShape());
+            xs[0] = inputs[0].broadcastTo(shape);
+            xs[1] = inputs[1].broadcastTo(shape);
+            gxs[0] = gys[0].divide(xs[1]);
+            gxs[1] = gys[0].neg().multiply(xs[0].divide(xs[1].square()));
+            gxs[0] = gxs[0].sumTo(inputs[0].getShape());
+            gxs[1] = gxs[1].sumTo(inputs[1].getShape());
         } else {
-            gys_[0] = gys[0].clone();
-            gys_[1] = gys[0].clone();
+            xs[0] = inputs[0];
+            xs[1] = inputs[1];
+            gxs[0] = gys[0].divide(xs[1]);
+            gxs[1] = gys[0].neg().multiply(xs[0].divide(xs[1].square()));
         }
-        Variable[] xs = inputs;
-        return new Variable[]{gys_[0].divide(xs[0]), gys_[0].neg().multiply(xs[0].divide(xs[1].square()))};
+
+        return gxs;
     }
 
     public static void main(String[] args) {
-        {
             Variable[] xs = new Variable[2];
-            xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-            xs[1] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-            System.out.println("x");
+        xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 8}});
+        xs[1] = new Variable(3);
+        Variable y = xs[0].divide(xs[1]);
+        y.backward(false, true);
+        System.out.println("x:[2nd]/[0th]");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
-            Variable y = xs[0].divide(xs[1]);
-            y.backward(false, true);
+        System.out.println(y);
             System.out.println(xs[0].grad);
             System.out.println(xs[1].grad);
-        }
-        {
-            Variable[] xs = new Variable[2];
-            xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-            xs[1] = new Variable(3);
-            System.out.println("x");
+        xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 7}});
+        xs[1] = new Variable(new double[]{1, 2, 4});
+        y = xs[0].divide(xs[1]);
+        y.backward(false, true);
+        System.out.println("x:[2nd]/[1st]");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
+        System.out.println(y);
+            System.out.println(xs[0].grad);
+            System.out.println(xs[1].grad);
 
-            Variable y = xs[0].divide(xs[1]);
-            y.backward(false, true);
-            System.out.println(xs[0].grad);
-            System.out.println(xs[1].grad);
-        }
-        {
-            Variable[] xs = new Variable[2];
-            xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
-            xs[1] = new Variable(new double[]{1, 2, 4});
+        xs[0] = new Variable(new double[][]{{1, 2, 3}, {4, 5, 8}});
+        xs[1] = new Variable(new double[][]{{1, 2, 4}, {1, 2, 4}});
+        y = xs[0].divide(xs[1]);
+        y.backward(false, true);
             System.out.println("x");
+        System.out.println("x:[2nd]/[2nd]");
             System.out.println(xs[0]);
             System.out.println(xs[1]);
-
-            Variable y = xs[0].divide(xs[1]);
-            y.backward(false, true);
             System.out.println(xs[0].grad);
             System.out.println(xs[1].grad);
-        }
+        /*
+         */
     }
 }

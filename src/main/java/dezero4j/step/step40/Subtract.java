@@ -37,7 +37,7 @@ public class Subtract extends Function {
             gxs[1] = gys[0].sumTo(inputs[1].getShape()).neg();
         } else {
             gxs[0] = gys[0].clone();
-            gxs[1] = (gys[0].clone()).neg();
+            gxs[1] = gys[0].clone().neg();
         }
         return new Variable[]{gxs[0], gxs[1]};
     }
