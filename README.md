@@ -539,9 +539,11 @@ public class Tensor implements Cloneable, Serializable {
 ### Step39：和を求める関数
 - Sumクラス
     - keepDimsについては保留
-- BroadcastToクラス
-    - Sumクラスのbackwarddメソッドで必要なforwardメソッドのみ
 
 ### Step40：ブロードキャストを行う関数
+
+- BroadcastToクラス
+- SumToクラス
+    - keepDimsについては保留
 - 四則演算クラスのbroadcast対応
 
