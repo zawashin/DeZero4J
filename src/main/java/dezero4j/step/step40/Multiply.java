@@ -12,37 +12,6 @@ public class Multiply extends Function {
 
     boolean broadcast = false;
 
-    @Override
-    public Tensor[] forward(Tensor... xs) {
-
-        Tensor[] xs_ = new Tensor[2];
-        if (!Arrays.equals(xs[0].getShape(), xs[1].getShape())) {
-            broadcast = true;
-            int[] shape_ = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
-            xs_[0] = xs[0].broadcastTo(shape_);
-            xs_[1] = xs[1].broadcastTo(shape_);
-
-        } else {
-            xs_[0] = xs[0];
-            xs_[1] = xs[1];
-        }
-        return new Tensor[]{xs_[0].multiply(xs_[1])};
-    }
-
-    @Override
-    public Variable[] backward(Variable... gys) {
-        Variable[] gxs = new Variable[2];
-        Variable[] xs = inputs;
-        if (broadcast) {
-            gxs[0] = (xs[1].multiply(gys[0]).sumTo(inputs[0].getShape()));
-            gxs[1] = (xs[0].multiply(gys[0]).sumTo(inputs[1].getShape()));
-        } else {
-            gxs[0] = xs[1].multiply(gys[0]);
-            gxs[1] = xs[0].multiply(gys[0]);
-        }
-        return gxs;
-    }
-
     public static void main(String[] args) {
         {
             Variable[] xs = new Variable[2];
@@ -85,5 +54,36 @@ public class Multiply extends Function {
             System.out.println(xs[0].grad);
             System.out.println(xs[1].grad);
         }
+    }
+
+    @Override
+    public Tensor[] forward(Tensor... xs) {
+
+        Tensor[] xs_ = new Tensor[2];
+        if (!Arrays.equals(xs[0].getShape(), xs[1].getShape())) {
+            broadcast = true;
+            int[] shape_ = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
+            xs_[0] = xs[0].broadcastTo(shape_);
+            xs_[1] = xs[1].broadcastTo(shape_);
+
+        } else {
+            xs_[0] = xs[0];
+            xs_[1] = xs[1];
+        }
+        return new Tensor[]{xs_[0].multiply(xs_[1])};
+    }
+
+    @Override
+    public Variable[] backward(Variable... gys) {
+        Variable[] gxs = new Variable[2];
+        Variable[] xs = inputs;
+        if (broadcast) {
+            gxs[0] = (xs[1].multiply(gys[0]).sumTo(inputs[0].getShape()));
+            gxs[1] = (xs[0].multiply(gys[0]).sumTo(inputs[1].getShape()));
+        } else {
+            gxs[0] = xs[1].multiply(gys[0]);
+            gxs[1] = xs[0].multiply(gys[0]);
+        }
+        return gxs;
     }
 }

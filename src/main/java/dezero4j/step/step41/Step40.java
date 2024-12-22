@@ -6,6 +6,10 @@ import dezero4j.step.Step;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Step40 extends Step {
+    public static void main(String[] args) {
+        new Step40().calc();
+    }
+
     @Override
     public void calc() {
         System.out.println("Multiply");
@@ -77,9 +81,5 @@ public class Step40 extends Step {
         System.out.println(xs[1]);
         System.out.println(xs[0].grad);
         System.out.println(xs[1].grad);
-    }
-
-    public static void main(String[] args) {
-        new Step40().calc();
     }
 }

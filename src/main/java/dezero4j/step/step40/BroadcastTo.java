@@ -14,16 +14,6 @@ public class BroadcastTo extends Function {
         this.shape = shape;
     }
 
-    @Override
-    public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
-    }
-
-    @Override
-    public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].sumTo(inputs[0].getShape())};
-    }
-
     public static void main(String[] args) {
         Variable[] xs = new Variable[1];
         xs[0] = new Variable(new double[]{1, 2, 3});
@@ -67,5 +57,15 @@ public class BroadcastTo extends Function {
         x.clearGrad();
         y.backward(false, true);
         System.out.println(x.grad);
+    }
+
+    @Override
+    public Tensor[] forward(Tensor... xs) {
+        return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
+    }
+
+    @Override
+    public Variable[] backward(Variable... gys) {
+        return new Variable[]{gys[0].sumTo(inputs[0].getShape())};
     }
 }

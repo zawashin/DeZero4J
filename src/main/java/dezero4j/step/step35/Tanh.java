@@ -1,7 +1,6 @@
 package dezero4j.step.step35;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>

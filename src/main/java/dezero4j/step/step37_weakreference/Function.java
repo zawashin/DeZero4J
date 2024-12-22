@@ -67,13 +67,9 @@ public abstract class Function {
         WeakReference<Variable> weakRef = outputs.get(n);
         Variable y = weakRef.get();
 
-        if (y != null) {
-            // y を使って処理を行う
-            return y;
-        } else {
-            // y がガベージコレクションで解放されている場合の処理
-            return null;
-        }
+        // y を使って処理を行う
+        // y がガベージコレクションで解放されている場合の処理
+        return y;
     }
 
     public int getGeneration() {

@@ -7,6 +7,10 @@ import dezero4j.step.Step;
  */
 public class Step37 extends Step {
 
+    public static void main(String[] args) {
+        new Step37().calc();
+    }
+
     @Override
     public void calc() {
         Variable x = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
@@ -22,9 +26,5 @@ public class Step37 extends Step {
         System.out.println(c);
         Variable t = x.add(c);
         System.out.println(t);
-    }
-
-    public static void main(String[] args) {
-        new Step37().calc();
     }
 }

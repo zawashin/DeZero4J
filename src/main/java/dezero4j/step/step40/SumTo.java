@@ -16,16 +16,6 @@ public class SumTo extends Function {
         this.shape = shape;
     }
 
-    @Override
-    public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.sumTo(xs[0], shape)};
-    }
-
-    @Override
-    public Variable[] backward(Variable... gys) {
-        return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
-    }
-
     public static void main(String[] args) {
         Variable[] xs;
         Variable x;
@@ -36,7 +26,7 @@ public class SumTo extends Function {
         xs[0] = new Variable(6);
         x = xs[0];
         System.out.println(x);
-        y = x.sumTo(new int[]{1, 1});
+        y = x.sumTo(1, 1);
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
@@ -60,7 +50,7 @@ public class SumTo extends Function {
         x = xs[0];
         System.out.println(Arrays.toString(x.getShape()));
         System.out.println(x);
-        y = x.sumTo(new int[]{1, 1});
+        y = x.sumTo(1, 1);
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
@@ -76,5 +66,15 @@ public class SumTo extends Function {
         System.out.println(x.grad);
 
          */
+    }
+
+    @Override
+    public Tensor[] forward(Tensor... xs) {
+        return new Tensor[]{Utils.sumTo(xs[0], shape)};
+    }
+
+    @Override
+    public Variable[] backward(Variable... gys) {
+        return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};
     }
 }

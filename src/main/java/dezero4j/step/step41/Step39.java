@@ -6,6 +6,10 @@ import dezero4j.step.Step;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Step39 extends Step {
+    public static void main(String[] args) {
+        new Step39().calc();
+    }
+
     @Override
     public void calc() {
         Variable x = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
@@ -20,9 +24,5 @@ public class Step39 extends Step {
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
-    }
-
-    public static void main(String[] args) {
-        new Step39().calc();
     }
 }

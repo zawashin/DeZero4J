@@ -7,6 +7,10 @@ import dezero4j.step.Step;
  */
 public class Step37 extends Step {
 
+    public static void main(String[] args) {
+        new Step37().calc();
+    }
+
     @Override
     public void calc() {
         Variable x = new Variable(new double[][]{{1, 2, 3}, {4, 5, 6}});
@@ -18,9 +22,5 @@ public class Step37 extends Step {
         t.backward(false, true);
         System.out.println(x.grad);
         System.out.println(c.grad);
-    }
-
-    public static void main(String[] args) {
-        new Step37().calc();
     }
 }

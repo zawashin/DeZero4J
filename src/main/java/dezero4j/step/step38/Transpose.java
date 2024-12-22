@@ -1,6 +1,5 @@
 package dezero4j.step.step38;
 
-import tensor4j.Operators;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
@@ -18,26 +17,6 @@ public class Transpose extends Function {
         if (axes.length == 1 || axes.length > 2) {
             throw new RuntimeException("# of Axes must be 0 or 2");
         }
-    }
-
-    @Override
-    public Tensor[] forward(Tensor... xs) {
-        if (xs[0].getRank() <= 2) {
-            return new Tensor[]{Utils.transpose(xs[0])};
-        } else {
-            return new Tensor[]{Utils.transpose(xs[0], axes[0], axes[1])};
-        }
-    }
-
-    @Override
-    public Variable[] backward(Variable... gys) {
-        Tensor gx;
-        if (gys[0].getRank() <= 2) {
-            gx = Utils.transpose(gys[0].getData());
-        } else {
-            gx = Utils.transpose(gys[0].getData(), axes[1], axes[0]);
-        }
-        return new Variable[]{new Variable(gx)};
     }
 
     public static void main(String[] args) {
@@ -58,5 +37,25 @@ public class Transpose extends Function {
         System.out.println(y);
         y.backward(false, true);
         System.out.println(x.grad);
+    }
+
+    @Override
+    public Tensor[] forward(Tensor... xs) {
+        if (xs[0].getRank() <= 2) {
+            return new Tensor[]{Utils.transpose(xs[0])};
+        } else {
+            return new Tensor[]{Utils.transpose(xs[0], axes[0], axes[1])};
+        }
+    }
+
+    @Override
+    public Variable[] backward(Variable... gys) {
+        Tensor gx;
+        if (gys[0].getRank() <= 2) {
+            gx = Utils.transpose(gys[0].getData());
+        } else {
+            gx = Utils.transpose(gys[0].getData(), axes[1], axes[0]);
+        }
+        return new Variable[]{new Variable(gx)};
     }
 }
