@@ -41,21 +41,13 @@ public class Transpose extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        if (xs[0].getRank() <= 2) {
-            return new Tensor[]{Utils.transpose(xs[0])};
-        } else {
-            return new Tensor[]{Utils.transpose(xs[0], axes[0], axes[1])};
-        }
+        return new Tensor[]{Utils.transpose(xs[0])};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
         Tensor gx;
-        if (gys[0].getRank() <= 2) {
-            gx = Utils.transpose(gys[0].getData());
-        } else {
-            gx = Utils.transpose(gys[0].getData(), axes[1], axes[0]);
-        }
+        gx = Utils.transpose(gys[0].getData());
         return new Variable[]{new Variable(gx)};
     }
 }

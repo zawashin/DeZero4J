@@ -26,15 +26,16 @@ public class Step41 extends Step {
         System.out.println(xs[0].grad);
         System.out.println(xs[1].grad);
 
-        //xs[0] = new Variable(new double[]{4, 5, 6}); // 落ちる！
-        xs[0] = new Variable(new double[][]{{4, 5, 6}});
+        Variable x0 = new Variable(new double[]{4, 5, 6}); // 落ちる！
+        xs[0] = x0.reshape(1, x0.getLength());
         xs[1] = new Variable(new double[][]{{1, 2}, {5, 6}, {9, 10}});
         System.out.println("1x2");
         System.out.println(xs[0]);
         System.out.println(xs[1]);
         y = xs[0].dot(xs[1]);
         System.out.println(y);
-        y.backward(false, true);
+        y.backward(true, true);
+        System.out.println(x0.grad);
         System.out.println(xs[0].grad);
         System.out.println(xs[1].grad);
     }

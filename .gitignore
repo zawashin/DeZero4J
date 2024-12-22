@@ -40,6 +40,7 @@ build/
 ##
 #/src/main/java/dezero4jv1/
 #/src/main/java/dezero4j/*/*.java
+./Numpyのブロードキャストの挙動.md
 /src/main/java/dezero4j/step/DeZeroCpp.md
 /src/main/java/dezero4j/step/make_readme.sh
 /src/main/java/dezero4j/step/*/*.md
