@@ -1,4 +1,4 @@
-package dezero4j.step.step41;
+package dezero4j.step.step42;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -201,7 +201,7 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
-    public void plusAssign(Variable other) {
+    public void addAssign(Variable other) {
         data.addAssign(other.data);
     }
 
@@ -215,7 +215,7 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
-    public void minusAssign(Variable other) {
+    public void subtractAssign(Variable other) {
         data.subtractAssign(other.data);
     }
 
