@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class step43 {
+public class And {
 
     public static Variable predict(Variable x, Variable w1, Variable b1, Variable w2, Variable b2) {
         return ((x.linear(w1, b1)).sigmoid()).linear(w2, b2);
@@ -20,20 +20,23 @@ public class step43 {
 
     public static void main(String[] args) {
         Random random = new Random(System.currentTimeMillis());
-        int n = 100;
-        double[][] xArray = new double[n][1];
-        double[][] yArray = new double[n][1];
-        for (int i = 0; i < xArray.length; i++) {
-            xArray[i][0] = random.nextDouble();
-            yArray[i][0] = Math.sin(2.0 * Math.PI * xArray[i][0]) + random.nextDouble();
-            //yArray[i][0] = Math.sin(2.0 * Math.PI * xArray[i][0]);
-        }
+        int numInputs = 2;
+        int numHiddens = 10;
+        int numOutputs = 1;
+        int n = 4;
+        double[][] xArray = new double[n][numInputs];
+        double[][] yArray = new double[n][numOutputs];
+        xArray[0] = new double[]{0, 0};
+        xArray[1] = new double[]{1, 0};
+        xArray[2] = new double[]{0, 1};
+        xArray[3] = new double[]{1, 1};
+        yArray[0] = new double[]{0};
+        yArray[1] = new double[]{1};
+        yArray[2] = new double[]{1};
+        yArray[3] = new double[]{1};
         Variable x = new Variable(xArray);
         Variable y0 = new Variable(yArray);
 
-        int numInputs = 1;
-        int numHiddens = 10;
-        int numOutputs = 1;
 
         Variable w0 = new Variable(Utils.random(numInputs, numHiddens));
         Variable b0 = new Variable(new double[numHiddens]);
@@ -50,6 +53,8 @@ public class step43 {
         double learningRate = 0.2;
         int iters = 10000;
         for (int i = 0; i < iters; i++) {
+            //Variable y = ((x.linear(w1, b1)).sigmoid()).linear(w2, b2);
+            //Variable y = predict(x, w0, b0, w1, b1);
             Variable y = predict(x, w, b);
             Variable loss = y.mse(y0);
             if (i % 1000 == 0) {
@@ -74,10 +79,10 @@ public class step43 {
         }
 
         Variable y = predict(x, w0, b0, w1, b1);
-        for (int i = 0; i < xArray.length; i++) {
+        for (int i = 0; i < x.getShape()[0]; i++) {
             System.out.println(x.getValues()[i] + "\t" + y.getValues()[i] + "\t" + y0.getData().getValues()[i]);
         }
-        for (int i = 0; i < xArray.length; i++) {
+        for (int i = 0; i < x.getShape()[0]; i++) {
             Variable xi = new Variable(xArray[i]);
             y = predict(xi, w0, b0, w1, b1);
             System.out.println(xi.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getData().getValues()[i]);
