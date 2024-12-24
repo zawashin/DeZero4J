@@ -1,4 +1,4 @@
-package dezero4j.step.step42;
+package dezero4j.step.step43;
 
 import tensor4j.Tensor;
 
@@ -14,7 +14,9 @@ public class MeanSquaredError extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        Variable[] gxs = new Variable[2];
+        int numInputs = 2;
+        int numOutputs = 1;
+        Variable[] gxs = new Variable[numInputs];
         Variable dx = inputs[0].subtract(inputs[1]);
         Variable gy = gys[0].broadcastTo(dx.getShape());
         //gxs[0] = gy.multiply(dx).multiply(new Variable(2.0 / dx.getLength(), inputs[0].getShape()));

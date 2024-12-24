@@ -1,4 +1,4 @@
-package dezero4j.step.step42;
+package dezero4j.step.step43;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
@@ -52,6 +52,13 @@ public class Variable implements Cloneable, Serializable {
             this.creator = variable.creator.clone();
         }
         this.generation = variable.generation;
+    }
+
+    public Variable(double v, int[] shape) {
+        this.data = Utils.fill(v, shape);
+        this.grad = null;
+        this.creator = null;
+        this.generation = 0;
     }
 
     @Override
@@ -219,12 +226,12 @@ public class Variable implements Cloneable, Serializable {
         data.subtractAssign(other.data);
     }
 
-    public Variable rminus(Variable other) {
+    public Variable rSubtract(Variable other) {
         Function f = new Subtract();
         return f.forward(other, this)[0];
     }
 
-    public Variable rminus(double other) {
+    public Variable rSubtract(double other) {
         Function f = new Subtract();
         return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
@@ -249,12 +256,12 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
     }
 
-    public Variable rdiv(Variable other) {
+    public Variable rDivide(Variable other) {
         Function f = new Divide();
         return f.forward(other, this)[0];
     }
 
-    public Variable rdiv(double other) {
+    public Variable rDivide(double other) {
         Function f = new Divide();
         return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
     }
@@ -332,6 +339,16 @@ public class Variable implements Cloneable, Serializable {
     public Variable mse(Variable other) {
         Function f = new MeanSquaredError();
         return f.forward(this, other)[0];
+    }
+
+    public Variable sigmoid() {
+        Function f = new Sigmoid();
+        return f.forward(this)[0];
+    }
+
+    public Variable linear(Variable w, Variable b) {
+        Function function = new Linear();
+        return function.forward(this, w, b)[0];
     }
 
 }
