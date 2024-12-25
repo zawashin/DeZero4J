@@ -1,7 +1,7 @@
-package dezero4j.step.step43;
+package dezero4j.step.step43.bool;
 
 
-import dezero4j.step.Step;
+import dezero4j.step.step43.Variable;
 import tensor4j.Utils;
 
 import java.util.Random;
@@ -9,37 +9,35 @@ import java.util.Random;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class step43 extends Step {
+public class BoolOr {
 
-    public static void main(String[] args) {
-        new step43().calc();
-    }
-
-    public Variable predict(Variable x, Variable w1, Variable b1, Variable w2, Variable b2) {
+    public static Variable predict(Variable x, Variable w1, Variable b1, Variable w2, Variable b2) {
         return ((x.linear(w1, b1)).sigmoid()).linear(w2, b2);
     }
 
-    public Variable predict(Variable x, Variable[] w, Variable[] b) {
+    public static Variable predict(Variable x, Variable[] w, Variable[] b) {
         return ((x.linear(w[0], b[0])).sigmoid()).linear(w[1], b[1]);
     }
 
-    @Override
-    public void calc() {
+    public static void main(String[] args) {
         Random random = new Random(System.currentTimeMillis());
-        int n = 100;
-        double[][] xArray = new double[n][1];
-        double[][] yArray = new double[n][1];
-        for (int i = 0; i < xArray.length; i++) {
-            xArray[i][0] = random.nextDouble();
-            yArray[i][0] = Math.sin(2.0 * Math.PI * xArray[i][0]) + random.nextDouble();
-            //yArray[i][0] = Math.sin(2.0 * Math.PI * xArray[i][0]);
-        }
+        int numInputs = 2;
+        int numHiddens = 10;
+        int numOutputs = 1;
+        int n = 4;
+        double[][] xArray = new double[n][numInputs];
+        double[][] yArray = new double[n][numOutputs];
+        xArray[0] = new double[]{0, 0};
+        xArray[1] = new double[]{1, 0};
+        xArray[2] = new double[]{0, 1};
+        xArray[3] = new double[]{1, 1};
+        yArray[0] = new double[]{0};
+        yArray[1] = new double[]{1};
+        yArray[2] = new double[]{1};
+        yArray[3] = new double[]{1};
         Variable x = new Variable(xArray);
         Variable y0 = new Variable(yArray);
 
-        int numInputs = 1;
-        int numHiddens = 10;
-        int numOutputs = 1;
 
         Variable w0 = new Variable(Utils.random(numInputs, numHiddens));
         Variable b0 = new Variable(new double[numHiddens]);
@@ -56,6 +54,8 @@ public class step43 extends Step {
         double learningRate = 0.2;
         int iters = 10000;
         for (int i = 0; i < iters; i++) {
+            //Variable y = ((x.linear(w1, b1)).sigmoid()).linear(w2, b2);
+            //Variable y = predict(x, w0, b0, w1, b1);
             Variable y = predict(x, w, b);
             Variable loss = y.mse(y0);
             if (i % 1000 == 0) {
@@ -68,10 +68,10 @@ public class step43 extends Step {
             w1.clearGrad();
             b1.clearGrad();
             loss.backward(false, true);
-            Variable dw0 = w0.grad;
-            Variable db0 = b0.grad;
-            Variable dw1 = w1.grad;
-            Variable db1 = b1.grad;
+            Variable dw0 = w0.getGrad();
+            Variable db0 = b0.getGrad();
+            Variable dw1 = w1.getGrad();
+            Variable db1 = b1.getGrad();
 
             w0.subtractAssign(dw0.multiply(learningRate));
             b0.subtractAssign(db0.multiply(learningRate));
@@ -80,13 +80,15 @@ public class step43 extends Step {
         }
 
         Variable y = predict(x, w0, b0, w1, b1);
-        for (int i = 0; i < xArray.length; i++) {
+        for (int i = 0; i < x.getShape()[0]; i++) {
             System.out.println(x.getValues()[i] + "\t" + y.getValues()[i] + "\t" + y0.getData().getValues()[i]);
         }
-        for (int i = 0; i < xArray.length; i++) {
+        for (int i = 0; i < x.getShape()[0]; i++) {
             Variable xi = new Variable(xArray[i]);
             y = predict(xi, w0, b0, w1, b1);
             System.out.println(xi.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getData().getValues()[i]);
         }
+
     }
+
 }

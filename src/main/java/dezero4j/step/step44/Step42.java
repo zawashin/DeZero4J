@@ -1,13 +1,20 @@
-package dezero4j.step.step43;
+package dezero4j.step.step44;
+
+import dezero4j.step.Step;
 
 import java.util.Random;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class step42 {
+public class Step42 extends Step {
 
     public static void main(String[] args) {
+        new Step42().calc();
+    }
+
+    @Override
+    public void calc() {
         Random random = new Random(0);
         int n = 101;
         double[][] xArray = new double[n][1];

@@ -1,6 +1,7 @@
-package dezero4j.step.step43;
+package dezero4j.step.step43.bool;
 
 
+import dezero4j.step.step43.Variable;
 import tensor4j.Utils;
 
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Random;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class And {
+public class BoolXor {
 
     public static Variable predict(Variable x, Variable w1, Variable b1, Variable w2, Variable b2) {
         return ((x.linear(w1, b1)).sigmoid()).linear(w2, b2);
@@ -33,7 +34,7 @@ public class And {
         yArray[0] = new double[]{0};
         yArray[1] = new double[]{1};
         yArray[2] = new double[]{1};
-        yArray[3] = new double[]{1};
+        yArray[3] = new double[]{0};
         Variable x = new Variable(xArray);
         Variable y0 = new Variable(yArray);
 
@@ -67,10 +68,10 @@ public class And {
             w1.clearGrad();
             b1.clearGrad();
             loss.backward(false, true);
-            Variable dw0 = w0.grad;
-            Variable db0 = b0.grad;
-            Variable dw1 = w1.grad;
-            Variable db1 = b1.grad;
+            Variable dw0 = w0.getGrad();
+            Variable db0 = b0.getGrad();
+            Variable dw1 = w1.getGrad();
+            Variable db1 = b1.getGrad();
 
             w0.subtractAssign(dw0.multiply(learningRate));
             b0.subtractAssign(db0.multiply(learningRate));

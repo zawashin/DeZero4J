@@ -1,9 +1,7 @@
-package dezero4j.step.step43;
+package dezero4j.step.step44;
 
 import tensor4j.Tensor;
 import tensor4j.Utils;
-
-import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
