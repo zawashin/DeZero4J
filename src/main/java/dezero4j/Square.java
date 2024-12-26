@@ -14,7 +14,7 @@ public class Square extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        /*
+        /*j
         Tensor x = getInputs()[0].getData();
         return new Tensor[]{x.multiply(gys[0]).multiply(2)};
 
