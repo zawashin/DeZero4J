@@ -38,6 +38,7 @@ build/
 .DS_Store
 
 ##
+/out/artifacts/*
 #/src/main/java/dezero4jv1/
 #/src/main/java/dezero4j/*/*.java
 ./Numpyのブロードキャストの挙動.md
