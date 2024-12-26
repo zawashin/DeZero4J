@@ -1,17 +1,12 @@
-package dezero4j.step.step45;
+package dezero4j.step.step46;
 
-import tensor4j.Utils;
 
 import java.util.Random;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class TwoLayerNet extends Model {
-
-    public TwoLayerNet(int numHidden, int numOutput) {
-        super(new int[]{numHidden, numOutput});
-    }
+public class Step45 {
 
     public static void main(String[] args) {
         Random random = new Random(System.currentTimeMillis());
@@ -32,9 +27,10 @@ public class TwoLayerNet extends Model {
         xs[0] = x;
         Variable y0 = new Variable(yArray);
 
+        int numInputs = 1;
         int numHiddens = 10;
         int numOutputs = 1;
-        TwoLayerNet model = new TwoLayerNet(numHiddens, numOutputs);
+        Model model = new TwoLayerNet(numHiddens, numOutputs);
 
         double learningRate = 0.2;
         int iters = 10000;
@@ -42,8 +38,9 @@ public class TwoLayerNet extends Model {
         for (int i = 0; i < iters; i++) {
             Variable y = model.predict(xs);
             Variable loss = y.mse(y0);
-            if (i % 1000 == 0) {
+            if (i % 100 == 0) {
                 System.out.println("Loss[" + i + "] = " + loss);
+                System.gc();
             }
             model.clearGrads();
             loss.backward(false, true);
@@ -53,11 +50,6 @@ public class TwoLayerNet extends Model {
         Variable y = model.predict(xs);
         for (int i = 0; i < x.getLength(); i++) {
             System.out.println(x.getData().getValues()[i] + "\t" + y.getData().getValues()[i] + "\t" + y0.getData().getValues()[i]);
-        }
-        for (int i = 0; i < xArray.length; i++) {
-            x = new Variable(xArray[i]);
-            y = model.predict(new Variable[]{x});
-            System.out.println(x.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getValues()[i]);
         }
         /*
          */

@@ -1,6 +1,4 @@
-package dezero4j.step.step45;
-
-import tensor4j.Utils;
+package dezero4j.step.step46;
 
 import java.util.Random;
 
