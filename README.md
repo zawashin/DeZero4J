@@ -569,17 +569,15 @@ public class Tensor implements Cloneable, Serializable {
 
 - Matmulクラス
     - 1階テンソルと2階テンソルのbackward計算が落ちる
-        - 対策として、1階テンソルを**明示的に**2階テンソルにする必要がある
-        - 1階テンソルの場合を考慮した処理を導入
-
+      - 対策として、1階テンソルを**明示的に**2階テンソルにする必要がある
+      - 1階テンソルの場合を考慮した処理を導入
 ### Step42：線形回帰
-
 - Matmulの修正
-    - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
-    - Dezeroでは計算できないようなのでこちらがバグってる可能性もあり
+  - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
+  - Dezeroでは計算できないようなのでこちらがバグってる可能性もあり
+
 
 ### Step43：ニューラルネットワーク
-
 - Linearクラスの実装
 - Sigmoidクラスの実装
 -
@@ -591,21 +589,20 @@ public class Tensor implements Cloneable, Serializable {
 - Affineクラス
     - Layerの派生クラス
     - Fuctionクラスの具象化Linearクラスと名前が被るのでAffineクラスと名称変更する
-        - ゼロつく①の線形層クラス
+      - ゼロつく①の線形層クラス
 
 ### Step45：レイヤをまとめるレイヤ
-
 - ActivationFunctionクラス
-    - 活性化関数をFucntionクラスの派生クラスとして定義
-        - Sigmoid, ReLU, Tanh, Softmaxなど
-        - **※Dezeroにはない**
-        - Variableクラスの派生クラスParameterがあるからなんとなく
+  - 活性化関数をFucntionクラスの派生クラスとして定義
+    - Sigmoid, ReLU, Tanh, Softmaxなど
+    - **※Dezeroにはない**
+    - Variableクラスの派生クラスParameterがあるからなんとなく
 - Modelクラス
     - Layerの派生抽象クラス
 - TwoLayerNetクラス
-    - Modelクラスの派生クラス
+  - Modelクラスの派生クラス
 - MultiLayerPerceptronクラス
-    - Modelクラスの派生クラス
+  - Modelクラスの派生クラス
 
 ### Step46 Optimizerによるパラメータ更新
 

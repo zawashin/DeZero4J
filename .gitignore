@@ -42,10 +42,10 @@ build/
 #/src/main/java/dezero4jv1/
 #/src/main/java/dezero4j/*/*.java
 ./Numpyのブロードキャストの挙動.md
-/src/main/java/dezero4j/step/DeZeroCpp.md
-/src/main/java/dezero4j/step/AltConfig/
-/src/main/java/dezero4j/step/step37_weakreference/
-/src/main/java/dezero4j/step/make_readme.sh
+/src/main/java/step/DeZeroCpp.md
+/src/main/java/step/AltConfig/
+/src/main/java/step/step37_weakreference/
+/src/main/java/step/make_readme.sh
 /src/main/java/dezero4j/step/*/*.md
-/src/main/java/dezero4j/step/step00/
+/src/main/java/step/step00/
 *zip
