@@ -28,10 +28,13 @@
 | Graphviz   | 計算グラフの可視化は行わないので不要                                        |
 
 ## ~~1回目の実装挑戦~~
+
 - ~~ステップ46の途中まで実装~~
 - ~~OutOfMemoryで落ちる~~
 - ~~例題で**しか**動作しない~~
+
 ## 現状
+
 - Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
 - Step39まで完了
 
@@ -46,6 +49,7 @@
 ## 各ステップの実装についてのメモ
 
 ### Step01：箱としての変数
+
 - Variableクラス
     - NumPyは使えないので取り敢えずdataフィールドはプリミティブ型
 
@@ -219,10 +223,12 @@ public abstract class Function {
     - クラス名をAddからPlusに変更
 
 ### Step12：可変長の引数（改善偏）
+
 - 特になし
 
 
 ### Step13：可変長の引数（逆伝播偏）
+
 - 特になし
 
 
@@ -352,18 +358,19 @@ public class Variable {
 - Variableクラスに各演算のメソッドを追加
 
 ### Step23：パッケージとしてまとめる
+
 - 特になし
 
 
 ### Step24：複雑な関数の微分
 
 - 演算子のオーバーロードがないので複雑になりすぎて可読性が**極めて**低い
-  - Copilotに丸投げ
-  - **参考記事**
-      - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
+    - Copilotに丸投げ
+    - **参考記事**
+        - [Javaに演算子オーバーロードを導入すべきときが来たのか](https://blogs.oracle.com/otnjp/post/is-it-time-for-overloading-in-java-ja)
 
 - Sphere関数
-  - $f(x, y) = x^2 + y^2$
+    - $f(x, y) = x^2 + y^2$
 
 ```java
 public class Sphere {
@@ -438,10 +445,12 @@ public class Step28 extends Step {
 
 
 ### Step30：高階微分（準備編）
+
 - 特になし
 
 
 ### Step31：高階微分（理論編）
+
 - 特になし
 
 
@@ -450,6 +459,7 @@ public class Step28 extends Step {
 - Variableクラス
     - gradフィールドをTensorクラスからVariableクラスに変更
     - backwardメソッドを修正
+
 ```java
 public class Variable {
     // ... 略
@@ -478,7 +488,8 @@ public class Variable {
 ```
 
 - Functionクラス
-  - backwardメソッドは順伝播のメソッドを使う
+    - backwardメソッドは順伝播のメソッドを使う
+
 ```java
 // Example 
 public class Cos extends Function {
@@ -496,22 +507,26 @@ public class Cos extends Function {
 
 
 ### Step33：ニュートン法を使った最適化(自動計算)
+
 - Step32までの実装が**正しければ**問題なく動作する
 
 ### Step34：sin 関数の高階微分
+
 - 特になし
 
 ### Step35：高階微分の計算グラフ
+
 - Tanhクラスを実装
 
 ### Step36：高階微分以外の用途
+
 - 特になし
 
 
 ### Step37：テンソルを使う
 
 - Tensorクラスを事前に実装しておいた
-  - StepごとにTensorを拡張してったら破綻した
+    - StepごとにTensorを拡張してったら破綻した
 
 ```java
 public class Tensor implements Cloneable, Serializable {
@@ -523,20 +538,23 @@ public class Tensor implements Cloneable, Serializable {
 }
 
 ```
+
 - テンソルでの逆伝播の確認
-  - Step39で登場するSumクラスの使用
-    - backwardメソッドでBroadcastToクラスが必要
-    - BroadcastToクラスのbackwardメソッドでSumToクラスが必要
-  - Step39、40まで保留
+    - Step39で登場するSumクラスの使用
+        - backwardメソッドでBroadcastToクラスが必要
+        - BroadcastToクラスのbackwardメソッドでSumToクラスが必要
+    - Step39、40まで保留
 
 ### Step38：形状を変える関数
+
 - Reshapeクラス
 - Transoposeクラス
-  - NumPyと同じように0階と1階のテンソルは同値を返すようにした
-    - 0階と1階のテンソルの倒置は、**数学的には存在しない**
-  - 2階まで対応
+    - NumPyと同じように0階と1階のテンソルは同値を返すようにした
+        - 0階と1階のテンソルの倒置は、**数学的には存在しない**
+    - 2階まで対応
 
 ### Step39：和を求める関数
+
 - Sumクラス
     - keepDimsについては保留
 
