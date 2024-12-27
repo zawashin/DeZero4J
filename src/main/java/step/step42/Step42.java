@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class step42 {
+public class Step42 {
 
     public static void main(String[] args) {
         Random random = new Random(0);
