@@ -198,6 +198,10 @@ public class Variable implements Cloneable, Serializable {
         return data.getValues();
     }
 
+    public double getValue(int... indices) {
+        return data.getValue(indices);
+    }
+
     public Variable add(Variable other) {
         Function f = new Add();
         return f.forward(this, other)[0];
