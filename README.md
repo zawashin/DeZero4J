@@ -594,11 +594,12 @@ public class Tensor implements Cloneable, Serializable {
     - Fuctionクラスの具象化Linearクラスと名前が被るのでAffineクラスと名称変更する
       - ゼロつく①の線形層クラス
 
+
 ### Step45：レイヤをまとめるレイヤ
 - ActivationFunctionクラス
   - 活性化関数をFucntionクラスの派生クラスとして定義
     - **※Dezeroにはない**
-        - Variableクラスの派生クラスParameterがあるからなんとなく
+      - Variableクラスの派生クラスParameterがあるからなんとなく
     - Sigmoid, ReLU, Tanh, Softmaxなど
 - Modelクラス
     - Layerの派生抽象クラス
@@ -608,8 +609,32 @@ public class Tensor implements Cloneable, Serializable {
   - Modelクラスの派生クラス
 
 ### Step46 Optimizerによるパラメータ更新
-
 - Optimizerクラス
-    - 抽象クラス
-    - 具象クラスとしてSDGクラスのみ実装
+  - 抽象クラス
+  - 具象クラスとしてSDGクラスのみ実装
+
+### Step47：ソフトマックス関数と交差エントロピー誤差
+
+- TBD
+
+### Step48：多値分類
+
+- TBD
+
+### Step49：Datasetクラスと前処理
+
+- TBD
+
+### Step50 ミニバッチを取り出すDataLoader
+
+- TBD
+
+### Step53 モデルの保存と読み込み
+
+- TBD
+
+### Step54：Dropoutとテストモード
+
+- TBD
+
 
