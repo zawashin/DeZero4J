@@ -14,11 +14,6 @@ public class Multiply extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        /*
-        Tensor[] xs = new Tensor[]{inputs[0].getData(), inputs[1].getData()};
-        return new Tensor[]{xs[1].multiply(gys[0]), xs[0].multiply(gys[0])};
-
-         */
         Variable[] xs = inputs;
         return new Variable[]{xs[1].multiply(gys[0]), xs[0].multiply(gys[0])};
     }

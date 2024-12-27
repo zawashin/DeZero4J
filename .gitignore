@@ -39,8 +39,8 @@ build/
 
 ##
 /out/artifacts/*
-./Numpyのブロードキャストの挙動.md
-./.gitignore
+/Numpyのブロードキャストの挙動.md
+/.gitignore
 /src/main/java/step/DeZeroCpp.md
 /src/main/java/step/AltConfig/
 /src/main/java/step/step37_weakreference/
