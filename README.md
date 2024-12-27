@@ -15,6 +15,8 @@
         - 車輪の再発明？それがどうした！
 - [Tensor](https://github.com/zawashin/Tensor4J)クラスを**先に**実装する
     - 四則演算、数学関数などのメソッドは深層学習で必要な2階までしか実装していない
+  - 途中で細かい修正をした
+- 深層強化学習でも使うことを考えて多値分類のStep47までを当面の目標とする
 
 ## 開発環境構成
 
@@ -595,9 +597,9 @@ public class Tensor implements Cloneable, Serializable {
 ### Step45：レイヤをまとめるレイヤ
 - ActivationFunctionクラス
   - 活性化関数をFucntionクラスの派生クラスとして定義
-    - Sigmoid, ReLU, Tanh, Softmaxなど
     - **※Dezeroにはない**
-    - Variableクラスの派生クラスParameterがあるからなんとなく
+        - Variableクラスの派生クラスParameterがあるからなんとなく
+    - Sigmoid, ReLU, Tanh, Softmaxなど
 - Modelクラス
     - Layerの派生抽象クラス
 - TwoLayerNetクラス
@@ -607,4 +609,7 @@ public class Tensor implements Cloneable, Serializable {
 
 ### Step46 Optimizerによるパラメータ更新
 
+- Optimizerクラス
+    - 抽象クラス
+    - 具象クラスとしてSDGクラスのみ実装
 
