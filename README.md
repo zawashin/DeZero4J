@@ -554,7 +554,6 @@ public class Tensor implements Cloneable, Serializable {
 - Transposeクラス
     - NumPyと同じように0階と1階のテンソルは同値を返すようにした
         - 0階と1階のテンソルの倒置は、**数学的には存在しない**
-    - 2階まで対応
 
 ### Step39：和を求める関数
 
@@ -571,7 +570,7 @@ public class Tensor implements Cloneable, Serializable {
 ### Step41：行列の積
 
 - Matmulクラス
-    - 1階テンソルの場合を考慮した処理を導入
+  - 1階テンソルの場合を考慮した処理を導入
 ### Step42：線形回帰
 - Matmulの修正
   - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
@@ -613,7 +612,6 @@ public class Tensor implements Cloneable, Serializable {
   - MomentumSGDなど後日実装予定
 
 ### Step47：ソフトマックス関数と交差エントロピー誤差
-
 - 以後、dezero4jとしたパッケージを使用
 - TBD
 
