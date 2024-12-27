@@ -75,7 +75,7 @@ public abstract class Model extends Layer {
     }
 
     @Override
-    public Variable[] forward(Variable[] xs) {
+    public Variable[] forward(Variable... xs) {
         ys = new Variable[2 * layers.size()][];
         int n = layers.size() - 1;
         ys[0] = xs;
@@ -94,7 +94,7 @@ public abstract class Model extends Layer {
         return ys[2 * n + 1];
     }
 
-    public Variable predict(Variable[] xs) {
+    public Variable predict(Variable... xs) {
         return forward(xs)[0];
     }
 

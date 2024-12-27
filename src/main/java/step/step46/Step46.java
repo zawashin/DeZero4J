@@ -34,7 +34,7 @@ public class Step46 {
         int iters = 10000;
         //iters = 2;
         for (int i = 0; i < iters; i++) {
-            Variable y = model.predict(xs);
+            Variable y = model.predict(x);
             Variable loss = y.mse(y0);
             if (i % 1000 == 0) {
                 System.out.println("Loss[" + i + "] = " + loss);
@@ -50,5 +50,11 @@ public class Step46 {
             System.out.println(x.getData().getValues()[i] + "\t" + y.getData().getValues()[i] + "\t" + y0.getData().getValues()[i]);
         }
 
+        System.out.println();
+        for (int i = 0; i < x.getLength(); i++) {
+            Variable xi = new Variable(xArray[i]);
+            y = model.predict(xi);
+            System.out.println(xi.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getValues()[i]);
+        }
     }
 }

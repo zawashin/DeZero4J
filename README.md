@@ -551,7 +551,7 @@ public class Tensor implements Cloneable, Serializable {
 ### Step38：形状を変える関数
 
 - Reshapeクラス
-- Transoposeクラス
+- Transposeクラス
     - NumPyと同じように0階と1階のテンソルは同値を返すようにした
         - 0階と1階のテンソルの倒置は、**数学的には存在しない**
     - 2階まで対応
@@ -571,9 +571,7 @@ public class Tensor implements Cloneable, Serializable {
 ### Step41：行列の積
 
 - Matmulクラス
-    - 1階テンソルと2階テンソルのbackward計算が落ちる
-      - 対策として、1階テンソルを**明示的に**2階テンソルにする必要がある
-      - 1階テンソルの場合を考慮した処理を導入
+    - 1階テンソルの場合を考慮した処理を導入
 ### Step42：線形回帰
 - Matmulの修正
   - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
@@ -583,7 +581,6 @@ public class Tensor implements Cloneable, Serializable {
 ### Step43：ニューラルネットワーク
 - Linearクラスの実装
 - Sigmoidクラスの実装
--
 
 ### Step44：パラメータをまとめるレイヤ
 
@@ -600,7 +597,8 @@ public class Tensor implements Cloneable, Serializable {
   - 活性化関数をFucntionクラスの派生クラスとして定義
     - **※Dezeroにはない**
       - Variableクラスの派生クラスParameterがあるからなんとなく
-    - Sigmoid, ReLU, Tanh, Softmaxなど
+    - Sigmoidクラスのみ実装
+    - ReLU, Tanh, Softmaxなど後日実装予定
 - Modelクラス
     - Layerの派生抽象クラス
 - TwoLayerNetクラス
@@ -612,29 +610,25 @@ public class Tensor implements Cloneable, Serializable {
 - Optimizerクラス
   - 抽象クラス
   - 具象クラスとしてSDGクラスのみ実装
+  - MomentumSGDなど後日実装予定
 
 ### Step47：ソフトマックス関数と交差エントロピー誤差
 
+- 以後、dezero4jとしたパッケージを使用
 - TBD
 
 ### Step48：多値分類
-
 - TBD
-
 ### Step49：Datasetクラスと前処理
-
 - TBD
 
 ### Step50 ミニバッチを取り出すDataLoader
-
 - TBD
 
 ### Step53 モデルの保存と読み込み
-
 - TBD
 
 ### Step54：Dropoutとテストモード
-
 - TBD
 
 
