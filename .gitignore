@@ -42,7 +42,7 @@ build/
 #/src/main/java/dezero4jv1/
 #/src/main/java/dezero4j/*/*.java
 ./Numpyのブロードキャストの挙動.md
-./.gitignore
+#./.gitignore
 /src/main/java/step/DeZeroCpp.md
 /src/main/java/step/AltConfig/
 /src/main/java/step/step37_weakreference/
