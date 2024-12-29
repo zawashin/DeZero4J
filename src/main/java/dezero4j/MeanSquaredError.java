@@ -2,10 +2,15 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class MeanSquaredError extends Function {
+
+    @Serial
+    private static final long serialVersionUID = 6446638295559137851L;
 
     @Override
     public Tensor[] forward(Tensor... xs) {
@@ -14,9 +19,7 @@ public class MeanSquaredError extends Function {
 
     @Override
     public Variable[] backward(Variable... gys) {
-        int numInputs = 2;
-        int numOutputs = 1;
-        Variable[] gxs = new Variable[numInputs];
+        Variable[] gxs = new Variable[2];
         Variable dx = inputs[0].subtract(inputs[1]);
         Variable gy = gys[0].broadcastTo(dx.getShape());
         //gxs[0] = gy.multiply(dx).multiply(new Variable(2.0 / dx.getLength(), inputs[0].getShape()));

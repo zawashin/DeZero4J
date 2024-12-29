@@ -122,7 +122,7 @@ public class Softmax0 {
         };
 
         // Backward計算
-        double[][] dx = softmax.backward(dout, output);
+        double[][] dx = softmax.backward(output, output);
 
         // 勾配の表示
         System.out.println("Backward Output:");

@@ -202,6 +202,10 @@ public class Variable implements Cloneable, Serializable {
         return data.getValue(indices);
     }
 
+    public void setValue(double value, int... indices) {
+        data.setValue(value, indices);
+    }
+
     public Variable add(Variable other) {
         Function f = new Add();
         return f.forward(this, other)[0];
@@ -348,6 +352,11 @@ public class Variable implements Cloneable, Serializable {
     public Variable sigmoid() {
         Function f = new Sigmoid();
         return f.forward(this)[0];
+    }
+
+    public Variable softmax(Variable t) {
+        Function f = new Softmax();
+        return f.forward(this, t)[0];
     }
 
     public Variable linear(Variable w, Variable b) {
