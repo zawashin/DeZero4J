@@ -1,7 +1,5 @@
-package step.step47;
+package dezero4j;
 
-import dezero4j.Function;
-import dezero4j.Variable;
 import tensor4j.Tensor;
 
 import java.io.Serial;
@@ -9,57 +7,11 @@ import java.util.Arrays;
 
 public class SoftmaxCrossEntropy extends Function {
 
-    public static void main(String[] args) {
-        {
-            // Example inputs
-            Tensor logits = new Tensor(new double[][]{{2.0, 1.0, 0.1}});
-            Tensor labels = new Tensor(new double[][]{{1.0, 0.0, 0.0}});
-
-            Function f = new SoftmaxCrossEntropy();
-            // Forward pass
-            Variable x = new Variable(logits);
-            Variable t = new Variable(labels);
-            Variable y = f.forward(x, t)[0];
-        /*
-        Cross-Entropy Loss: 0.4170300162778335
-         */
-            System.out.println("Cross-Entropy Loss: " + y);
-
-            // Backward pass
-            y.backward(true, true);
-            Variable gx = x.getGrad();
-            System.out.println("Gradients:");
-            System.out.println(gx);
-        }
-        {
-            // Example inputs
-            Tensor logits = new Tensor(new double[][]{{2.0, 1.0, 0.1}, {1.0, 2.0, 3.0}});
-            Tensor labels = new Tensor(new double[][]{{1.0, 0.0, 0.0}, {0.0, 0.0, 1.0}});
-
-            Function f = new SoftmaxCrossEntropy();
-            // Forward pass
-            Variable x = new Variable(logits);
-            Variable t = new Variable(labels);
-            Variable y = f.forward(x, t)[0];
-        /*
-        Cross-Entropy Loss: 0.4170300162778335
-         */
-            System.out.println("Cross-Entropy Loss: " + y);
-
-            // Backward pass
-            y.backward(true, true);
-            Variable gx = x.getGrad();
-            System.out.println("Gradients:");
-            System.out.println(gx);
-        }
-    }
-
     @Serial
     private static final long serialVersionUID = -7757218444635889221L;
     double[] softmax;
-    double eps;
-    int[][] indices;
     int shape0, shape1;
+    double eps;
 
     public SoftmaxCrossEntropy() {
         this(1.0e-7);
@@ -88,14 +40,14 @@ public class SoftmaxCrossEntropy extends Function {
                 throw new IllegalArgumentException("Rank " + xs[0].getRank() + " is not supported.");
         }
 
-        indices = new int[shape0][shape1];
+        int[][] indices = new int[shape0][shape1];
         for (int i = 0; i < shape0; i++) {
             for (int j = 0; j < shape1; j++) {
                 indices[i][j] = i * shape1 + j;
             }
         }
         // Compute softmax
-        softmax = new double[shape0 * shape1];
+        softmax = new double[xs[0].getLength()];
         // 各行ごとに最大値を計算
         double[] maxValues = new double[shape1];
         Arrays.fill(maxValues, Double.NEGATIVE_INFINITY);
@@ -110,7 +62,7 @@ public class SoftmaxCrossEntropy extends Function {
         for (int i = 0; i < shape0; i++) {
             double sumExp = 0.0;
             for (int j = 0; j < shape1; j++) {
-                softmax[i * shape1 + j] = Math.exp(xs[0].getValues()[indices[i][j]] - maxValues[i]);
+                softmax[indices[i][j]] = Math.exp(xs[0].getValues()[indices[i][j]] - maxValues[i]);
                 sumExp += softmax[indices[i][j]];
             }
             for (int j = 0; j < shape1; j++) {

@@ -1,11 +1,15 @@
 package dezero4j;
 
+import java.io.Serial;
 import java.util.Random;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class TwoLayerNet extends Model {
+
+    @Serial
+    private static final long serialVersionUID = -485411077061436914L;
 
     public TwoLayerNet(int numHidden, int numOutput) {
         super(new int[]{numHidden, numOutput});
