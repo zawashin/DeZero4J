@@ -4,7 +4,7 @@ public class MomentumSGD extends Optimizer {
 
     private double learningRate = 0.01;
     private double momentum = 0.9;  // モメンタム係数
-    private double[] velocity;  // 勾配の速度
+    private final double[] velocity;  // 勾配の速度
 
     public MomentumSGD(Model model, double learningRate, double momentum) {
         super(model);

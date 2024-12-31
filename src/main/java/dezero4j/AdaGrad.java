@@ -3,8 +3,8 @@ package dezero4j;
 public class AdaGrad extends Optimizer {
 
     private double learningRate = 0.01;
-    private double[] gradSquared;  // 勾配の二乗の累積
-    private double epsilon = 1e-8;  // 数値安定性のための小さな定数
+    private final double[] gradSquared;  // 勾配の二乗の累積
+    private final double epsilon = 1e-8;  // 数値安定性のための小さな定数
 
     public AdaGrad(Model model, double learningRate) {
         super(model);

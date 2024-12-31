@@ -3,9 +3,9 @@ package dezero4j;
 public class AdaDelta extends Optimizer {
 
     private double rho = 0.95;  // 移動平均の減衰率
-    private double epsilon = 1e-8;  // 数値安定性のための小さな定数
-    private double[] accumGradSquared;  // 勾配の二乗の移動平均
-    private double[] accumUpdateSquared;  // 更新の二乗の移動平均
+    private final double epsilon = 1e-8;  // 数値安定性のための小さな定数
+    private final double[] accumGradSquared;  // 勾配の二乗の移動平均
+    private final double[] accumUpdateSquared;  // 更新の二乗の移動平均
 
     public AdaDelta(Model model, double rho) {
         super(model);

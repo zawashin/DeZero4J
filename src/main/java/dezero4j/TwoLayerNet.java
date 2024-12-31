@@ -12,7 +12,7 @@ public class TwoLayerNet extends Model {
     private static final long serialVersionUID = -485411077061436914L;
 
     public TwoLayerNet(int numHidden, int numOutput) {
-        super(new int[]{numHidden, numOutput});
+        super(numHidden, numOutput);
     }
 
     public static void main(String[] args) {
@@ -58,7 +58,7 @@ public class TwoLayerNet extends Model {
         }
         for (int i = 0; i < xArray.length; i++) {
             x = new Variable(xArray[i]);
-            y = model.predict(new Variable[]{x});
+            y = model.predict(x);
             System.out.println(x.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getValues()[i]);
         }
         /*
