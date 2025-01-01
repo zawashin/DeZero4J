@@ -1,7 +1,11 @@
 package dezero4j;
 
+import java.io.Serial;
+
 public class AdaDelta extends Optimizer {
 
+    @Serial
+    private static final long serialVersionUID = 5050070461901986605L;
     private double rho = 0.95;  // 移動平均の減衰率
     private final double epsilon = 1e-8;  // 数値安定性のための小さな定数
     private final double[] accumGradSquared;  // 勾配の二乗の移動平均

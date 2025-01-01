@@ -1,30 +1,10 @@
-package step.step47;
+package dezero4j;
 
-import dezero4j.Function;
-import dezero4j.Variable;
 import tensor4j.Tensor;
-import tensor4j.Utils;
 
 import java.io.Serial;
-import java.util.Arrays;
 
 public class SoftmaxCrossEntropy extends Function {
-
-    public static void main(String[] args) {
-        Variable x = new Variable(new double[][]{{-0.61505778, -0.42790161, 0.31733289},
-                {-0.76395313, -0.2497645, 0.18591382},
-                {-0.52006391, -0.96254612, 0.57818938},
-                {-0.94252164, -0.50307479, 0.17576323}});
-        //Variable t = new Variable(new double[][]{{2}, {0}, {1}, {0}});
-        //Variable t = new Variable(new double[][]{{2}, {0}, {1}, {0}});
-        Variable t = new Variable(new double[]{2, 0, 1, 0});
-
-        Function f = new SoftmaxCrossEntropy();
-        Variable loss = f.forward(x, t)[0];
-        System.out.println(loss);
-        loss.backward();
-        System.out.println(x.getGrad());
-    }
 
     @Serial
     private static final long serialVersionUID = -7757218444635889221L;
@@ -111,7 +91,6 @@ public class SoftmaxCrossEntropy extends Function {
                 gx[i][j] *= scale;
             }
         }
-
         return new Variable[]{new Variable(gx).reshape(inputs[0].getShape()), null};
     }
 
