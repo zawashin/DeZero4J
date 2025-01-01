@@ -626,7 +626,7 @@ public class SoftmaxCrossEntropy extends Function {
 }
 ```
 
-- Softmaxクラスを作る必要あった？
+- ~~Softmaxクラスを作る必要あった？~~
 
 ### Step48：多値分類
 - TBD

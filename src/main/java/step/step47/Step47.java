@@ -28,6 +28,9 @@ public class Step47 extends Step {
         System.out.println(loss);
         loss.backward();
         System.out.println(x.getGrad());
+        f = new Softmax();
+        Variable y = f.forward(x)[0];
+        System.out.println(y);
     }
     /*
     variable(1.4967442524053063)
