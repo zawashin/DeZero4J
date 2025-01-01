@@ -614,8 +614,7 @@ public class Tensor implements Cloneable, Serializable {
 ### Step47：ソフトマックス関数と交差エントロピー誤差
 - 以後、dezero4jとしたパッケージを使用
 - SoftmaxCrossEntropyクラスを実装
-    - backwardメソッドの返り値Variable[]は入力の数と一致させるためnullを追加
-
+  - backwardメソッドの返り値Variable[]は入力の数と一致させるためnullを追加
 ```java
 public class SoftmaxCrossEntropy extends Function {
 
@@ -626,6 +625,8 @@ public class SoftmaxCrossEntropy extends Function {
     }
 }
 ```
+
+- Softmaxクラスを作る必要あった？
 
 ### Step48：多値分類
 - TBD
