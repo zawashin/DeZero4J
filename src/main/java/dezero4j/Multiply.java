@@ -3,6 +3,7 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -10,6 +11,8 @@ import java.util.Arrays;
  */
 public class Multiply extends Function {
 
+    @Serial
+    private static final long serialVersionUID = -1496490213630397675L;
     boolean broadcast = false;
 
     public static void main(String[] args) {

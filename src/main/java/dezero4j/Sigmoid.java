@@ -3,10 +3,15 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Sigmoid extends ActivationFunction {
+
+    @Serial
+    private static final long serialVersionUID = 726922453663085425L;
 
     public static void main(String[] args) {
         Function sigmoid = new Sigmoid();

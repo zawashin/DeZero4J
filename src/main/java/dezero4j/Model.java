@@ -1,5 +1,6 @@
 package dezero4j;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,11 @@ import java.util.List;
  */
 public abstract class Model extends Layer {
 
+    @Serial
+    private static final long serialVersionUID = -6327084753832035480L;
     protected List<Layer> layers = new ArrayList<>();
     protected List<ActivationFunction> activates = new ArrayList<>();
-    protected Variable[][] ys;
+    protected transient Variable[][] ys;
 
     public Model(int... numOutputs) {
         super(numOutputs[0]);

@@ -1,9 +1,14 @@
 package dezero4j;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class UsingConfig implements AutoCloseable {
+
+    @Serial
+    private static final long serialVersionUID = 3798644903562374895L;
     private final String name;
     private boolean oldValue;
 

@@ -1,10 +1,14 @@
 package dezero4j;
 
+import java.io.Serial;
+
 public class AdaGrad extends Optimizer {
 
-    private double learningRate = 0.01;
+    @Serial
+    private static final long serialVersionUID = 5799648050718408485L;
     private final double[] gradSquared;  // 勾配の二乗の累積
     private final double epsilon = 1e-8;  // 数値安定性のための小さな定数
+    private double learningRate = 0.01;
 
     public AdaGrad(Model model, double learningRate) {
         super(model);

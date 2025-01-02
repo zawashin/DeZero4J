@@ -2,11 +2,15 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class LeakyReLU extends ActivationFunction {
 
+    @Serial
+    private static final long serialVersionUID = 7837911938568046238L;
     private double slope = 0.2;
 
     public LeakyReLU(double slope) {

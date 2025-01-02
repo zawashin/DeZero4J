@@ -3,11 +3,15 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class BroadcastTo extends Function {
 
+    @Serial
+    private static final long serialVersionUID = -5476127322749795530L;
     private final int[] shape;
 
     public BroadcastTo(int[] shape) {

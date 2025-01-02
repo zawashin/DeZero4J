@@ -2,12 +2,16 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Matmul extends Function {
+
+    @Serial
+    private static final long serialVersionUID = -1801283586208111715L;
 
     @Override
     public Tensor[] forward(Tensor... xs) {

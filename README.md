@@ -39,7 +39,7 @@
 
 - Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
 - Step46まで完了
-  - 全結合の多階層ニューラルネットでの最低限の学習・推論は出来る
+    - 全結合の多階層ニューラルネットでの最低限の学習・推論は出来る
 
 ## 参考資料
 
@@ -570,14 +570,16 @@ public class Tensor implements Cloneable, Serializable {
 ### Step41：行列の積
 
 - Matmulクラス
-  - 1階テンソルの場合を考慮した処理を導入
+    - 1階テンソルの場合を考慮した処理を導入
 ### Step42：線形回帰
+
 - Matmulの修正
-  - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
-  - Dezeroでは計算できないようなのでこちらがバグってる可能性もあり
+    - 0階テンソル(スカラ)の微分値が1x1の2階テンソル(行列)になってしまうバグの修正
+    - Dezeroでは計算できないようなのでこちらがバグってる可能性もあり
 
 
 ### Step43：ニューラルネットワーク
+
 - Linearクラスの実装
 - Sigmoidクラスの実装
 
@@ -588,33 +590,37 @@ public class Tensor implements Cloneable, Serializable {
 - Affineクラス
     - Layerの派生クラス
     - Fuctionクラスの具象化Linearクラスと名前が被るのでAffineクラスと名称変更する
-      - ゼロつく①の線形層クラス
+        - ゼロつく①の線形層クラス
 
 
 ### Step45：レイヤをまとめるレイヤ
+
 - ActivationFunctionクラス
-  - 活性化関数をFucntionクラスの派生クラスとして定義
-    - **※Dezeroにはない**
-      - Variableクラスの派生クラスParameterがあるからなんとなく
-    - Sigmoidクラスのみ実装
-    - ReLU, Tanh, Softmaxなど後日実装予定
+    - 活性化関数をFucntionクラスの派生クラスとして定義
+        - **※Dezeroにはない**
+            - Variableクラスの派生クラスParameterがあるからなんとなく
+        - Sigmoidクラスのみ実装
+        - ReLU, Tanh, Softmaxなど後日実装予定
 - Modelクラス
     - Layerの派生抽象クラス
 - TwoLayerNetクラス
-  - Modelクラスの派生クラス
+    - Modelクラスの派生クラス
 - MultiLayerPerceptronクラス
-  - Modelクラスの派生クラス
+    - Modelクラスの派生クラス
 
 ### Step46 Optimizerによるパラメータ更新
+
 - Optimizerクラス
-  - 抽象クラス
-  - 具象クラスとしてSDGクラスのみ実装
-  - MomentumSGDなど後日実装予定
+    - 抽象クラス
+    - 具象クラスとしてSDGクラスのみ実装
+    - MomentumSGDなど後日実装予定
 
 ### Step47：ソフトマックス関数と交差エントロピー誤差
+
 - 以後、dezero4jとしたパッケージを使用
 - SoftmaxCrossEntropyクラスを実装
-  - backwardメソッドの返り値Variable[]は入力の数と一致させるためnullを追加
+    - backwardメソッドの返り値Variable[]は入力の数と一致させるためnullを追加
+
 ```java
 public class SoftmaxCrossEntropy extends Function {
 
@@ -629,17 +635,35 @@ public class SoftmaxCrossEntropy extends Function {
 - ~~Softmaxクラスを作る必要あった？~~
 
 ### Step48：多値分類
+
 - TBD
 ### Step49：Datasetクラスと前処理
+
 - TBD
 
 ### Step50 ミニバッチを取り出すDataLoader
+
 - TBD
 
 ### Step53 モデルの保存と読み込み
-- TBD
+
+- 各クラスにインターフェイスSerializableを実装し、バイナリ形式で保存と読み書き
+    - ファイルの拡張子はmodelとする
+- 一部クラスのフィールドをtransientとして保存しないようにする
+
+```java
+public class Variable implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5871953224193632639L;
+    // ↓ 保存しない
+    protected transient Variable grad;
+    // ... 略
+}
+```
 
 ### Step54：Dropoutとテストモード
+
 - TBD
 
 

@@ -3,6 +3,7 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -10,6 +11,8 @@ import java.util.Arrays;
  */
 public class Transpose extends Function {
 
+    @Serial
+    private static final long serialVersionUID = 2587299061840819179L;
     int[] axes;
 
     public Transpose(int... axes) {

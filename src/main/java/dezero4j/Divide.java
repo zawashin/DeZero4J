@@ -3,12 +3,16 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Divide extends Function {
+
+    @Serial
+    private static final long serialVersionUID = 1196990071074481144L;
     boolean broadcast = false;
     int[] shape;
 

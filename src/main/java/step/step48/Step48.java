@@ -27,9 +27,11 @@ public class Step48 extends Step {
         Model model = new TwoLayerNet(10, 3);
 
         Optimizer optimizer = new SGD(model, 0.2);
-        int iters = 10000;
-        //iters = 2;
+        int data_size = x.getLength();
+        int iters = data_size / batch_size;
+
         Function f = new SoftmaxCrossEntropy();
+
         for (int i = 0; i < iters; i++) {
 
             Variable y = model.predict(x);

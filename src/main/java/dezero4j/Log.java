@@ -3,10 +3,15 @@ package dezero4j;
 import tensor4j.Operators;
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Log extends Function {
+
+    @Serial
+    private static final long serialVersionUID = -8205250995439686599L;
 
     @Override
     public Tensor[] forward(Tensor... xs) {

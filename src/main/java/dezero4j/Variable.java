@@ -11,10 +11,11 @@ import java.util.*;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Variable implements Cloneable, Serializable {
+
     @Serial
     private static final long serialVersionUID = -5871953224193632639L;
     protected Tensor data;
-    protected Variable grad;
+    protected transient Variable grad;
     protected Function creator;
     protected int generation;
 

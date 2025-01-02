@@ -1,5 +1,6 @@
 package dezero4j;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.List;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public abstract class Layer implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5620991157240433224L;
     protected int numInputs;
     protected List<Integer> numOutputs;
     protected List<Parameter> params;

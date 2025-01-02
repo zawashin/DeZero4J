@@ -1,10 +1,14 @@
 package dezero4j;
 
+import java.io.Serial;
+
 public class MomentumSGD extends Optimizer {
 
+    @Serial
+    private static final long serialVersionUID = 6378280131961899280L;
+    private final double[] velocity;  // 勾配の速度
     private double learningRate = 0.01;
     private double momentum = 0.9;  // モメンタム係数
-    private final double[] velocity;  // 勾配の速度
 
     public MomentumSGD(Model model, double learningRate, double momentum) {
         super(model);

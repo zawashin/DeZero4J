@@ -34,24 +34,6 @@ public class Affine extends Layer {
         function = new Linear();
     }
 
-    public Variable[] forward(Variable[] xs) {
-        if (!initialized) {
-            numInputs = xs[0].getShape()[1];
-            if (!noBias) {
-                params.add(new Parameter(Utils.random(numInputs, numOutputs.getFirst())));
-                params.add(new Parameter(new double[numOutputs.getFirst()]));
-            } else {
-                params.add(new Parameter(Utils.random(numInputs, numOutputs.getFirst())));
-            }
-            initialized = true;
-        }
-        if (!noBias) {
-            return function.forward(xs[0], params.getFirst(), params.getLast());
-        } else {
-            return function.forward(xs[0], params.getFirst());
-        }
-    }
-
     public static void main(String[] args) {
         Random random = new Random(System.currentTimeMillis());
         int n = 100;
@@ -120,6 +102,24 @@ public class Affine extends Layer {
             Variable[] ys3 = layer2.forward(ys2);
             Variable y = ys3[0];
             System.out.println(xArray[i][0] + "\t" + y.getData().getValues()[0] + "\t" + yArray[i][0]);
+        }
+    }
+
+    public Variable[] forward(Variable[] xs) {
+        if (!initialized) {
+            numInputs = xs[0].getShape()[1];
+            if (!noBias) {
+                params.add(new Parameter(Utils.random(numInputs, numOutputs.getFirst())));
+                params.add(new Parameter(new double[numOutputs.getFirst()]));
+            } else {
+                params.add(new Parameter(Utils.random(numInputs, numOutputs.getFirst())));
+            }
+            initialized = true;
+        }
+        if (!noBias) {
+            return function.forward(xs[0], params.getFirst(), params.getLast());
+        } else {
+            return function.forward(xs[0], params.getFirst());
         }
     }
 

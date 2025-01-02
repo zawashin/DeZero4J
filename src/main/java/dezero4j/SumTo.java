@@ -3,6 +3,7 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.util.Arrays;
 
 /**
@@ -10,6 +11,8 @@ import java.util.Arrays;
  */
 public class SumTo extends Function {
 
+    @Serial
+    private static final long serialVersionUID = -582887011392887853L;
     private final int[] shape;
 
     public SumTo(int[] shape) {

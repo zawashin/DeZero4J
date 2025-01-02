@@ -3,50 +3,16 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Linear extends Function {
 
-    public static void main(String[] args) {
-        Random random = new Random(0);
-        int n = 101;
-        double[][] xArray = new double[n][1];
-        double[][] yArray = new double[n][1];
-        for (int i = 0; i < xArray.length; i++) {
-            xArray[i][0] = (double) i / (n - 1);
-            yArray[i][0] = 5.0 + 2.0 * xArray[i][0] + random.nextDouble();
-        }
-        Variable x = new Variable(xArray);
-        Variable y0 = new Variable(yArray);
-
-        Variable w = new Variable(0);
-        Variable b = new Variable(0);
-
-        double learningRate = 0.1;
-        int iters = 1000;
-
-        for (int i = 0; i < iters; i++) {
-            //Function linear = new Linear();
-            //Variable y = linear.forward(x, w, b)[0];
-            Variable y = x.linear(w, b);
-            //Function mes = new MeanSquaredError();
-            //Variable loss = mes.forward(y, y0)[0];
-            Variable loss = y.mse(y0);
-            System.out.println("Loss = " + loss);
-            w.clearGrad();
-            b.clearGrad();
-            loss.backward(false, true);
-            Variable dw = w.grad;
-            Variable db = b.grad;
-            w.subtractAssign(dw.multiply(learningRate));
-            b.subtractAssign(db.multiply(learningRate));
-        }
-        System.out.println(w + "\t" + b);
-    }
+    @Serial
+    private static final long serialVersionUID = 3837388304530009698L;
 
     // 順伝播
     @Override

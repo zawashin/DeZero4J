@@ -8,7 +8,7 @@ import java.util.Random;
 public class TwoLayerNet extends Model {
 
     public TwoLayerNet(int numHidden, int numOutput) {
-        super(new int[]{numHidden, numOutput});
+        super(numHidden, numOutput);
     }
 
     public static void main(String[] args) {

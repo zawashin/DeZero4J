@@ -3,11 +3,15 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Sum extends Function {
 
+    @Serial
+    private static final long serialVersionUID = 9057717116009117174L;
     private int axis;
 
     public Sum() {

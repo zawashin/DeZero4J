@@ -2,11 +2,15 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Power extends Function {
 
+    @Serial
+    private static final long serialVersionUID = -2797698397922827503L;
     private double index = 0;
 
     public Power(double index) {

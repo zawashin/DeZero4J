@@ -2,10 +2,15 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Neg extends Function {
+
+    @Serial
+    private static final long serialVersionUID = -9014337093353943587L;
 
     @Override
     public Tensor[] forward(Tensor... xs) {

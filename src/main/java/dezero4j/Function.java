@@ -2,6 +2,7 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -9,6 +10,9 @@ import java.util.Arrays;
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public abstract class Function implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4277464578673096158L;
     protected Variable[] inputs;
     protected Variable[] outputs;
     protected int generation;

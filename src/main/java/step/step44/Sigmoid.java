@@ -8,6 +8,16 @@ import tensor4j.Utils;
  */
 public class Sigmoid extends Function {
 
+    public static void main(String[] args) {
+        Function sigmoid = new Sigmoid();
+        Variable x = new Variable(new double[]{-5, -4, -2, 0, 3, 4, 5});
+        Variable y = sigmoid.forward(x)[0];
+        System.out.println(x);
+        System.out.println(y);
+        y.backward(false, true);
+        System.out.println(x.getGrad());
+    }
+
     // 順伝播
     @Override
     public Tensor[] forward(Tensor... xs) {
@@ -25,15 +35,5 @@ public class Sigmoid extends Function {
         //Variable param1 = new Variable(1.0, y.getShape());
         gxs[0] = gy.multiply(y).multiply(param1.subtract(y));
         return gxs;
-    }
-
-    public static void main(String[] args) {
-        Function sigmoid = new Sigmoid();
-        Variable x = new Variable(new double[]{-5, -4, -2, 0, 3, 4, 5});
-        Variable y = sigmoid.forward(x)[0];
-        System.out.println(x);
-        System.out.println(y);
-        y.backward(false, true);
-        System.out.println(x.getGrad());
     }
 }

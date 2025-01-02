@@ -10,10 +10,16 @@ public abstract class DataSet implements Serializable {
     @Serial
     private static final long serialVersionUID = 7872471894346034525L;
     private double[][] x;
-    private int[] t;
+    private final int[] t;
 
     public DataSet(double[][] x, int[] t) {
         this.x = x;
+        this.t = t;
+    }
+
+    public DataSet(double[] x, int[] t) {
+        //this.x = new double[1][]{{x}};
+        //this.x = new double[1][]{{x}};
         this.t = t;
     }
 

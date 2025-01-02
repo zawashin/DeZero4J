@@ -3,11 +3,16 @@ package dezero4j;
 import tensor4j.Tensor;
 import tensor4j.Utils;
 
+import java.io.Serial;
+
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Reshape extends Function {
+
+    @Serial
+    private static final long serialVersionUID = -7237892511797689579L;
     int[] shape;
 
     public Reshape(int... shape) {

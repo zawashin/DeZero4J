@@ -2,10 +2,15 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
+import java.io.Serial;
+
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
 public class Tanh extends Function {
+
+    @Serial
+    private static final long serialVersionUID = 7705887820050495684L;
 
     @Override
     public Tensor[] forward(Tensor... xs) {

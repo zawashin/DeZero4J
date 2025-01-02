@@ -2,7 +2,13 @@ package dezero4j;
 
 import tensor4j.Tensor;
 
-public class Utils {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Utils implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 7786635886227153145L;
 
     // ソフトマックス関数 (forward)
     public static Tensor[] softmax(Tensor... xs) {
