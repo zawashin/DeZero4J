@@ -30,7 +30,7 @@ public class ArgMax implements Serializable {
             case 1:
                 double max = xs[0].getValues()[0];
                 int argmax = 0;
-                for (int i = 1; i < shape1; i++) {
+                for (int i = 1; i < xs[0].getLength(); i++) {
                     if (xs[0].getValues()[i] > max) {
                         max = xs[0].getValues()[i];
                         argmax = i;

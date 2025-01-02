@@ -18,9 +18,9 @@ public abstract class DataSet implements Serializable {
     }
 
     public DataSet(double[] x, int[] t) {
-        //this.x = new double[1][]{{x}};
-        //this.x = new double[1][]{{x}};
-        this.t = t;
+        this.x = new double[1][x.length];
+        this.x[0] = x.clone();
+        this.t = t.clone();
     }
 
     public double[][] getX() {
