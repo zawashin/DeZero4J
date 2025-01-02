@@ -49,18 +49,15 @@ public class Step53 extends Step {
             optimizer.update();
             loss.clearGrad();
         }
-        Variable y = model.predict(xs);
-        for (int i = 0; i < x.getLength(); i++) {
-            System.out.println(x.getData().getValues()[i] + "\t" + y.getData().getValues()[i] + "\t" + y0.getData().getValues()[i]);
-        }
+        Variable y1 = model.predict(xs);
         try {
             // ファイルに保存
-            String filePath = "nn.model";
-            ModelSaver.saveModelToFile(model, filePath);
+            String filePath = "step53.model";
+            ModelIO.saveModelToFile(model, filePath);
             System.out.println("Model serialized successfully.");
 
             // ファイルから読み込み
-            model = ModelLoader.loadModelFromFile(filePath);
+            model = ModelIO.loadModelFromFile(filePath);
 
             // 読み込んだ内容を確認
             System.out.println("Model deserialized successfully.");
@@ -73,8 +70,9 @@ public class Step53 extends Step {
         System.out.println();
         for (int i = 0; i < x.getLength(); i++) {
             Variable xi = new Variable(xArray[i]);
-            y = model.predict(xi);
-            System.out.println(xi.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y0.getValues()[i]);
+            Variable y = model.predict(xi);
+            System.out.println(xi.getValues()[0] + "\t" + y.getValues()[0] + "\t" + y1.getValues()[i] + "\t" +
+                    y0.getValues()[i]);
         }
     }
 }

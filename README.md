@@ -650,7 +650,7 @@ public class SoftmaxCrossEntropy extends Function {
 - 各クラスにインターフェイスSerializableを実装し、バイナリ形式で保存と読み書き
     - ファイルの拡張子はmodelとする
 - 一部クラスのフィールドをtransientとして保存しないようにする
-
+    - しないと、保存時にエラーが発生する
 ```java
 public class Variable implements Cloneable, Serializable {
 
