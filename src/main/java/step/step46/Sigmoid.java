@@ -1,7 +1,7 @@
 package step.step46;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -21,7 +21,7 @@ public class Sigmoid extends ActivationFunction {
     // 順伝播
     @Override
     public Tensor[] forward(Tensor... xs) {
-        Tensor param05 = Utils.fill(0.5, xs[0].getShape());
+        Tensor param05 = TensorUtils.fill(0.5, xs[0].getShape());
         return new Tensor[]{(((xs[0].multiply(param05)).tanh()).multiply(param05)).add(param05)};
     }
 

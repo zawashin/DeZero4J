@@ -1,6 +1,6 @@
 package step.step45;
 
-import tensor4j.Operators;
+import tensor4j.TensorOperators;
 import tensor4j.Tensor;
 
 /**
@@ -10,7 +10,7 @@ public class Log extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Operators.log(xs[0])
+        return new Tensor[]{TensorOperators.log(xs[0])
         };
     }
 

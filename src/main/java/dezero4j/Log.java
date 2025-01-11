@@ -1,6 +1,6 @@
 package dezero4j;
 
-import tensor4j.Operators;
+import tensor4j.TensorOperators;
 import tensor4j.Tensor;
 
 import java.io.Serial;
@@ -15,7 +15,7 @@ public class Log extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Operators.log(xs[0])
+        return new Tensor[]{TensorOperators.log(xs[0])
         };
     }
 

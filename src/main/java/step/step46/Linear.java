@@ -1,7 +1,7 @@
 package step.step46;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -57,7 +57,7 @@ public class Linear extends Function {
         Tensor y = x.dot(w);
         if (xs.length >= 3 && xs[2] != null) {
             Tensor b = xs[2];
-            int[] shape = Utils.broadcastShape(y, xs[2]);
+            int[] shape = TensorUtils.broadcastShape(y, xs[2]);
             Tensor y_ = y.broadcastTo(shape);
             Tensor b_ = b.broadcastTo(shape);
             ys[0] = y_.add(b_);

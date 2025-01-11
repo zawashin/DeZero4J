@@ -2,7 +2,7 @@ package step.step47;
 
 import dezero4j.Function;
 import dezero4j.Softmax;
-import dezero4j.SoftmaxCrossEntropy;
+import step.step48.SoftmaxCrossEntropy;
 import dezero4j.Variable;
 import step.Step;
 

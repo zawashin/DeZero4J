@@ -1,6 +1,6 @@
 package step.step24;
 
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -36,6 +36,6 @@ public class GoldsteinPrice {
     }
 
     private Variable constant(double value) {
-        return new Variable(Utils.fill(value, shape));
+        return new Variable(TensorUtils.fill(value, shape));
     }
 }

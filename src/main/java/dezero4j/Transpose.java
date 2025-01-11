@@ -1,7 +1,7 @@
 package dezero4j;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.io.Serial;
 import java.util.Arrays;
@@ -44,13 +44,13 @@ public class Transpose extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.transpose(xs[0])};
+        return new Tensor[]{TensorUtils.transpose(xs[0])};
     }
 
     @Override
     public Variable[] backward(Variable... gys) {
         Tensor gx;
-        gx = Utils.transpose(gys[0].getData());
+        gx = TensorUtils.transpose(gys[0].getData());
         return new Variable[]{new Variable(gx)};
     }
 }

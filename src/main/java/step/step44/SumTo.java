@@ -1,7 +1,7 @@
 package step.step44;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.Arrays;
 
@@ -70,7 +70,7 @@ public class SumTo extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.sumTo(xs[0], shape)};
+        return new Tensor[]{TensorUtils.sumTo(xs[0], shape)};
     }
 
     @Override

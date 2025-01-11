@@ -1,6 +1,6 @@
 package step.step29;
 
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -11,6 +11,6 @@ public abstract class MultivariateFunction {
     public abstract Variable calc(Variable... xs);
 
     protected Variable c(double value) {
-        return new Variable(Utils.fill(value, shape));
+        return new Variable(TensorUtils.fill(value, shape));
     }
 }

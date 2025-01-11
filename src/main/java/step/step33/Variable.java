@@ -1,7 +1,7 @@
 package step.step33;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.io.Serializable;
 import java.util.*;
@@ -77,7 +77,7 @@ public class Variable implements Cloneable, Serializable {
 
     public void backward(boolean retainGrad, boolean createGraph) {
         if (grad == null) {
-            grad = new Variable(Utils.fill(1.0, data.getShape()));
+            grad = new Variable(TensorUtils.fill(1.0, data.getShape()));
         }
         ArrayList<Function> funcs = new ArrayList<>();
         Set<Function> seenSet = new HashSet<>();
@@ -90,7 +90,7 @@ public class Variable implements Cloneable, Serializable {
             Variable[] gys = new Variable[f.outputs.length];
             for (int i = 0; i < f.outputs.length; i++) {
                 if (f.outputs[i].grad == null) {
-                    gys[i] = new Variable(Utils.fill(1.0, data.getShape()));
+                    gys[i] = new Variable(TensorUtils.fill(1.0, data.getShape()));
                 } else {
                     gys[i] = f.outputs[i].grad;
                 }
@@ -195,7 +195,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable add(double other) {
         Function f = new Add();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public void plusAssign(Variable other) {
@@ -209,7 +209,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable subtract(double other) {
         Function f = new Subtract();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public void minusAssign(Variable other) {
@@ -223,7 +223,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rminus(double other) {
         Function f = new Subtract();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable multiply(Variable other) {
@@ -233,7 +233,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable multiply(double other) {
         Function f = new Multiply();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable divide(Variable other) {
@@ -243,7 +243,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable divide(double other) {
         Function f = new Divide();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public Variable rdiv(Variable other) {
@@ -253,7 +253,7 @@ public class Variable implements Cloneable, Serializable {
 
     public Variable rdiv(double other) {
         Function f = new Divide();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable exp() {

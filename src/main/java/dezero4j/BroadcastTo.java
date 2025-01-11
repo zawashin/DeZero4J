@@ -1,7 +1,7 @@
 package dezero4j;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.io.Serial;
 
@@ -65,7 +65,7 @@ public class BroadcastTo extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.broadcastTo(xs[0], shape)};
+        return new Tensor[]{TensorUtils.broadcastTo(xs[0], shape)};
     }
 
     @Override

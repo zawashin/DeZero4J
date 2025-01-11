@@ -1,7 +1,7 @@
 package step.step40;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.Arrays;
 
@@ -62,7 +62,7 @@ public class Multiply extends Function {
         Tensor[] xs_ = new Tensor[2];
         if (!Arrays.equals(xs[0].getShape(), xs[1].getShape())) {
             broadcast = true;
-            int[] shape_ = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
+            int[] shape_ = TensorUtils.broadcastShape(xs[0].getShape(), xs[1].getShape());
             xs_[0] = xs[0].broadcastTo(shape_);
             xs_[1] = xs[1].broadcastTo(shape_);
 

@@ -1,7 +1,7 @@
 package step.step40;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
@@ -77,7 +77,7 @@ public class Sum extends Function {
 
     @Override
     public Tensor[] forward(Tensor... xs) {
-        return new Tensor[]{Utils.sum(xs[0], axis)};
+        return new Tensor[]{TensorUtils.sum(xs[0], axis)};
     }
 
     @Override
@@ -86,7 +86,7 @@ public class Sum extends Function {
         double[] values;
         //if(this.axis != -1||this.axis == Tensor.RANK_MAX) {
         if (gys[0].getRank() == 0) {
-            gy0 = Utils.fill(gys[0].getValues()[0], inputs[0].getShape());
+            gy0 = TensorUtils.fill(gys[0].getValues()[0], inputs[0].getShape());
         } else if (gys[0].getRank() == 1) {
             if (axis == 0) {
                 gy0 = new Tensor(inputs[0].getShape()[0], gys[0].getLength());
@@ -105,12 +105,12 @@ public class Sum extends Function {
                     }
                 }
             } else {
-                System.err.println(Utils.ERROR_RANK);
-                throw new RuntimeException(Utils.ERROR_RANK);
+                System.err.println(TensorUtils.ERROR_RANK);
+                throw new RuntimeException(TensorUtils.ERROR_RANK);
             }
         } else {
-            System.err.println(Utils.ERROR_RANK);
-            throw new RuntimeException(Utils.ERROR_RANK);
+            System.err.println(TensorUtils.ERROR_RANK);
+            throw new RuntimeException(TensorUtils.ERROR_RANK);
         }
         return new Variable[]{new Variable(gy0)};
         //return new Variable[]{gys[0].broadcastTo(inputs[0].getShape())};

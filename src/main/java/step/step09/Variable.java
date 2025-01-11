@@ -1,7 +1,7 @@
 package step.step09;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class Variable implements Serializable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.fill(1.0, data.getShape());
+            grad = TensorUtils.fill(1.0, data.getShape());
         }
 
         Function[] funcs = {creator};

@@ -1,7 +1,7 @@
 package step.step44;
 
 
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.Random;
 
@@ -26,12 +26,12 @@ public class Affine extends Layer {
         if (!bias) {
             numParams = 2;
             params = new Parameter[numParams];
-            params[0] = new Parameter(Utils.random(numInputs, numOutputs));
+            params[0] = new Parameter(TensorUtils.random(numInputs, numOutputs));
             params[1] = new Parameter(new double[numOutputs]);
         } else {
             numParams = 1;
             params = new Parameter[numParams];
-            params[0] = new Parameter(Utils.random(numInputs, numOutputs));
+            params[0] = new Parameter(TensorUtils.random(numInputs, numOutputs));
         }
         initialized = true;
         function = new Linear();
@@ -101,12 +101,12 @@ public class Affine extends Layer {
             if (bias) {
                 numParams = 2;
                 params = new Parameter[numParams];
-                params[0] = new Parameter(Utils.random(numInputs, numOutputs));
+                params[0] = new Parameter(TensorUtils.random(numInputs, numOutputs));
                 params[1] = new Parameter(new double[numOutputs]);
             } else {
                 numParams = 1;
                 params = new Parameter[numParams];
-                params[0] = new Parameter(Utils.random(numInputs, numOutputs));
+                params[0] = new Parameter(TensorUtils.random(numInputs, numOutputs));
             }
             initialized = true;
         }

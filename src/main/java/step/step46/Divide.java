@@ -1,7 +1,7 @@
 package step.step46;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public class Divide extends Function {
         Tensor[] xs_ = new Tensor[2];
         if (!Arrays.equals(xs[0].getShape(), xs[1].getShape())) {
             broadcast = true;
-            shape = Utils.broadcastShape(xs[0].getShape(), xs[1].getShape());
+            shape = TensorUtils.broadcastShape(xs[0].getShape(), xs[1].getShape());
             xs_[0] = xs[0].broadcastTo(shape);
             xs_[1] = xs[1].broadcastTo(shape);
 

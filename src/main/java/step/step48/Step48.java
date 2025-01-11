@@ -23,7 +23,7 @@ public class Step48 extends Step {
         int batch_size = 30;
         Variable x = new Variable(spiral.getX());
         // int[]をdouble[]に変換
-        Variable t = new Variable(Arrays.stream(spiral.getT()).asDoubleStream().toArray());
+        Variable t = new Variable(Arrays.stream(spiral.getTarget()).asDoubleStream().toArray());
         Model model = new TwoLayerNet(10, 3);
 
         Optimizer optimizer = new SGD(model, 0.2);

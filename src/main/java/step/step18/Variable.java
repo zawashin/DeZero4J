@@ -1,7 +1,7 @@
 package step.step18;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,7 +44,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.fill(1.0, data.getShape());
+            grad = TensorUtils.fill(1.0, data.getShape());
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -145,7 +145,7 @@ public class Variable {
 
     public Variable add(double other) {
         Function f = new Add();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
 }

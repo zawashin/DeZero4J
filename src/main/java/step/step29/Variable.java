@@ -1,7 +1,7 @@
 package step.step29;
 
 import tensor4j.Tensor;
-import tensor4j.Utils;
+import tensor4j.TensorUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,7 +44,7 @@ public class Variable {
 
     public void backward() {
         if (grad == null) {
-            grad = Utils.fill(1.0, data.getShape());
+            grad = TensorUtils.fill(1.0, data.getShape());
         }
         ArrayList<Function> funcs = new ArrayList<>();
         funcs.add(creator);
@@ -139,7 +139,7 @@ public class Variable {
 
     public Variable add(double other) {
         Function f = new Add();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public Variable subtract(Variable other) {
@@ -149,7 +149,7 @@ public class Variable {
 
     public Variable subtract(double other) {
         Function f = new Subtract();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public void minusAssign(Variable other) {
@@ -163,7 +163,7 @@ public class Variable {
 
     public Variable rminus(double other) {
         Function f = new Subtract();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable multiply(Variable other) {
@@ -173,7 +173,7 @@ public class Variable {
 
     public Variable multiply(double other) {
         Function f = new Multiply();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable divide(Variable other) {
@@ -183,7 +183,7 @@ public class Variable {
 
     public Variable divide(double other) {
         Function f = new Divide();
-        return f.forward(this, new Variable(Utils.fill(other, this.getShape())))[0];
+        return f.forward(this, new Variable(TensorUtils.fill(other, this.getShape())))[0];
     }
 
     public Variable rdiv(Variable other) {
@@ -193,7 +193,7 @@ public class Variable {
 
     public Variable rdiv(double other) {
         Function f = new Divide();
-        return f.forward(new Variable(Utils.fill(other, this.getShape())), this)[0];
+        return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
     public Variable exp() {
