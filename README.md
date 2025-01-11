@@ -38,8 +38,10 @@
 ## 現状
 
 - Tensorデータを扱うためのクラスをあらかじめ実装して仕切り直し
-- Step46まで完了
-    - 全結合の多階層ニューラルネットでの最低限の学習・推論は出来る
+- Step48まで完了
+  - 多値分類まで可能
+  - Modelクラスのファイル書き込みと読み込み
+    - 全結合の多階層ニューラルネットでの学習・推論は出来る
 
 ## 参考資料
 
@@ -651,7 +653,7 @@ public class SoftmaxCrossEntropy extends Function {
 - 各クラスにインターフェイスSerializableを実装し、バイナリ形式で保存と読み書き
     - ファイルの拡張子はmodelとする
 - 一部クラスのフィールドをtransientとして保存しないようにする
-    - しないと、保存時にエラーが発生する
+  - しないと、保存時にエラーが発生する
 ```java
 public class Variable implements Cloneable, Serializable {
 
