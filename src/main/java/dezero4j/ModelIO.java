@@ -1,6 +1,4 @@
-package step.step53;
-
-import dezero4j.Model;
+package dezero4j;
 
 import java.io.*;
 

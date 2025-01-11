@@ -48,6 +48,7 @@ public class Step53 extends Step {
 
             optimizer.update();
             loss.clearGrad();
+            x.clearGrad();
         }
         Variable y1 = model.predict(xs);
         try {

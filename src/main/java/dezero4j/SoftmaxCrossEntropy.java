@@ -1,7 +1,5 @@
-package step.step48;
+package dezero4j;
 
-import dezero4j.Function;
-import dezero4j.Variable;
 import tensor4j.Tensor;
 
 import java.io.Serial;
