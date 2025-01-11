@@ -582,6 +582,7 @@ public class Tensor implements Cloneable, Serializable {
 
 - Linearクラスの実装
 - Sigmoidクラスの実装
+-
 
 ### Step44：パラメータをまとめるレイヤ
 

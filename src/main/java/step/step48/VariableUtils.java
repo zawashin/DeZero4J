@@ -77,7 +77,6 @@ public class VariableUtils {
             values[i] = indcies[i];
         }
         return new Variable(values);
-
     }
 
     /*

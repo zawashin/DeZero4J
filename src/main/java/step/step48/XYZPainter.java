@@ -22,7 +22,7 @@ public class XYZPainter extends NvPainter {
      */
     public static void main(String[] args) {
         SpiralDataset spiralDataset = new SpiralDataset();
-        spiralDataset.generateSpiral(true);
+        spiralDataset.generate(true);
         int n = spiralDataset.getDataSize();
         double[][] xyt = new double[n][3];
         double[][] xy = spiralDataset.getX();
@@ -49,7 +49,7 @@ public class XYZPainter extends NvPainter {
         yOffset = height / 2;
         int gridWidth = this.width * 4 / 5;
         int gridHeight = this.height * 4 / 5;
-        scale = gridHeight / 2;
+        scale = gridHeight / 2.0;
         int r = 6, r2 = r * 2;
         g.setColor(colorMap.getBlack());
 
