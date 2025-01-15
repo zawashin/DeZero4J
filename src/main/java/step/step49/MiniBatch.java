@@ -35,7 +35,7 @@ public class MiniBatch {
         // Shuffle the indices
         for (int i = 0; i < numData; i++) {
             int idx = random.nextInt(numBatches);
-            xList.get(idx).add(x[idx]);
+            xList.get(idx).add(x[i]);
             if (vector) {
                 tList.get(idx).add(new double[]{t[0][i]});
 

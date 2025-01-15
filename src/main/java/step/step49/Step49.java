@@ -22,46 +22,41 @@ public class Step49 extends Step {
     public void calc() {
         SpiralDataset spiral = new SpiralDataset();
         spiral.generate(true);
-        int max_epoch = 10000;
         double[][] xy = spiral.getX();
         // int[]をdouble[]に変換
         double[] target = Arrays.stream(spiral.getTarget()).asDoubleStream().toArray();
-        Variable x = new Variable(xy);
-        Variable t = new Variable(target);
         int batchSize = 5;
-        //Variable[][] miniBatch = MiniBatch.create(xy, target, batchSize);
-        int data_size = x.getShape()[0];
-        int iters = data_size / batchSize;
+        int data_size = xy.length;
+        int max_epoch = 10000;
         Model model = new TwoLayerNet(10, 3);
         Optimizer optimizer = new SGD(model, 0.2);
-        iters = 50000;
+        Variable[][] miniBatch = MiniBatch.create(xy, target, batchSize);
 
         Function f = new SoftmaxCrossEntropy();
 
-        for (int i = 0; i < iters; i++) {
-            Variable y = model.predict(x);
-            Variable loss = f.forward(y, t)[0];
-            if (i % 1000 == 0) {
-                System.out.println("Loss[" + i + "] = " + loss);
+        for (int epoch = 0; epoch < max_epoch; epoch++) {
+
+            for (int i = 0; i < batchSize; i++) {
+                Variable x = miniBatch[i][0];
+                Variable t = miniBatch[i][1];
+                Variable y = model.predict(x);
+                Variable loss = f.forward(y, t)[0];
+                if (epoch % 1000 == 0) {
+                    System.out.println("Loss[" + epoch + "] = " + loss);
+                }
+                if (loss.getValues()[0] < 0.05) {
+                    break;
+                }
+
+                loss.backward(false, true);
+
+                optimizer.update();
+                model.clearGrads();
+                // ↓　忘れるとOutOfMemoryで落ちる
+                x.clearGrad();
             }
-            if (loss.getValues()[0] < 0.05) {
-                break;
-            }
-
-            loss.backward(false, true);
-
-            optimizer.update();
-            model.clearGrads();
-            // ↓　忘れるとOutOfMemoryで落ちる
-            x.clearGrad();
-        }
-        /*
-        Variable te = VariableUtils.softMaxArgMax(model.predict(x));
-        for (int i = 0; i < x.getShape()[0]; i++) {
-            System.out.println(t.getValues()[i] + " " + te.getValues()[i]);
         }
 
-         */
         int n = 100;
         double[] x0 = new double[n];
         double[] y0 = new double[n];
@@ -78,14 +73,13 @@ public class Step49 extends Step {
                 cnt++;
             }
         }
-        Variable xi = new Variable(xy);
-        Variable yi = VariableUtils.softMaxArgMax(model.predict(xi));
-        System.out.println(xi + " " + yi);
+        Variable x = new Variable(xy);
+        Variable y = VariableUtils.softMaxArgMax(model.predict(x));
         double[][] xyt = new double[n * n][3];
         for (int i = 0; i < n * n; i++) {
             xyt[i][0] = xy[i][0];
             xyt[i][1] = xy[i][1];
-            xyt[i][2] = (double) yi.getValues()[i];
+            xyt[i][2] = (double) y.getValues()[i];
         }
 
         XYZPainter painter = new XYZPainter(800, 800, xyt);

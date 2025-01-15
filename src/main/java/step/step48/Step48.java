@@ -27,10 +27,7 @@ public class Step48 extends Step {
         Variable t = new Variable(Arrays.stream(spiral.getTarget()).asDoubleStream().toArray());
         Model model = new TwoLayerNet(10, 3);
         Optimizer optimizer = new SGD(model, 0.2);
-        int batchSize = 5;
-        int data_size = x.getShape()[0];
-        int iters = data_size / batchSize;
-        iters = 50000;
+        int iters = 10000;
 
         Function f = new SoftmaxCrossEntropy();
 
@@ -51,20 +48,12 @@ public class Step48 extends Step {
             // ↓　忘れるとOutOfMemoryで落ちる
             x.clearGrad();
         }
-        /*
-        Variable te = VariableUtils.softMaxArgMax(model.predict(x));
-        for (int i = 0; i < x.getShape()[0]; i++) {
-            System.out.println(t.getValues()[i] + " " + te.getValues()[i]);
-        }
-
-         */
         int n = 100;
         double[] x0 = new double[n];
         double[] y0 = new double[n];
         double d = 2.0 / n;
         for (int i = 0; i < n; i++) {
             x0[i] = y0[i] = -1.0 + d * 0.5 + i * d;
-            System.out.println(x0[i]);
         }
         xy = new double[n * n][2];
         int cnt = 0;
@@ -77,7 +66,6 @@ public class Step48 extends Step {
         }
         Variable xi = new Variable(xy);
         Variable yi = VariableUtils.softMaxArgMax(model.predict(xi));
-        System.out.println(xi + " " + yi);
         double[][] xyt = new double[n * n][3];
         for (int i = 0; i < n * n; i++) {
             xyt[i][0] = xy[i][0];
