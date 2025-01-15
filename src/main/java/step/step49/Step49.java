@@ -1,18 +1,20 @@
-package step.step48;
+package step.step49;
 
 import dezero4j.*;
 import numviz.NvFrame;
 import step.Step;
+import step.step48.SpiralDataset;
+import step.step48.XYZPainter;
 
 import java.util.Arrays;
 
 /**
  * @author Shin-Ichiro Serizawa <zawashin@outlook.com>
  */
-public class Step48 extends Step {
+public class Step49 extends Step {
 
     public static void main(String[] args) {
-        Step step = new Step48();
+        Step step = new Step49();
         step.calc();
     }
 
@@ -22,14 +24,16 @@ public class Step48 extends Step {
         spiral.generate(true);
         int max_epoch = 10000;
         double[][] xy = spiral.getX();
-        Variable x = new Variable(xy);
         // int[]をdouble[]に変換
-        Variable t = new Variable(Arrays.stream(spiral.getTarget()).asDoubleStream().toArray());
-        Model model = new TwoLayerNet(10, 3);
-        Optimizer optimizer = new SGD(model, 0.2);
+        double[] target = Arrays.stream(spiral.getTarget()).asDoubleStream().toArray();
+        Variable x = new Variable(xy);
+        Variable t = new Variable(target);
         int batchSize = 5;
+        //Variable[][] miniBatch = MiniBatch.create(xy, target, batchSize);
         int data_size = x.getShape()[0];
         int iters = data_size / batchSize;
+        Model model = new TwoLayerNet(10, 3);
+        Optimizer optimizer = new SGD(model, 0.2);
         iters = 50000;
 
         Function f = new SoftmaxCrossEntropy();
@@ -64,7 +68,6 @@ public class Step48 extends Step {
         double d = 2.0 / n;
         for (int i = 0; i < n; i++) {
             x0[i] = y0[i] = -1.0 + d * 0.5 + i * d;
-            System.out.println(x0[i]);
         }
         xy = new double[n * n][2];
         int cnt = 0;

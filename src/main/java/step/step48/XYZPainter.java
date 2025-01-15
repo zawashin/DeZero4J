@@ -54,12 +54,8 @@ public class XYZPainter extends NvPainter {
         g.setColor(colorMap.getBlack());
 
         Graphics2D g2 = (Graphics2D) g;
-        BasicStroke bs = new BasicStroke(3);
-        g2.setStroke(bs);
-        g.setColor(Color.BLACK);
-        g.drawLine(xOffset - gridWidth / 2, yOffset, xOffset + gridWidth / 2, yOffset);
-        g.drawLine(xOffset, yOffset - gridHeight / 2, xOffset, yOffset + gridHeight / 2);
 
+        BasicStroke bs = new BasicStroke(3);
         bs = new BasicStroke(1);
         g2.setStroke(bs);
         for (int i = 0; i < xyt.length; i++) {
@@ -74,6 +70,11 @@ public class XYZPainter extends NvPainter {
             int yc = yOffset - (int) (scale * xyt[i][1]);
             g.fillOval(xc - r, yc - r, r2, r2);
         }
+        bs = new BasicStroke(3);
+        g2.setStroke(bs);
+        g.setColor(Color.BLACK);
+        g.drawLine(xOffset - gridWidth / 2, yOffset, xOffset + gridWidth / 2, yOffset);
+        g.drawLine(xOffset, yOffset - gridHeight / 2, xOffset, yOffset + gridHeight / 2);
         int xs = xOffset - gridWidth / 2;
         int ys = yOffset + gridHeight / 2;
         int xe = xOffset + gridWidth / 2;
