@@ -255,6 +255,10 @@ public class Variable implements Cloneable, Serializable {
         return f.forward(new Variable(TensorUtils.fill(other, this.getShape())), this)[0];
     }
 
+    public void multiplyAssign(Variable other) {
+        data.multiplyAssign(other.data);
+    }
+
     public Variable divide(Variable other) {
         Function f = new Divide();
         return f.forward(this, other)[0];

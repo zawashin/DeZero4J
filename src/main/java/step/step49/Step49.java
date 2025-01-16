@@ -26,8 +26,8 @@ public class Step49 extends Step {
         // int[]をdouble[]に変換
         double[] target = Arrays.stream(spiral.getTarget()).asDoubleStream().toArray();
         int batchSize = 5;
-        int data_size = xy.length;
         int max_epoch = 10000;
+        double eps = 1.0e-3;
         Model model = new TwoLayerNet(10, 3);
         Optimizer optimizer = new SGD(model, 0.2);
         Variable[][] miniBatch = MiniBatch.create(xy, target, batchSize);
@@ -36,17 +36,13 @@ public class Step49 extends Step {
 
         for (int epoch = 0; epoch < max_epoch; epoch++) {
 
+            double lossSum = 0.0;
             for (int i = 0; i < batchSize; i++) {
                 Variable x = miniBatch[i][0];
                 Variable t = miniBatch[i][1];
                 Variable y = model.predict(x);
                 Variable loss = f.forward(y, t)[0];
-                if (epoch % 1000 == 0) {
-                    System.out.println("Loss[" + epoch + "] = " + loss);
-                }
-                if (loss.getValues()[0] < 0.05) {
-                    break;
-                }
+                lossSum += loss.getValues()[0];
 
                 loss.backward(false, true);
 
@@ -54,6 +50,12 @@ public class Step49 extends Step {
                 model.clearGrads();
                 // ↓　忘れるとOutOfMemoryで落ちる
                 x.clearGrad();
+            }
+            if (epoch % 1000 == 0) {
+                System.out.println("Loss[" + epoch + "] = " + lossSum);
+            }
+            if (lossSum < eps) {
+                break;
             }
         }
 
